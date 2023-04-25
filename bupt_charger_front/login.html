@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+
+    <script src="config.js"></script>
+</head>
+
+<body>
+    <h1>欢迎登录</h1>
+    <form id="login-form" method="POST">
+        <label for="username">用户名:</label>
+        <input type="text" id="username" name="username" maxlength="20" required>
+        <br>
+        <label for="password">密码:</label>
+        <input type="password" id="password" name="password" maxlength="32" required>
+        <p></p>
+        <br>
+        <button type="submit">登录</button>
+    </form>
+    <button onclick="window.location.href='register.html'">注册</button>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const data = { username, password };
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data),
+                redirect: 'follow'
+            };
+            fetch(serverURL + "login", requestOptions)
+                .then(response => response.text())
+                .then(result => {
+                    const res = JSON.parse(result);
+                    if (res.code === 0) {
+                        alert(res.message);
+                        window.location.href = '#';
+                    } else if (res.code === -1) {
+                        alert(res.message);
+                        document.getElementById("password").value = "";
+                    }
+                })
+                .catch(error => console.error(error));
+        });
+    </script>
+</body>
+
+</html>

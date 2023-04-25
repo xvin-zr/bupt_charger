@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+    <!-- <link rel="stylesheet" type="text/css" href="../css/style.css"> -->
+    
+    <script src="config.js"></script>
+    <script>
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var pattern = /^[a-zA-Z0-9]+$/;
+            if (!pattern.test(username)) {
+                alert("用户名必须由英文和数字组成！");
+                return false;
+            }
+            // var batteryCapacity = document.getElementById("battery-capacity").value;
+            // if (batteryCapacity <= 0) {
+            //     alert("车辆电池容量必须大于0！");
+            //     return false;
+            // }   
+
+
+            return true;
+        }
+
+        
+    </script>
+</head>
+<body>
+<h1>用户注册</h1>
+<form id="regis-form" method="post" onsubmit="return validateForm()">
+    <label for="username">用户名:</label>
+    <input type="text" id="username" name="username" minlength="4" maxlength="20" required>
+    <br>
+    <label for="password">密码:</label>
+    <input type="password" id="password" name="password" minlength="1" maxlength="32" required>
+    <br>
+    <!-- <label for="license-plate">车牌号:</label>
+    <input type="text" id="license-plate" name="license-plate" pattern="[A-Z0-9]{4}" required>
+    <br>
+    <label for="battery-capacity">车辆电池容量:</label>
+    <input type="number" id="battery-capacity" name="battery-capacity" min="1" required> -->
+    <br>
+    <button type="submit">注册</button>
+    <br>
+    <button onclick="window.location.href='login.html'">返回登录</button>
+
+    <script>
+        const regisForm = document.getElementById('regis-form');
+        regisForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const data = { username, password };
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data),
+                redirect: 'follow'
+
+            };
+            fetch(serverURL+"register", requestOptions)
+                .then(response => response.text())
+                .then(result => {
+                    const res = JSON.parse(result);
+                    console.log(res);
+
+                    if (res.code === 0) {
+                        alert(res.message);
+                        window.location.href = 'login.html';
+                    } else if (res.code === -1) {
+                        alert(res.message);
+                        document.getElementById("username").value = "";
+                        document.getElementById("password").value = "";
+                    }
+                })
+                .catch(error => console.error(error));
+        });
+    </script>
+</form>
+</body>
+</html>
