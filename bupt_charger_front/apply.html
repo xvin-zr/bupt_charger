@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <title>提交充电请求</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- <script src="../js/clock.js"></script> -->
+    <script src="config.js"></script>
+
+</head>
+
+<body>
+    <header class="header">
+        <h1>提交充电请求</h1>
+        <!-- <div id="clock"></div> -->
+    </header>
+    <nav class="navbar">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Database</a></li>
+            <li><a href="#">Tasks</a></li>
+            <li><a href="#">Calendar</a></li>
+        </ul>
+        <ul>
+            <li><a href="#"></a></li>
+            <li><a href="#">退出</a></li>
+        </ul>
+    </nav>
+    <main class="content">
+        <form id="apply-form" method="post">
+            <!-- <input type="hidden" name="user" id="user" value="<%= JSON.stringify(user) %>"> -->
+            <label>
+                <input type="radio" id="chargingMode" name="chargingMode" value="F" checked>
+                快充
+            </label>
+
+            <label>
+                <input type="radio" id="chargingMode" name="chargingMode" value="T">
+                慢充
+            </label>
+            <br>
+            <br>
+            <label for="chargingAmount">输入请求充电量：</label>
+            <input type="number" id="chargingAmount" name="chargingAmount" min="1" step="0.01" required>
+            <br>
+            <label for="chargingAmount">输入电池容量：</label>
+            <input type="number" id="batteryAmount" name="batteryAmount" min="1" step="0.01" required>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+        <script>
+            const applyForm = document.getElementById('apply-form');
+            applyForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const chargingMode = document.getElementById('chargingMode').value;
+                const chargingAmountInput = document.getElementById('chargingAmount');
+                const batteryAmountInput = document.getElementById('batteryAmount');
+                const chargingAmount = parseFloat(chargingAmountInput.value);
+                const batteryAmount = parseFloat(batteryAmountInput.value);
+                if (isNaN(chargingAmount) || isNaN(batteryAmount) ||
+                    chargingAmount.toFixed(2) !== chargingAmountInput.value ||
+                    batteryAmount.toFixed(2) !== batteryAmountInput.value ||
+                    chargingAmount > batteryAmount) {
+                    alert('请输入正确的充电量和容量 (精确到小数点后两位)');
+                    return;
+                }
+                const data = { chargingMode, chargingAmount, batteryAmount };
+                console.log(data);
+                const requestOptions = {
+                    method: 'POST',
+                    headers: {
+                        'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data),
+                    redirect: 'follow'
+                };
+                fetch(serverURL + "charging/request", requestOptions)
+                    .then(response => response.text())
+                    .then(result => {
+                        const res = JSON.parse(result);
+                        console.log(res);
+                    })
+                    .catch(error => console.error(error));
+            });
+        </script>
+
+    </main>
+</body>
+
+</html>

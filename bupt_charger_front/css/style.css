@@ -1,0 +1,80 @@
+body {
+    background-color: #f8f8f8;
+    font-family: system-ui, -apple-system, "Microsoft YaHei";
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.navbar {
+    /* width: 20%; */
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li {
+    margin-right: 10px;
+}
+
+.navbar ul li a {
+    color: #666;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.navbar ul li a:hover {
+    color: #000;
+    border-bottom: 2px solid #000;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+    max-width: 45%; /* 新增 */
+    margin: 0 auto; /* 新增 */
+
+}
+
+.card {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+    margin: 10px;
+    /*max-width: 300px;*/
+    padding: 20px;
+    text-align: left;
+    max-width: calc(33.33% - 20px); /* 新增 */
+}
+
+.card h2 {
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+.card p {
+    color: #666;
+    font-size: 16px;
+    margin: 10px 0;
+    padding: 0;
+}
+
