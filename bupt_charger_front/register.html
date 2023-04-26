@@ -63,7 +63,7 @@
                 redirect: 'follow'
 
             };
-            fetch(serverURL+"register", requestOptions)
+            fetch(serverURL+"/register", requestOptions)
                 .then(response => response.text())
                 .then(result => {
                     const res = JSON.parse(result);
