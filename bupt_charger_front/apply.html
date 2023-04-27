@@ -46,12 +46,12 @@
         <form id="apply-form" method="post">
             <!-- <input type="hidden" name="user" id="user" value="<%= JSON.stringify(user) %>"> -->
             <label>
-                <input type="radio" id="chargingMode" name="chargingMode" value="F" checked>
+                <input type="radio" id="chargingMode-fast" name="chargingMode" value="F" checked>
                 快充
             </label>
-
+            
             <label>
-                <input type="radio" id="chargingMode" name="chargingMode" value="T">
+                <input type="radio" id="chargingMode-slow" name="chargingMode" value="T">
                 慢充
             </label>
             <br>
@@ -62,13 +62,18 @@
             <label for="chargingAmount">输入电池容量：</label>
             <input type="number" id="batteryAmount" name="batteryAmount" min="1" step="0.01" required>
             <br>
+            <p>（输入精确到小数点后两位）</p>
             <input type="submit" value="Submit">
         </form>
         <script>
             const applyForm = document.getElementById('apply-form');
             applyForm.addEventListener('submit', (event) => {
                 event.preventDefault();
-                const chargingMode = document.getElementById('chargingMode').value;
+                // 获取选中的单选按钮元素
+                const selectedRadio = document.querySelector('input[name="chargingMode"]:checked');
+                
+                // 获取选中的单选按钮的值
+                const chargingMode = selectedRadio.value;
                 const chargingAmountInput = document.getElementById('chargingAmount');
                 const batteryAmountInput = document.getElementById('batteryAmount');
                 const chargingAmount = parseFloat(chargingAmountInput.value);

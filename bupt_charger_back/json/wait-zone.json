@@ -1,0 +1,44 @@
+[
+  {
+    "queueNumber": "F0",
+    "userReq": {
+      "chargingAmount": 111.11,
+      "batteryAmount": 222.22
+    }
+  },
+  {
+    "queueNumber": "F1",
+    "userReq": {
+      "chargingAmount": 111.11,
+      "batteryAmount": 222.22
+    }
+  },
+  {
+    "queueNumber": "F2",
+    "userReq": {
+      "chargingAmount": 333.33,
+      "batteryAmount": 444.44
+    }
+  },
+  {
+    "queueNumber": "F3",
+    "userReq": {
+      "chargingAmount": 444.44,
+      "batteryAmount": 555.55
+    }
+  },
+  {
+    "queueNumber": "F4",
+    "userReq": {
+      "chargingAmount": 111.11,
+      "batteryAmount": 222.22
+    }
+  },
+  {
+    "queueNumber": "T0",
+    "userReq": {
+      "chargingAmount": 111.11,
+      "batteryAmount": 222.22
+    }
+  }
+]
