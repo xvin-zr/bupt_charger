@@ -84,6 +84,20 @@ app.post('/register', (req, res) => {
 
 })
 
+app.get('/time', (req, res) => {
+    const datetime = new Date().toISOString();
+    const timestamp = Date.now();
+
+    res.status(200).json({
+        code: 0,
+        message: '获取时间成功',
+        data: {
+            datetime: datetime,
+            timestamp: timestamp
+        }
+    });
+})
+
 
 
 app.listen(PORT, () => {

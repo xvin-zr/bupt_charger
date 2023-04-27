@@ -6,13 +6,28 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- <script src="../js/clock.js"></script> -->
     <script src="config.js"></script>
+    <script src="js/time.js"></script>
+    <script>
+        var timerId;
+        // 在页面加载完成后调用函数
+        window.onload = function () {
+            getTimeFromServer();
+
+            callGetTimeFromServer();
+
+            // 在用户离开页面时停止计时器
+            window.onbeforeunload = function () {
+                clearInterval(timerId);
+            };
+        };
+    </script>
 
 </head>
 
 <body>
     <header class="header">
         <h1>提交充电请求</h1>
-        <!-- <div id="clock"></div> -->
+        <div id="time"></div>
     </header>
     <nav class="navbar">
         <ul>
