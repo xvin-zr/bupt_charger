@@ -56,10 +56,10 @@
             </label>
             <br>
             <br>
-            <label for="chargingAmount">输入请求充电量：</label>
+            <label for="chargingAmount">输入请求充电量 (KWh)：</label>
             <input type="number" id="chargingAmount" name="chargingAmount" min="1" step="0.01" required>
             <br>
-            <label for="chargingAmount">输入电池容量：</label>
+            <label for="chargingAmount">输入电池容量 (KWh)：</label>
             <input type="number" id="batteryAmount" name="batteryAmount" min="1" step="0.01" required>
             <br>
             <p>（输入精确到小数点后两位）</p>
@@ -104,7 +104,7 @@
                         console.log(res);
                         if (res.code === 0) {
                             alert(res.message);
-                            window.location.href = '#';
+                            window.location.href = 'wait-zone.html';
                         } else if (res.code === -1) {
                             alert(res.message);
                             window.location.href = '#';

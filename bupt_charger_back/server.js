@@ -100,8 +100,10 @@ app.get('/time', (req, res) => {
 
 // 路由
 const chargingRouter = require('./routes/charging');
+const queueRouter = require('./routes/queue');
 
 app.use('/charging', chargingRouter);
+app.use('/queue', queueRouter);
 
 
 

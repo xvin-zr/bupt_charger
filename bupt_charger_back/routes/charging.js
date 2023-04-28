@@ -18,8 +18,17 @@ router.post('/request', (req, res) => {
     const username = getUsernameFromJwt(token, secretKey);
 
     console.log(chargingMode, chargingAmount, batteryAmount);
-    // 记录申请信息
+
     const waitZone = new WaitZone();
+    if (waitZone.existUsername(username)) {
+        res.status(401).json({
+            code: -1,
+            message: '你已在等候区，请勿重复提交申请',
+            data: {}
+        })
+    }
+
+    // 记录申请信息
     const addRes = waitZone.addUserRequest(username, chargingMode, chargingAmount, batteryAmount);
 
     if (addRes) {

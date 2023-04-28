@@ -24,7 +24,7 @@ class WaitZone {
         let emptyQueueIndex = -1;
 
         // 找到最大的序号和第一个空队列的位置
-        for (let i = 0; i < this.waitZone.length; i++) {
+        for (let i = this.waitZone.length - 1; i >= 0; i--) {
             const userReq = this.waitZone[i];
 
             if (userReq.queueNumber === '') {
@@ -66,6 +66,34 @@ class WaitZone {
         this.saveWaitZone();
         return true;
     }
+
+    existUsername(username) {
+        return !!this.waitZone.some(item => item.userReq.username === username &&
+                                    item.queueNumber !== '');
+    }
+
+    getWaitingCountAhead(username) {
+        const userQueueNumber = this.waitZone.find(item => item.userReq.username === username)?.queueNumber;
+        if (!userQueueNumber) return 0;
+
+        const firstLetter = userQueueNumber[0];
+        const filteredQueue = this.waitZone.filter(item => item.queueNumber[0] === firstLetter);
+        const count = filteredQueue.reduce((acc, item) => {
+            const queueNum = parseInt(item.queueNumber.slice(1));
+            const userQueueNum = parseInt(userQueueNumber.slice(1));
+            if (queueNum < userQueueNum) {
+                return acc + 1;
+            }
+            return acc;
+        }, 0);
+
+        return count;
+    }
+
+    getQueueNumber(username) {
+        return this.waitZone.find(item => item.userReq.username === username)?.queueNumber;
+    }
+
 
     clearQueueInfo(queueNumber) {
         for (let i = 0; i < this.waitZone.length; i++) {
