@@ -42,9 +42,12 @@
                 .then(response => response.text())
                 .then(result => {
                     const res = JSON.parse(result);
+                    console.log(result)
                     if (res.code === 0) {
+                        // console.log(res.token);
+                        localStorage.setItem('token', res.data.token);
                         alert(res.message);
-                        window.location.href = '#';
+                        window.location.href = 'apply.html';
                     } else if (res.code === -1) {
                         alert(res.message);
                         document.getElementById("password").value = "";

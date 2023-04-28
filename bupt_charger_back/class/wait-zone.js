@@ -17,7 +17,7 @@ class WaitZone {
         }
     }
 
-    addUserRequest(chargingMode, chargingAmount, batteryAmount) {
+    addUserRequest(username, chargingMode, chargingAmount, batteryAmount) {
         const prefix = chargingMode;
         let queueNumber = '';
         let maxIndex = 0;
@@ -29,7 +29,7 @@ class WaitZone {
 
             if (userReq.queueNumber === '') {
                 emptyQueueIndex = i;
-                break;
+                // break;
             } else if (userReq.queueNumber.startsWith(prefix)) {
                 const index = parseInt(userReq.queueNumber.slice(1));
                 // console.log('index:', index);
@@ -52,6 +52,7 @@ class WaitZone {
             this.waitZone[emptyQueueIndex] = {
                 queueNumber: prefix + maxIndex.toString(),
                 userReq: {
+                    username: username,
                     chargingAmount: chargingAmount,
                     batteryAmount: batteryAmount
                 }

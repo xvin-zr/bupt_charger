@@ -1,14 +1,26 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 const WaitZone = require('../class/wait-zone');
+const { secretKey }  = require('../config.js');
+const { getUsernameFromJwt } = require('../class/token');
 
 router.post('/request', (req, res) => {
     const { chargingMode, chargingAmount, batteryAmount } = req.body;
+    const authHeader = req.headers.authorization;
+    let token = ''
+    if (authHeader) {
+        token = authHeader.split(' ')[1];
+        console.log(`Received token: ${token}`);
+    }
+
+    const username = getUsernameFromJwt(token, secretKey);
+
     console.log(chargingMode, chargingAmount, batteryAmount);
     // 记录申请信息
     const waitZone = new WaitZone();
-    const addRes = waitZone.addUserRequest(chargingMode, chargingAmount, batteryAmount);
+    const addRes = waitZone.addUserRequest(username, chargingMode, chargingAmount, batteryAmount);
 
     if (addRes) {
         // store success

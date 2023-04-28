@@ -7,9 +7,9 @@ const app = express();
 
 const User = require('./class/user').User // import User class
 const UserList = require('./class/user').UserList // import UserList class
-const { PORT, host } = require('./config.js');
+const { PORT, HOST, secretKey } = require('./config.js');
 
-const secretKey = 'mysecretkey';
+// const secretKey = 'mysecretkey';
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));

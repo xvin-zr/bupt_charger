@@ -1,14 +1,16 @@
 [
   {
-    "queueNumber": "F0",
+    "queueNumber": "F5",
     "userReq": {
-      "chargingAmount": 111.11,
-      "batteryAmount": 222.22
+      "username": "usr1",
+      "chargingAmount": 122.11,
+      "batteryAmount": 233.22
     }
   },
   {
     "queueNumber": "F1",
     "userReq": {
+      "username": "",
       "chargingAmount": 111.11,
       "batteryAmount": 222.22
     }
@@ -16,6 +18,7 @@
   {
     "queueNumber": "F2",
     "userReq": {
+      "username": "",
       "chargingAmount": 333.33,
       "batteryAmount": 444.44
     }
@@ -23,6 +26,7 @@
   {
     "queueNumber": "F3",
     "userReq": {
+      "username": "",
       "chargingAmount": 444.44,
       "batteryAmount": 555.55
     }
@@ -30,13 +34,15 @@
   {
     "queueNumber": "F4",
     "userReq": {
+      "username": "",
       "chargingAmount": 111.11,
       "batteryAmount": 222.22
     }
   },
   {
-    "queueNumber": "T0",
+    "queueNumber": "T2",
     "userReq": {
+      "username": "",
       "chargingAmount": 111.11,
       "batteryAmount": 222.22
     }

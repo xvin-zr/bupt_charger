@@ -91,7 +91,8 @@
                     method: 'POST',
                     headers: {
                         'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': preToken + localStorage.getItem('token')
                     },
                     body: JSON.stringify(data),
                     redirect: 'follow'
@@ -101,6 +102,13 @@
                     .then(result => {
                         const res = JSON.parse(result);
                         console.log(res);
+                        if (res.code === 0) {
+                            alert(res.message);
+                            window.location.href = '#';
+                        } else if (res.code === -1) {
+                            alert(res.message);
+                            window.location.href = '#';
+                        }
                     })
                     .catch(error => console.error(error));
             });
