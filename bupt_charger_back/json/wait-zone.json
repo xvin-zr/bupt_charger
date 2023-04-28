@@ -1,6 +1,6 @@
 [
   {
-    "queueNumber": "F5",
+    "queueNumber": "",
     "userReq": {
       "username": "usr1",
       "chargingAmount": 111.22,
@@ -24,7 +24,7 @@
     }
   },
   {
-    "queueNumber": "F3",
+    "queueNumber": "",
     "userReq": {
       "username": "",
       "chargingAmount": 444.44,
@@ -32,7 +32,7 @@
     }
   },
   {
-    "queueNumber": "F4",
+    "queueNumber": "",
     "userReq": {
       "username": "",
       "chargingAmount": 111.11,
@@ -40,7 +40,7 @@
     }
   },
   {
-    "queueNumber": "T2",
+    "queueNumber": "",
     "userReq": {
       "username": "",
       "chargingAmount": 111.11,

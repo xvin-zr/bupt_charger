@@ -20,7 +20,7 @@ router.get('/info', (req, res) => {
 
     // TODO: add else if 用户在充电区
 
-    if (waitZone.existUsername(username)) {
+    if (waitZone.existUser(username)) {
         const queueLen = waitZone.getWaitingCountAhead(username);
         const chargeId = waitZone.getQueueNumber(username);
         res.status(200).json({

@@ -20,7 +20,7 @@ router.post('/request', (req, res) => {
     console.log(chargingMode, chargingAmount, batteryAmount);
 
     const waitZone = new WaitZone();
-    if (waitZone.existUsername(username)) {
+    if (waitZone.existUser(username)) {
         res.status(401).json({
             code: -1,
             message: '你已在等候区，请勿重复提交申请',

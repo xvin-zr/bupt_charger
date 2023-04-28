@@ -67,7 +67,7 @@ class WaitZone {
         return true;
     }
 
-    existUsername(username) {
+    existUser(username) {
         return !!this.waitZone.some(item => item.userReq.username === username &&
                                     item.queueNumber !== '');
     }
