@@ -8,7 +8,7 @@ const { getUsernameFromJwt } = require('../class/token');
 
 router.get('/info', (req, res) => {
     const authHeader = req.headers.authorization;
-    let token = ''
+    let token = '';
     if (authHeader) {
         token = authHeader.split(' ')[1];
         console.log(`Received token: ${token}`);
@@ -52,7 +52,7 @@ router.post('/change', (req, res) => {
     const { chargingMode, chargingAmount } = req.body;
     console.log("/change", chargingMode, chargingAmount);
 
-    let token = ''
+    let token = '';
     if (authHeader) {
         token = authHeader.split(' ')[1];
         console.log(`Received token: ${token}`);

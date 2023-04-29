@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+const session = require('express-session');
 
 const app = express();
 
@@ -11,8 +12,17 @@ const { PORT, HOST, secretKey } = require('./config.js');
 
 // const secretKey = 'mysecretkey';
 
+
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
+// 使用 session 中间件，并设置 session 的相关配置
+app.use(session({
+    secret: 'my-secret-key', // 用于加密 session ID 的密钥
+    resave: false, // 是否在每个请求结束后都保存 session 数据
+    saveUninitialized: true, // 是否自动保存未初始化的 session
+    cookie: { secure: false } // 是否使用 HTTPS 协议传输 cookie
+}));
+
 
 app.use(cors({
     origin: ['http://127.0.0.1:8080', 'http://localhost:8080']
@@ -28,6 +38,7 @@ app.post('/login', (req, res) => {
     if (isUser) {
         const user = {username, password};
         const token = jwt.sign(user, secretKey, { expiresIn: '1h' });
+        req.session.username = username;
 
         res.status(200).json({
             code: 0,
@@ -41,6 +52,8 @@ app.post('/login', (req, res) => {
     } else if (username === 'admin' && password === 'admin'){
         const admin = {username, password};
         const token = jwt.sign(admin, secretKey, { expiresIn: '1h' });
+
+        // app.set("username", username); // 定义全局 username 变量
 
         res.status(200).json({
             code: 0,
@@ -107,10 +120,20 @@ app.use('/queue', queueRouter);
 
 
 
-app.listen(PORT, () => {
+const server =  app.listen(PORT, () => {
     console.log('服务器已启动');
     console.log();
 });
+
+
+// 独立运行的代码，用于实现充电桩叫号
+// 充电桩队列有位置就分配。
+// 如果当前用户被叫到，/charging/remainAmount 后 restartCharging
+server.on('listening', () => {
+    setInterval(() => {
+
+    }, 60 * 1000);
+})
 
 // const PORT = 3000;
 // const HOST = '127.0.0.1';

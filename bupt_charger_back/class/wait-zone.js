@@ -96,7 +96,7 @@ class WaitZone {
 
     // todo: 修改充电请求
     modifyUserRequest(username, chargingMode, chargingAmount) {
-        // 调用 addUserRer 和 clearQueueInfo
+        // 调用 addUserReq 和 clearQueueInfo
         return true;
 
     }

@@ -1,0 +1,132 @@
+[
+  {
+    "chargingPileId": 1,
+    "chargerType": "F",
+    "status": "RUNNING",
+    "cumulativeUsageTimes": 0,
+    "cumulativeChargingTime": 0,
+    "cumulativeChargingAmount": 0,
+    "chargerQueue": [
+      {
+        "username": "",
+        "chargingAmount": 0,
+        "remainAmount": 0,
+        "batteryAmount": 0,
+        "chargingFee": 0,
+        "serviceFee": 0
+      },
+      {
+        "username": "",
+        "chargingAmount": 0,
+        "remainAmount": 0,
+        "batteryAmount": 0,
+        "chargingFee": 0,
+        "serviceFee": 0
+      }
+    ]
+  },
+  {
+    "chargingPileId": 2,
+    "chargerType": "F",
+    "status": "RUNNING",
+    "cumulativeUsageTimes": 0,
+    "cumulativeChargingTime": 0,
+    "cumulativeChargingAmount": 0,
+    "chargerQueue": [
+      {
+        "username": "",
+        "chargingAmount": 0,
+        "remainAmount": 0,
+        "batteryAmount": 0,
+        "chargingFee": 0,
+        "serviceFee": 0
+      },
+      {
+        "username": "",
+        "chargingAmount": 0,
+        "remainAmount": 0,
+        "batteryAmount": 0,
+        "chargingFee": 0,
+        "serviceFee": 0
+      }
+    ]
+  },
+  {
+    "chargingPileId": 3,
+    "chargerType": "T",
+    "status": "RUNNING",
+    "cumulativeUsageTimes": 0,
+    "cumulativeChargingTime": 0,
+    "cumulativeChargingAmount": 0,
+    "chargerQueue": [
+      {
+        "username": "",
+        "chargingAmount": 0,
+        "remainAmount": 0,
+        "batteryAmount": 0,
+        "chargingFee": 0,
+        "serviceFee": 0
+      },
+      {
+        "username": "",
+        "chargingAmount": 0,
+        "remainAmount": 0,
+        "batteryAmount": 0,
+        "chargingFee": 0,
+        "serviceFee": 0
+      }
+    ]
+  },
+  {
+    "chargingPileId": 4,
+    "chargerType": "T",
+    "status": "RUNNING",
+    "cumulativeUsageTimes": 0,
+    "cumulativeChargingTime": 0,
+    "cumulativeChargingAmount": 0,
+    "chargerQueue": [
+      {
+        "username": "",
+        "chargingAmount": 0,
+        "remainAmount": 0,
+        "batteryAmount": 0,
+        "chargingFee": 0,
+        "serviceFee": 0
+      },
+      {
+        "username": "",
+        "chargingAmount": 0,
+        "remainAmount": 0,
+        "batteryAmount": 0,
+        "chargingFee": 0,
+        "serviceFee": 0
+      }
+    ]
+  },
+  {
+    "chargingPileId": 5,
+    "chargerType": "T",
+    "status": "RUNNING",
+    "cumulativeUsageTimes": 0,
+    "cumulativeChargingTime": 0,
+    "cumulativeChargingAmount": 0,
+    "chargerQueue": [
+      {
+        "username": "",
+        "chargingAmount": 0,
+        "remainAmount": 0,
+        "batteryAmount": 0,
+        "chargingFee": 0,
+        "serviceFee": 0
+      },
+      {
+        "username": "",
+        "chargingAmount": 0,
+        "remainAmount": 0,
+        "batteryAmount": 0,
+        "chargingFee": 0,
+        "serviceFee": 0
+      }
+    ]
+  }
+]
