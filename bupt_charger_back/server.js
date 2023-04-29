@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-const session = require('express-session');
+// const session = require('express-session');
 
 const app = express();
 
@@ -16,12 +16,12 @@ const { PORT, HOST, secretKey } = require('./config.js');
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 // 使用 session 中间件，并设置 session 的相关配置
-app.use(session({
-    secret: 'my-secret-key', // 用于加密 session ID 的密钥
-    resave: false, // 是否在每个请求结束后都保存 session 数据
-    saveUninitialized: true, // 是否自动保存未初始化的 session
-    cookie: { secure: false } // 是否使用 HTTPS 协议传输 cookie
-}));
+// app.use(session({
+//     secret: 'my-secret-key', // 用于加密 session ID 的密钥
+//     resave: false, // 是否在每个请求结束后都保存 session 数据
+//     saveUninitialized: true, // 是否自动保存未初始化的 session
+//     cookie: { secure: false } // 是否使用 HTTPS 协议传输 cookie
+// }));
 
 
 app.use(cors({
