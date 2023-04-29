@@ -96,6 +96,7 @@ class WaitZone {
 
     // todo: 修改充电请求
     modifyUserRequest(username, chargingMode, chargingAmount) {
+        // 调用 addUserRer 和 clearQueueInfo
         return true;
 
     }
@@ -107,6 +108,7 @@ class WaitZone {
 
             if (userReq.queueNumber === queueNumber) {
                 this.waitZone[i].queueNumber = '';
+                this.waitZone[i].userReq.username = '';
                 this.waitZone[i].userReq.chargingAmount = 0;
                 this.waitZone[i].userReq.batteryAmount = 0;
                 break;
