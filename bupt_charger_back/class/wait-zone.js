@@ -5,7 +5,7 @@ class WaitZone {
         this.waitZone = [];
         this.filePath = 'json/wait-zone.json';
         this.loadWaitZone();
-        console.log(this.waitZone);
+        // console.log(this.waitZone);
     }
 
     loadWaitZone() {
@@ -92,6 +92,12 @@ class WaitZone {
 
     getQueueNumber(username) {
         return this.waitZone.find(item => item.userReq.username === username)?.queueNumber;
+    }
+
+    // todo: 修改充电请求
+    modifyUserRequest(username, chargingMode, chargingAmount) {
+        return true;
+
     }
 
 

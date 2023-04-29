@@ -44,4 +44,24 @@ router.get('/info', (req, res) => {
     }
 })
 
+
+// todo: 修改充电请求
+router.post('/change', (req, res) => {
+    const authHeader = req.headers.authorization;
+    const { chargingMode, chargingAmount } = req.body;
+    console.log("/change", chargingMode, chargingAmount);
+
+    let token = ''
+    if (authHeader) {
+        token = authHeader.split(' ')[1];
+        console.log(`Received token: ${token}`);
+    }
+
+    const username = getUsernameFromJwt(token, secretKey);
+    console.log("/change", username);
+
+    const waitZone = new WaitZone();
+
+})
+
 module.exports = router;

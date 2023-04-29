@@ -9,24 +9,31 @@
     <script src="config.js"></script>
     <style>
         .button-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        margin-top: 20px;
-      }
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 20px;
+        }
+
         #submitBtn {
-        display: block; /* 将 button 元素设置为块级元素 */
-        clear: both;
-        margin-top: 20px; /* 在上方添加 20 像素的间距 */
-        align-items: center;
-      }
-      #count {
-        display: inline-block; /* 将包含 X 人数的 div 元素设置为内联块级元素 */
-      }
-      #queueInfo {
-        display: inline-block; /* 将包含整个句子的 div 元素设置为内联块级元素 */
-      }
+            display: block;
+            /* 将 button 元素设置为块级元素 */
+            clear: both;
+            margin-top: 20px;
+            /* 在上方添加 20 像素的间距 */
+            align-items: center;
+        }
+
+        #count {
+            display: inline-block;
+            /* 将包含 X 人数的 div 元素设置为内联块级元素 */
+        }
+
+        #queueInfo {
+            display: inline-block;
+            /* 将包含整个句子的 div 元素设置为内联块级元素 */
+        }
     </style>
 
     <script>
@@ -77,21 +84,53 @@
 			</div>
 		<% } %> -->
         <div class="card">
-            <h3>你的排队号码：<div id="queueNumber"></div></h3>
-            
+            <h3>你的排队号码：<div id="queueNumber"></div>
+            </h3>
+
             <div>前方还有 <div id="count"></div> 人</div>
 
-			
-		</div>
-        
-        <br>
-        
 
-        
+        </div>
+
+        <br>
+
+
+
     </main>
     <div class="button-container">
         <input type="button" value="查询排队状态" id="submitBtn">
 
+    </div>
+    <div class="button-container">
+        <input type="button" value="修改充电请求" id="modifyBtn">
+
+    </div>
+    <div id="chargingOptions" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+
+            <label>
+                <input type="radio" id="chargingMode-fast" name="chargingMode" value="F" checked>
+                快充
+            </label>
+
+            <label>
+                <input type="radio" id="chargingMode-slow" name="chargingMode" value="T">
+                慢充
+            </label>
+
+
+            <br>
+            <br>
+
+            <label for="chargingAmount">输入请求充电量 (KWh)：</label>
+            <input type="number" id="chargingAmount" name="chargingAmount" min="1" step="0.01" required>
+
+            <div class="button-container">
+                <input type="button" value="提交" id="submit">
+
+            </div>
+        </div>
     </div>
     <script>
         document.getElementById("submitBtn").addEventListener("click", function () {
@@ -121,6 +160,67 @@
                     }
                 })
                 .catch(error => console.log('error', error));
+        });
+
+        const modifyBtn = document.getElementById("modifyBtn");
+        const popup = document.getElementById("chargingOptions");
+        const closeBtn = document.getElementsByClassName("close")[0];
+
+        modifyBtn.addEventListener("click", () => {
+            popup.style.display = "block";
+        });
+
+        closeBtn.addEventListener("click", () => {
+            popup.style.display = "none";
+        });
+
+        window.addEventListener("click", (event) => {
+            if (event.target == popup) {
+                popup.style.display = "none";
+            }
+        });
+
+        // 获取提交按钮元素
+        var submitBtn = document.getElementById('submit');
+
+        // 给提交按钮添加点击事件
+        submitBtn.addEventListener('click', function () {
+            // 获取选中的单选按钮元素
+            const selectedRadio = document.querySelector('input[name="chargingMode"]:checked');
+
+            // 获取选中的单选按钮的值
+            const chargingMode = selectedRadio.value;
+            const chargingAmountInput = document.getElementById('chargingAmount');
+            const chargingAmount = parseFloat(chargingAmountInput.value);
+            if (isNaN(chargingAmount) ||
+                chargingAmount.toFixed(2) !== chargingAmountInput.value) {
+                alert('请输入正确的充电量 (精确到小数点后两位)');
+                return;
+            }
+            const data = { chargingMode, chargingAmount };
+            console.log(data);
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
+                    'Content-Type': 'application/json',
+                    'Authorization': preToken + localStorage.getItem('token')
+                },
+                body: JSON.stringify(data),
+                redirect: 'follow'
+            };
+            fetch(serverURL + "/queue/change", requestOptions)
+                .then(response => response.text())
+                .then(result => {
+                    const res = JSON.parse(result);
+                    console.log(res);
+                    if (res.code === 0) {
+                        alert(res.message);
+                    } else if (res.code === -1) {
+                        alert(res.message);
+                    }
+                })
+                .catch(error => console.error(error));
         });
     </script>
 </body>
