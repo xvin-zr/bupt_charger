@@ -1,6 +1,7 @@
 
 
 // const serverURL = require('../config.js').serverURL;
+const PER_HOUR = 60 / 24;
 
 function getTimeFromServer() {
     var myHeaders = new Headers();
@@ -24,9 +25,12 @@ function getTimeFromServer() {
             console.log(res);
 
             if (res.code === 0) {
-                var datetime = new Date(res.data.datetime);
-                var options = { hour: 'numeric', minute: 'numeric', second: undefined };
-                timeDiv.innerText = datetime.toLocaleTimeString([], options);
+                const datetime = timeToDecimal(res.data.datetime);
+                const hour = Math.floor(datetime / PER_HOUR);
+                
+                // 将内容修改为"Hour: hour"
+                timeDiv.innerHTML = "Hour: " + hour;
+
             }
         })
         .catch(error => console.log('error', error));
@@ -38,3 +42,12 @@ function callGetTimeFromServer() {
         getTimeFromServer();
     }, 60 * 1000); // 每60秒调用一次函数
 }
+
+function timeToDecimal(timeString) {
+    const date = new Date(timeString);
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+    const decimal = minutes + seconds / 60;
+    return decimal.toFixed(2);
+}
+

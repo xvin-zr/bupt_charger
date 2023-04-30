@@ -78,7 +78,7 @@ body {
     padding: 0;
 }
 #time {
-    font-family: "SF Mono", "Menlo", "Monaco", "Consolas", monospace;
+    font-family: "SF Mono", SFMono-Regular, "Menlo", "Monaco", "Consolas", monospace;
 }
 .popup {
     display: none;
