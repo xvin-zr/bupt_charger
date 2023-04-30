@@ -29,7 +29,7 @@ function getTimeFromServer() {
                 const hour = Math.floor(datetime / PER_HOUR);
                 
                 // 将内容修改为"Hour: hour"
-                timeDiv.innerHTML = "Hour: " + hour;
+                timeDiv.innerHTML = hour + ":00";
 
             }
         })
