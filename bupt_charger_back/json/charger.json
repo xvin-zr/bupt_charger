@@ -13,7 +13,8 @@
         "remainAmount": 0,
         "batteryAmount": 0,
         "chargingFee": 0,
-        "serviceFee": 0
+        "serviceFee": 0,
+        "startTime": ""
       },
       {
         "username": "",
@@ -21,7 +22,8 @@
         "remainAmount": 0,
         "batteryAmount": 0,
         "chargingFee": 0,
-        "serviceFee": 0
+        "serviceFee": 0,
+        "startTime": ""
       }
     ]
   },
@@ -39,7 +41,8 @@
         "remainAmount": 0,
         "batteryAmount": 0,
         "chargingFee": 0,
-        "serviceFee": 0
+        "serviceFee": 0,
+        "startTime": ""
       },
       {
         "username": "",
@@ -47,7 +50,8 @@
         "remainAmount": 0,
         "batteryAmount": 0,
         "chargingFee": 0,
-        "serviceFee": 0
+        "serviceFee": 0,
+        "startTime": ""
       }
     ]
   },
@@ -65,7 +69,8 @@
         "remainAmount": 0,
         "batteryAmount": 0,
         "chargingFee": 0,
-        "serviceFee": 0
+        "serviceFee": 0,
+        "startTime": ""
       },
       {
         "username": "",
@@ -73,7 +78,8 @@
         "remainAmount": 0,
         "batteryAmount": 0,
         "chargingFee": 0,
-        "serviceFee": 0
+        "serviceFee": 0,
+        "startTime": ""
       }
     ]
   },
@@ -91,7 +97,8 @@
         "remainAmount": 0,
         "batteryAmount": 0,
         "chargingFee": 0,
-        "serviceFee": 0
+        "serviceFee": 0,
+        "startTime": ""
       },
       {
         "username": "",
@@ -99,7 +106,8 @@
         "remainAmount": 0,
         "batteryAmount": 0,
         "chargingFee": 0,
-        "serviceFee": 0
+        "serviceFee": 0,
+        "startTime": ""
       }
     ]
   },
@@ -117,7 +125,8 @@
         "remainAmount": 0,
         "batteryAmount": 0,
         "chargingFee": 0,
-        "serviceFee": 0
+        "serviceFee": 0,
+        "startTime": ""
       },
       {
         "username": "",
@@ -125,7 +134,8 @@
         "remainAmount": 0,
         "batteryAmount": 0,
         "chargingFee": 0,
-        "serviceFee": 0
+        "serviceFee": 0,
+        "startTime": ""
       }
     ]
   }
