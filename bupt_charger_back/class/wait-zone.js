@@ -96,8 +96,10 @@ class WaitZone {
 
     // todo: 修改充电请求
     modifyUserRequest(username, chargingMode, chargingAmount) {
+        // 先判断 chargingAmount 是否大于 batteryAmount
         // 调用 addUserReq 和 clearQueueInfo
-        return true;
+
+        return { modifyRes: true, msg: "msg" };
 
     }
 
