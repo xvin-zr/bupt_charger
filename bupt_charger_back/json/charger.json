@@ -2,6 +2,7 @@
   {
     "chargingPileId": 1,
     "chargerType": "F",
+    "power": 30,
     "status": "RUNNING",
     "cumulativeUsageTimes": 0,
     "cumulativeChargingTime": 0,
@@ -30,6 +31,7 @@
   {
     "chargingPileId": 2,
     "chargerType": "F",
+    "power": 30,
     "status": "RUNNING",
     "cumulativeUsageTimes": 0,
     "cumulativeChargingTime": 0,
@@ -58,6 +60,7 @@
   {
     "chargingPileId": 3,
     "chargerType": "T",
+    "power": 7,
     "status": "RUNNING",
     "cumulativeUsageTimes": 0,
     "cumulativeChargingTime": 0,
@@ -86,6 +89,7 @@
   {
     "chargingPileId": 4,
     "chargerType": "T",
+    "power": 7,
     "status": "RUNNING",
     "cumulativeUsageTimes": 0,
     "cumulativeChargingTime": 0,
@@ -114,6 +118,7 @@
   {
     "chargingPileId": 5,
     "chargerType": "T",
+    "power": 7,
     "status": "RUNNING",
     "cumulativeUsageTimes": 0,
     "cumulativeChargingTime": 0,
