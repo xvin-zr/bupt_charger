@@ -8,7 +8,7 @@
     }
   },
   {
-    "queueNumber": "",
+    "queueNumber": "F2",
     "userReq": {
       "username": "",
       "chargingAmount": 222.22,
@@ -16,7 +16,7 @@
     }
   },
   {
-    "queueNumber": "",
+    "queueNumber": "T1",
     "userReq": {
       "username": "usr1",
       "chargingAmount": 123.11,
@@ -24,7 +24,7 @@
     }
   },
   {
-    "queueNumber": "",
+    "queueNumber": "T2",
     "userReq": {
       "username": "",
       "chargingAmount": 444.44,

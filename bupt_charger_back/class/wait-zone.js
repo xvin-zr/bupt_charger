@@ -99,16 +99,49 @@ class WaitZone {
         // 先判断 chargingAmount 是否大于 batteryAmount
         // 调用 addUserReq 和 clearQueueInfo
 
+
+        this.saveWaitZone();
         return { modifyRes: true, msg: "msg" };
 
     }
 
+    // 找到快充和慢充排第一的用户
+    getFirstUserReqs() {
+        let fMinQueueNum = "";
+        let tMinQueueNum = "";
+        let fMinUserReq = null;
+        let tMinUserReq = null;
 
-    clearQueueInfo(queueNumber) {
+        for (const i of this.waitZone) {
+            if (i.queueNumber.startsWith("F")) {
+                if (fMinQueueNum === "") {
+                    fMinQueueNum = i.queueNumber;
+                    fMinUserReq = i.userReq;
+                } else if (i.queueNumber < fMinQueueNum) {
+                    fMinQueueNum = i.queueNumber;
+                    fMinUserReq = i.userReq;
+                }
+            } else if (i.queueNumber.startsWith("T")) {
+                if (tMinQueueNum === "") {
+                    tMinQueueNum = i.queueNumber;
+                    tMinUserReq = i.userReq;
+                } else if (i.queueNumber < tMinQueueNum) {
+                    tMinQueueNum = i.queueNumber;
+                    tMinUserReq = i.userReq;
+                }
+            }
+        }
+
+        return { fMinReq: fMinUserReq, tMinReq: tMinUserReq };
+
+    }
+
+
+    clearQueueInfo(username) {
         for (let i = 0; i < this.waitZone.length; i++) {
-            const userReq = this.waitZone[i];
+            const userReq = this.waitZone[i].userReq;
 
-            if (userReq.queueNumber === queueNumber) {
+            if (userReq.username === username) {
                 this.waitZone[i].queueNumber = '';
                 this.waitZone[i].userReq.username = '';
                 this.waitZone[i].userReq.chargingAmount = 0;

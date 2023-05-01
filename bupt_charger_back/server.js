@@ -8,6 +8,8 @@ const app = express();
 
 const User = require('./class/user').User // import User class
 const UserList = require('./class/user').UserList // import UserList class
+const WaitZone = require('./class/wait-zone');
+const Charger = require('./class/charger'); // import Charger class
 const { PORT, HOST, secretKey } = require('./config.js');
 
 // const secretKey = 'mysecretkey';
@@ -127,12 +129,25 @@ const server =  app.listen(PORT, () => {
 
 
 // 独立运行的代码，用于实现充电桩叫号
-// 充电桩队列有位置就分配。
+// 判断充电桩队列有位置
+// 转移用户到充电桩
 // 如果当前用户被叫到，/charging/remainAmount 后 restartCharging
 server.on('listening', () => {
     setInterval(() => {
+        const waitZone = new WaitZone();
+        const chargers = new Charger();
+        const { fMinReq, tMinReq } = waitZone.getFirstUserReqs();
+        console.log('fMinReq', fMinReq, 'tMinReq', tMinReq);
 
-    }, 60 * 1000);
+        if (chargers.hasSlotForFastCharger() && fMinReq) {
+            waitZone.clearQueueInfo(fMinReq.username);
+
+        }
+        if (chargers.hasSlotForSlowCharger() && tMinReq) {
+            console.log('hasAvailableSlotForSlowCharger');
+        }
+
+    }, 10 * 1000);
 })
 
 // const PORT = 3000;
