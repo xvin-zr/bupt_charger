@@ -9,7 +9,7 @@ const { getUsernameFromJwt } = require('../class/token');
 router.post('/request', (req, res) => {
     const { chargingMode, chargingAmount, batteryAmount } = req.body;
     const authHeader = req.headers.authorization;
-    let token = ''
+    let token = '';
     if (authHeader) {
         token = authHeader.split(' ')[1];
         console.log(`Received token: ${token}`);

@@ -18,7 +18,27 @@ class Charger {
         this.loadCharger();
     }
 
+    chargingOnce() {
+
+    }
+
     restartCharging() {
+
+    }
+
+    existChargingUser(username) {
+
+    }
+
+    existWaitingUser(username) {
+
+    }
+
+    cancelCharging() {
+
+    }
+
+    finishCharging() {
 
     }
 
