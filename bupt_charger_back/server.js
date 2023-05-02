@@ -131,6 +131,7 @@ const server =  app.listen(PORT, () => {
 // 独立运行的代码，用于实现充电桩叫号
 // 判断是否有故障
 // 有故障，将队列中的车取出，优先分配
+// 得到等待区最前的用户
 // 判断充电桩队列有位置
 // 转移用户到充电桩
 // 如果当前用户被叫到，/charging/remainAmount 后 restartCharging
@@ -138,16 +139,36 @@ server.on('listening', () => {
     setInterval(() => {
         const waitZone = new WaitZone();
         const chargers = new Charger();
+
+        const shutdownRes = chargers.getShutdownChargerUsers();
+        if (shutdownRes) {
+            const { chargerType, user1, user2 } = shutdownRes;
+            if (user1.username) {
+                const assignRes =  chargers.assignUserFromShutdown(chargerType, user1);
+                chargers.cancelCharging(user1.username);
+            }
+            if (user2.username) {
+                const assignRes =  chargers.assignUserFromShutdown(chargerType, user2);
+                chargers.cancelCharging(user2.username);
+            }
+        }
+
+
         const { fMinReq, tMinReq } = waitZone.getFirstUserReqs();
         console.log('fMinReq', fMinReq, 'tMinReq', tMinReq);
 
         if (chargers.hasSlotForFastCharger() && fMinReq) {
+            chargers.assignUser("F", fMinReq);
             waitZone.clearQueueInfo(fMinReq.username);
 
         }
         if (chargers.hasSlotForSlowCharger() && tMinReq) {
-            console.log('hasAvailableSlotForSlowCharger');
+            // console.log('hasAvailableSlotForSlowCharger');
+            chargers.assignUser("T", tMinReq);
+            waitZone.clearQueueInfo(tMinReq.username);
         }
+
+        chargers.chargingOnce();
 
     }, 10 * 1000);
 })

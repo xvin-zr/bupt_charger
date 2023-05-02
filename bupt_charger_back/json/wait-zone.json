@@ -1,34 +1,34 @@
 [
   {
-    "queueNumber": "F1",
-    "userReq": {
-      "username": "usr1",
-      "chargingAmount": 234.11,
-      "batteryAmount": 234.22
-    }
-  },
-  {
-    "queueNumber": "F2",
+    "queueNumber": "",
     "userReq": {
       "username": "",
-      "chargingAmount": 222.22,
-      "batteryAmount": 333.33
+      "chargingAmount": 0,
+      "batteryAmount": 0
     }
   },
   {
-    "queueNumber": "T1",
-    "userReq": {
-      "username": "usr1",
-      "chargingAmount": 123.11,
-      "batteryAmount": 233.22
-    }
-  },
-  {
-    "queueNumber": "T2",
+    "queueNumber": "",
     "userReq": {
       "username": "",
-      "chargingAmount": 444.44,
-      "batteryAmount": 555.55
+      "chargingAmount": 0,
+      "batteryAmount": 0
+    }
+  },
+  {
+    "queueNumber": "",
+    "userReq": {
+      "username": "",
+      "chargingAmount": 0,
+      "batteryAmount": 0
+    }
+  },
+  {
+    "queueNumber": "",
+    "userReq": {
+      "username": "",
+      "chargingAmount": 0,
+      "batteryAmount": 0
     }
   },
   {
