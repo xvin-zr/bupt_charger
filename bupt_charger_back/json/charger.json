@@ -7,6 +7,9 @@
     "cumulativeUsageTimes": 0,
     "cumulativeChargingTime": 0,
     "cumulativeChargingAmount": 0,
+    "cumulativeChargingFee": 0,
+    "cumulativeServiceFee": 0,
+    "cumulativeFee": 0,
     "chargerQueue": [
       {
         "username": "",
@@ -36,6 +39,9 @@
     "cumulativeUsageTimes": 0,
     "cumulativeChargingTime": 0,
     "cumulativeChargingAmount": 0,
+    "cumulativeChargingFee": 0,
+    "cumulativeServiceFee": 0,
+    "cumulativeFee": 0,
     "chargerQueue": [
       {
         "username": "",
@@ -65,6 +71,9 @@
     "cumulativeUsageTimes": 0,
     "cumulativeChargingTime": 0,
     "cumulativeChargingAmount": 0,
+    "cumulativeChargingFee": 0,
+    "cumulativeServiceFee": 0,
+    "cumulativeFee": 0,
     "chargerQueue": [
       {
         "username": "",
@@ -94,6 +103,9 @@
     "cumulativeUsageTimes": 0,
     "cumulativeChargingTime": 0,
     "cumulativeChargingAmount": 0,
+    "cumulativeChargingFee": 0,
+    "cumulativeServiceFee": 0,
+    "cumulativeFee": 0,
     "chargerQueue": [
       {
         "username": "",
@@ -123,6 +135,9 @@
     "cumulativeUsageTimes": 0,
     "cumulativeChargingTime": 0,
     "cumulativeChargingAmount": 0,
+    "cumulativeChargingFee": 0,
+    "cumulativeServiceFee": 0,
+    "cumulativeFee": 0,
     "chargerQueue": [
       {
         "username": "",

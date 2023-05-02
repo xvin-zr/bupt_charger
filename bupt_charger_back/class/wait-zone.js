@@ -138,19 +138,15 @@ class WaitZone {
 
 
     clearQueueInfo(username) {
-        for (let i = 0; i < this.waitZone.length; i++) {
-            const userReq = this.waitZone[i].userReq;
-
-            if (userReq.username === username) {
-                this.waitZone[i].queueNumber = '';
-                this.waitZone[i].userReq.username = '';
-                this.waitZone[i].userReq.chargingAmount = 0;
-                this.waitZone[i].userReq.batteryAmount = 0;
-                break;
-            }
+        const index = this.waitZone.findIndex(item => item.userReq?.username === username);
+        if (index !== -1) {
+            const item = this.waitZone[index];
+            item.queueNumber = '';
+            item.userReq.username = '';
+            item.userReq.chargingAmount = 0;
+            item.userReq.batteryAmount = 0;
+            this.saveWaitZone();
         }
-
-        this.saveWaitZone();
     }
 
     saveWaitZone() {

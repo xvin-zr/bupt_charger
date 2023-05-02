@@ -1,4 +1,6 @@
 const fs = require("fs");
+const csv = require("csv");
+
 // 峰时电费单价
 const HIGH_PRICE = 1.0;
 
@@ -22,6 +24,24 @@ class Charger {
 
     }
 
+    append2CSV() {
+        const filePath = "../json/report.csv";
+        const data = {
+
+        };
+
+        // 将新数据追加到CSV文件中
+        csv.stringify([data], { header: false }, (err, output) => {
+            if (err) throw err;
+
+            // 使用追加模式打开文件以添加数据
+            fs.appendFile(filePath, output, (err) => {
+                if (err) throw err;
+                console.log('新数据已添加到CSV文件中');
+            });
+        });
+    }
+
     restartCharging() {
 
     }
@@ -43,7 +63,8 @@ class Charger {
     }
 
     assignUser(chargingType, userReq) {
-        const chargers = this.chargers.filter(c => c.chargerType === chargingType);
+        const chargers = this.chargers.filter(c => c.chargerType === chargingType &&
+                                                c.status === "RUNNING");
 
         // 查找第一个空闲位置
         const firstEmptySlot = chargers
@@ -93,7 +114,8 @@ class Charger {
 
     hasSlotForFastCharger() {
         // 遍历所有快充充电桩
-        for (const charger of this.chargers.filter(c => c.chargerType === "F")) {
+        for (const charger of this.chargers.filter(c => c.chargerType === "F" &&
+                                                    c.status === "RUNNING")) {
             // 检查是否有空闲队列位置
             if (charger.chargerQueue.some(q => q.username === "")) {
                 return true;
@@ -104,7 +126,8 @@ class Charger {
 
     hasSlotForSlowCharger() {
         // 遍历所有慢充充电桩
-        for (const charger of this.chargers.filter(c => c.chargerType === "T")) {
+        for (const charger of this.chargers.filter(c => c.chargerType === "T" &&
+                                                    c.status === "RUNNING")) {
             // 检查是否有空闲队列位置
             if (charger.chargerQueue.some(q => q.username === "")) {
                 return true;

@@ -129,6 +129,8 @@ const server =  app.listen(PORT, () => {
 
 
 // 独立运行的代码，用于实现充电桩叫号
+// 判断是否有故障
+// 有故障，将队列中的车取出，优先分配
 // 判断充电桩队列有位置
 // 转移用户到充电桩
 // 如果当前用户被叫到，/charging/remainAmount 后 restartCharging
