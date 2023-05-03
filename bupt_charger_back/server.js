@@ -141,6 +141,8 @@ server.on('listening', () => {
         const waitZone = new WaitZone();
         const chargers = new Charger();
 
+        chargers.chargingOnce();
+
         const shutdownRes = chargers.getShutdownChargerUsers();
         if (shutdownRes) {
             const { chargerType, user1, user2 } = shutdownRes;
@@ -169,10 +171,8 @@ server.on('listening', () => {
             waitZone.clearQueueInfo(tMinReq.username);
         }
 
-        chargers.chargingOnce();
 
-
-    }, 5 * 1000);
+    }, 60 * 1000);
 })
 
 // const PORT = 3000;

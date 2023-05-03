@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 const WaitZone = require('../class/wait-zone');
+const Charger = require('../class/charger'); // import Charger class
 const { secretKey }  = require('../config.js');
 const { getUsernameFromJwt } = require('../class/token');
 
@@ -17,6 +18,7 @@ router.get('/info', (req, res) => {
     const username = getUsernameFromJwt(token, secretKey);
 
     const waitZone = new WaitZone();
+    const chargers = new Charger();
 
     // TODO: add else if 用户在充电区
 
@@ -33,9 +35,46 @@ router.get('/info', (req, res) => {
                 "place": "WAITINGPLACE"
             }
         })
-    } else if (false)  { // TODO: add else if 用户在充电区
-
-    } else {
+    } else if (chargers.existWaitingUser(username))  { // TODO: add else if 用户在充电区
+        const chargerId = chargers.getUserChargerId(username);
+        const chargerStatus = chargers.getChargerStatus(chargerId);
+        let curState = "";
+        if (chargerStatus === "RUNNING") {
+            curState = "WAITINGSTAGE2";
+        } else if (chargerStatus === "SHUTDOWN") {
+            curState = "FAULTREQUEUE";
+        }
+        res.status(200).json({
+            "code": 0,
+            "message": "success",
+            "data": {
+                "chargeId": "",
+                "queueLen": 0,
+                "curState": curState,
+                "place": chargerId
+            }
+        });
+    } else if (chargers.existChargingUser(username)) {
+        const chargerId = chargers.getUserChargerId(username);
+        const chargerStatus = chargers.getChargerStatus(chargerId);
+        let curState = "";
+        if (chargerStatus === "RUNNING") {
+            curState = "CHARGING";
+        } else if (chargerStatus === "SHUTDOWN") {
+            curState = "FAULTREQUEUE";
+        }
+        res.status(200).json({
+            "code": 0,
+            "message": "success",
+            "data": {
+                "chargeId": "",
+                "queueLen": 0,
+                "curState": curState,
+                "place": chargerId
+            }
+        });
+    }
+    else {
         res.status(401).json({
             code: -1,
             message: '未找到用户充电信息',

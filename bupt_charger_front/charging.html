@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <title>充电区</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/time.js"></script>
+    <script src="js/charge.js"></script>
+    <script src="config.js"></script>
+    <style>
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #submitBtn {
+            display: block;
+            /* 将 button 元素设置为块级元素 */
+            clear: both;
+            margin-top: 20px;
+            /* 在上方添加 20 像素的间距 */
+            align-items: center;
+        }
+
+        #count {
+            display: inline-block;
+            /* 将包含 X 人数的 div 元素设置为内联块级元素 */
+        }
+
+        #queueInfo {
+            display: inline-block;
+            /* 将包含整个句子的 div 元素设置为内联块级元素 */
+        }
+    </style>
+
+    <script>
+        var timerId;
+        window.onload = function () {
+            getTimeFromServer();
+            displayImg();
+            getChargingQueueInfo();
+
+            // callGetTimeFromServer();
+            setInterval(function () {
+                getTimeFromServer();
+                getChargingQueueInfo();
+                
+            }, 60 * 1000); // 每60秒调用一次函数
+
+            window.onbeforeunload = function () {
+                clearInterval(timerId);
+            };
+
+        }
+    </script>
+
+</head>
+
+<body>
+    <header class="header">
+        <h1>充电区</h1>
+        <div id="time"></div>
+    </header>
+    <nav class="navbar">
+        <ul>
+            <li><a href="#">申请充电</a></li>
+            <li><a href="#">等待区</a></li>
+            <li><a href="#">Database</a></li>
+            <li><a href="#">Tasks</a></li>
+            <li><a href="#">Calendar</a></li>
+        </ul>
+        <ul>
+
+            <li><a href="#">退出</a></li>
+        </ul>
+    </nav>
+    <main class="content">
+        <!-- <% for (let i = 0; i < waitZones.length; i++) { %>
+			<div class="card">
+				<h3>等待号码：<%= waitZones[i].queueNumber %></h3>
+				<p>用户名：<%= waitZones[i].username %></p>
+				<p>车牌号：<%= waitZones[i].plateNumber %></p>
+			</div>
+		<% } %> -->
+        <div class="card">
+            <img id="chargerImg" src="" alt="">  
+            <div id="chargerId"></div>
+            <div id="queueInfo"></div>
+
+
+        </div>
+
+        <br>
+
+
+
+    </main>
+    <div class="button-container">
+        <input type="button" value="查询排队状态" id="submitBtn">
+
+    </div>
+    
+    <div class="button-container">
+        <input type="button" value="取消充电" id="cancelBtn">
+
+    </div>
+    
+    
+</body>
+
+</html>

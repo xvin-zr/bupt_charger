@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 const WaitZone = require('../class/wait-zone');
+const Charger = require('../class/charger'); // import Charger class
 const { secretKey }  = require('../config.js');
 const { getUsernameFromJwt } = require('../class/token');
 
@@ -52,6 +53,48 @@ router.post('/request', (req, res) => {
 
 
 
+})
+
+router.get("/remainAmount", (req, res) => {
+    const authHeader = req.headers.authorization;
+    let token = '';
+    if (authHeader) {
+        token = authHeader.split(' ')[1];
+        console.log(`Received token: ${token}`);
+    }
+    const username = getUsernameFromJwt(token, secretKey);
+
+    const chargers = new Charger();
+    const remainAmount = chargers.getUserRemainAmount(username);
+    console.log("remainAmount", remainAmount);
+
+    res.status(200).json({
+        code: 0,
+        message: 'success',
+        data: {
+            amount: remainAmount
+        }
+    })
+})
+
+router.post("/submit", (req, res) => {
+    const authHeader = req.headers.authorization;
+    let token = '';
+    if (authHeader) {
+        token = authHeader.split(' ')[1];
+        console.log(`Received token: ${token}`);
+    }
+    const username = getUsernameFromJwt(token, secretKey);
+
+    const chargers = new Charger();
+
+    const data = chargers.finishCharging(username);
+
+    res.status(200).json({
+        code: 0,
+        message: 'success',
+        data: data
+    })
 })
 
 

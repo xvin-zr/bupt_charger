@@ -62,7 +62,7 @@ class Charger {
                 task.remainAmount -= charger.power; // 消耗电量
                 if (task.remainAmount <= 0) {
                     task.remainAmount = 0;
-                    this.finishCharging(task.username); // 完成充电任务
+                    // this.finishCharging(task.username); // 完成充电任务
                 }
 
             }
@@ -104,11 +104,48 @@ class Charger {
     }
 
     existChargingUser(username) {
-
+        for (const c of this.chargers) {
+            if (c.chargerQueue[0].username === username) {
+                return true;
+            }
+        }
+        return false;
     }
 
     existWaitingUser(username) {
+        for (const c of this.chargers) {
+            if (c.chargerQueue[1].username === username) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    getUserChargerId(username) {
+        for (const c of this.chargers) {
+            if (c.chargerQueue[0].username === username || c.chargerQueue[1].username === username) {
+                return c.chargingPileId;
+            }
+        }
+        return -1;
+    }
+
+    getUserRemainAmount(username) {
+        for (const c of this.chargers) {
+            if (c.chargerQueue[0].username === username ) {
+                return c.chargerQueue[0].remainAmount;
+            }
+        }
+        return 0;
+    }
+
+    getChargerStatus(chargerId) {
+        for (const c of this.chargers) {
+            if (c.chargingPileId === chargerId) {
+                return c.status;
+            }
+        }
+        return "SHUTDOWN";
     }
 
     cancelCharging(username) {
@@ -150,6 +187,7 @@ class Charger {
                 console.log("userId: " + userId);
                 const data = {
                     userId: userId,
+                    username: queue[0].username,
                     orderId: queue[0].username + Math.floor(Date.now() / 10000).toString(),
                     createTime: queue[0].startTime,
                     chargingPileId: c.chargingPileId,
@@ -188,10 +226,13 @@ class Charger {
                         startTime: "",
                     };
                 }
-                break; // 找到了用户，退出循环
+                this.saveCharger();
+                return data;
+                // break; // 找到了用户，退出循环
             }
         }
         this.saveCharger();
+        return null;
     }
 
     assignUser(chargingType, userReq) {
