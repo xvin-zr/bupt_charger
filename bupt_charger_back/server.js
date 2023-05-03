@@ -40,7 +40,7 @@ app.post('/login', (req, res) => {
     if (isUser) {
         const user = {username, password};
         const token = jwt.sign(user, secretKey, { expiresIn: '1h' });
-        req.session.username = username;
+
 
         res.status(200).json({
             code: 0,
@@ -125,6 +125,7 @@ app.use('/queue', queueRouter);
 const server =  app.listen(PORT, () => {
     console.log('服务器已启动');
     console.log();
+
 });
 
 
@@ -170,7 +171,8 @@ server.on('listening', () => {
 
         chargers.chargingOnce();
 
-    }, 10 * 1000);
+
+    }, 5 * 1000);
 })
 
 // const PORT = 3000;

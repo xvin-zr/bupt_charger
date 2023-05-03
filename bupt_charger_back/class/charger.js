@@ -132,12 +132,7 @@ class Charger {
 
 
 
-    // if userId is a number
-    // const objectHash = require('node-object-hash')({sort: false});
-    //
-    // const surname = 'Smith';
-    // const surnameNumber = objectHash.hash(surname);
-    // console.log(surnameNumber);
+
     finishCharging(username) {
         for (const c of this.chargers) {
             const queue = c.chargerQueue;

@@ -6,10 +6,10 @@
     "status": "RUNNING",
     "cumulativeUsageTimes": 0,
     "cumulativeChargingTime": 0,
-    "cumulativeChargingAmount": 450,
-    "cumulativeChargingFee": 234,
-    "cumulativeServiceFee": 360,
-    "cumulativeFee": 594,
+    "cumulativeChargingAmount": 540,
+    "cumulativeChargingFee": 324,
+    "cumulativeServiceFee": 432,
+    "cumulativeFee": 756,
     "chargerQueue": [
       {
         "username": "",
@@ -38,10 +38,10 @@
     "status": "RUNNING",
     "cumulativeUsageTimes": 0,
     "cumulativeChargingTime": 0,
-    "cumulativeChargingAmount": 0,
-    "cumulativeChargingFee": 0,
-    "cumulativeServiceFee": 0,
-    "cumulativeFee": 0,
+    "cumulativeChargingAmount": 20,
+    "cumulativeChargingFee": 20,
+    "cumulativeServiceFee": 16,
+    "cumulativeFee": 36,
     "chargerQueue": [
       {
         "username": "",

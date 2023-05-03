@@ -1,3 +1,10 @@
 {
-    "liveServer.settings.port": 8080
+    "liveServer.settings.port": 8080,
+    "liveServer.settings.ignoreFiles": [
+        "bupt_charger_back/json/**",
+        ".vscode/**",
+        "**/*.scss",
+        "**/*.sass",
+        "**/*.ts"
+    ]
 }
