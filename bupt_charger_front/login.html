@@ -10,7 +10,9 @@
 </head>
 
 <body>
+    <h1>智能充电桩系统</h1>
     <h1>欢迎登录</h1>
+    <div class="card">
     <form id="login-form" method="POST">
         <label for="username">用户名:</label>
         <input type="text" id="username" name="username" maxlength="20" required>
@@ -19,9 +21,10 @@
         <input type="password" id="password" name="password" maxlength="32" required>
         <p></p>
         <br>
-        <button type="submit">登录</button>
+        <button type="submit" class="login-btn">登录</button>
     </form>
-    <button onclick="window.location.href='register.html'">注册</button>
+    <button onclick="window.location.href='register.html'" class="login-btn">注册</button>
+    </div>
 
     <script>
         const loginForm = document.getElementById('login-form');

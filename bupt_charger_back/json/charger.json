@@ -6,19 +6,19 @@
     "status": "RUNNING",
     "cumulativeUsageTimes": 0,
     "cumulativeChargingTime": 0,
-    "cumulativeChargingAmount": 0,
-    "cumulativeChargingFee": 0,
-    "cumulativeServiceFee": 0,
-    "cumulativeFee": 0,
+    "cumulativeChargingAmount": 450,
+    "cumulativeChargingFee": 234,
+    "cumulativeServiceFee": 360,
+    "cumulativeFee": 594,
     "chargerQueue": [
       {
-        "username": "usrF1",
+        "username": "",
         "chargingAmount": 0,
         "remainAmount": 0,
         "batteryAmount": 0,
         "chargingFee": 0,
         "serviceFee": 0,
-        "startTime": "2023-05-02T14:38:55.244Z"
+        "startTime": ""
       },
       {
         "username": "",
@@ -102,25 +102,25 @@
     "status": "RUNNING",
     "cumulativeUsageTimes": 0,
     "cumulativeChargingTime": 0,
-    "cumulativeChargingAmount": 0,
-    "cumulativeChargingFee": 0,
-    "cumulativeServiceFee": 0,
-    "cumulativeFee": 0,
+    "cumulativeChargingAmount": 111.11,
+    "cumulativeChargingFee": 59.14399999999999,
+    "cumulativeServiceFee": 88.88799999999999,
+    "cumulativeFee": 148.032,
     "chargerQueue": [
       {
-        "username": "usrT1",
+        "username": "",
         "chargingAmount": 0,
         "remainAmount": 0,
         "batteryAmount": 0,
         "chargingFee": 0,
         "serviceFee": 0,
-        "startTime": "2023-05-02T14:38:55.247Z"
+        "startTime": ""
       },
       {
-        "username": "sd2",
-        "chargingAmount": 111.11,
-        "remainAmount": 111.11,
-        "batteryAmount": 111.11,
+        "username": "",
+        "chargingAmount": 0,
+        "remainAmount": 0,
+        "batteryAmount": 0,
         "chargingFee": 0,
         "serviceFee": 0,
         "startTime": ""
@@ -134,16 +134,16 @@
     "status": "RUNNING",
     "cumulativeUsageTimes": 0,
     "cumulativeChargingTime": 0,
-    "cumulativeChargingAmount": 0,
-    "cumulativeChargingFee": 0,
-    "cumulativeServiceFee": 0,
-    "cumulativeFee": 0,
+    "cumulativeChargingAmount": 111.11,
+    "cumulativeChargingFee": 59.14399999999999,
+    "cumulativeServiceFee": 88.88799999999999,
+    "cumulativeFee": 148.032,
     "chargerQueue": [
       {
-        "username": "sd1",
-        "chargingAmount": 111.11,
-        "remainAmount": 111.11,
-        "batteryAmount": 111.11,
+        "username": "",
+        "chargingAmount": 0,
+        "remainAmount": 0,
+        "batteryAmount": 0,
         "chargingFee": 0,
         "serviceFee": 0,
         "startTime": ""

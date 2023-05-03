@@ -1,1 +1,2 @@
-day,week,month,chargingPileId,cumulativeUsageTimes,cumulativeChargingTime,cumulativeChargingAmount,cumulativeChargingFee,cumulativeServiceFee,cumulativeFee
+userId,orderId,createTime,chargingPileId,volume,chargingTime,startTime,endTime,chargingFee,serviceFee,totalFee,time
+usrF1,usrF1168309106,2023-05-02T14:38:55.244Z,1,90,52733.615,2023-05-02T14:38:55.244Z,2023-05-03T05:17:48.859Z,72,144,216,1683091068859

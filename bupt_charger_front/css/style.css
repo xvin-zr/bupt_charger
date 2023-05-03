@@ -58,7 +58,7 @@ body {
 .card {
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
-    margin: 10px;
+    margin: 10px auto;
     /* max-width: 400px; */
     padding: 20px;
     text-align: center;
@@ -120,5 +120,53 @@ body {
     text-decoration: none;
     cursor: pointer;
   }
+  h1 {
+    text-align: center;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+label {
+    font-size: 18px;
+}
+
+input[type="text"],
+input[type="password"] {
+    font-size: 16px;
+    /* border: 1px solid #ccc; 添加边框 */
+    /* border-radius: 5px; 添加圆角 */
+    border: none;
+    border-bottom: 2px solid #ccc;
+    margin: 10px 0;
+    padding: 8px 10px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-bottom: 2px solid #444;
+}
+
+.login-btn {
+    background-color: #827e7e;
+    color: #fff;
+    font-size: 14px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+
+.login-btn:hover {
+    background-color: #444;
+}
+
+.login-btn:focus {
+    outline: none;
+}
 
