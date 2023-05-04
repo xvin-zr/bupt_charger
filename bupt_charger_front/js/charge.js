@@ -15,6 +15,8 @@ function getChargingQueueInfo() {
             console.log(result);
             const res = JSON.parse(result);
             if (res.data.curState === "WAITINGSTAGE2" ) {
+                document.getElementById("chargerId").innerText = "充电桩 " + res.data.place;
+                document.getElementById("chargerId").style.fontWeight = "bold";
                 document.getElementById("queueInfo").innerText = "前方一人正在充电";
             } else if (res.data.curState === "CHARGING") {
                 getRemainAmount();
@@ -79,15 +81,16 @@ function finishCharging() {
         .catch(error => console.log('error', error));
 }
 
-function displayImg() {
+function displayImg(chargerId) {
     // 获取 URL 中的 chargerId 参数
-    const urlParams = new URLSearchParams(window.location.search);
-    const chargerId = urlParams.get("chargerId");
+    // const urlParams = new URLSearchParams(window.location.search);
+    // const chargerId = urlParams.get("chargerId");
 
     // 根据 chargerId 的值选择要显示的图片
     const chargerImg = document.getElementById("chargerImg");
-    document.getElementById("chargerId").innerText = "充电桩 " + chargerId;
-    if (chargerId === 1 || chargerId === 2) {
+    // document.getElementById("chargerId").innerText = "充电桩 " + chargerId;
+    // document.getElementById("chargerId").style.fontWeight = "bold";
+    if (chargerId == 1 || chargerId == 2) {
         chargerImg.src = "assets/fast-charger.png";
     } else {
         chargerImg.src = "assets/slow-charger.png";

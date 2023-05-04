@@ -1,7 +1,10 @@
 const fs = require("fs");
+const express = require("express");
 const csv = require("csv");
 const crypto = require('crypto');
 const { v4: uuidv4 } = require('uuid');
+
+const app = express();
 
 
 
@@ -62,7 +65,9 @@ class Charger {
                 task.remainAmount -= charger.power; // 消耗电量
                 if (task.remainAmount <= 0) {
                     task.remainAmount = 0;
-                    // this.finishCharging(task.username); // 完成充电任务
+                    if (app.get("username") && task.username !== app.get("username")) {
+                        this.finishCharging(task.username); // 完成充电任务
+                    }
                 }
 
             }
@@ -70,9 +75,9 @@ class Charger {
         this.saveCharger(); // 保存充电桩数据
     }
 
-    getShutdownChargerUsers() {
+    getUnavailableChargerUsers() {
         for (const charger of this.chargers) {
-            if (charger.status === "SHUTDOWN") {
+            if (charger.status === "UNAVAILABLE") {
                 const {chargerType, chargerQueue} = charger;
                 // if (chargerQueue[0].username) {
                 //     this.finishCharging(chargerQueue[0].username);
@@ -165,6 +170,27 @@ class Charger {
             }
         }
         // console.log(`No charging task found for user ${username}`);
+    }
+
+    removeFromUnavailable(username) {
+        for (const charger of this.chargers) {
+            if (charger.status === "UNAVAILABLE") {
+                for (let task of charger.chargerQueue) {
+                    if (task.username === username) {
+                        task.username = "";
+                        task.chargingAmount = 0;
+                        task.remainAmount = 0;
+                        task.batteryAmount = 0;
+                        task.chargingFee = 0;
+                        task.serviceFee = 0;
+                        task.startTime = "";
+                        // console.log(`Canceled charging for user ${username}`);
+                        return;
+                    }
+                }
+            }
+
+        }
     }
 
 
@@ -289,7 +315,7 @@ class Charger {
         }
     }
 
-    assignUserFromShutdown(chargingType, userReq) {
+    assignUserFromUnavailable(chargingType, userReq) {
         const chargers = this.chargers.filter(c => c.chargerType === chargingType &&
             c.status === "RUNNING");
 
@@ -300,6 +326,7 @@ class Charger {
 
         if (firstEmptySlot) {
             Object.assign(firstEmptySlot, userReq);
+            this.removeFromUnavailable(userReq.username);
             this.saveCharger();
             return true;
         } else {
@@ -322,6 +349,7 @@ class Charger {
 
 
                 Object.assign(minCharger.charger.chargerQueue[1], userReq);
+                this.removeFromUnavailable(userReq.username);
                 this.saveCharger();
                 return true;
             } else {

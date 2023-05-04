@@ -27,12 +27,17 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use(cors({
-    origin: ['http://127.0.0.1:8080', 'http://localhost:8080']
+    origin: ['http://127.0.0.1:8080', 'http://localhost:8080', 'http://10.128.155.80:*'],
 }));
+
+// 使用他人客户端用这个
+// app.use(cors({
+//     origin: '*'
+// }));
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
-    console.log(username, password);
+    console.log("/login", username, password);
 
     const userList = new UserList();
     const isUser = userList.login(username, password);
@@ -40,6 +45,8 @@ app.post('/login', (req, res) => {
     if (isUser) {
         const user = {username, password};
         const token = jwt.sign(user, secretKey, { expiresIn: '1h' });
+
+        app.set("username", username); // 定义全局 username 变量
 
 
         res.status(200).json({
@@ -122,7 +129,7 @@ app.use('/queue', queueRouter);
 
 
 
-const server =  app.listen(PORT, () => {
+const server =  app.listen(PORT, HOST,() => {
     console.log('服务器已启动');
     console.log();
 
@@ -143,16 +150,16 @@ server.on('listening', () => {
 
         chargers.chargingOnce();
 
-        const shutdownRes = chargers.getShutdownChargerUsers();
-        if (shutdownRes) {
-            const { chargerType, user1, user2 } = shutdownRes;
+        const unavailableRes = chargers.getUnavailableChargerUsers();
+        if (unavailableRes) {
+            const { chargerType, user1, user2 } = unavailableRes;
             if (user1.username) {
-                const assignRes =  chargers.assignUserFromShutdown(chargerType, user1);
-                chargers.cancelCharging(user1.username);
+                const assignRes =  chargers.assignUserFromUnavailable(chargerType, user1);
+                // chargers.removeFromUnavailable(user1.username);
             }
             if (user2.username) {
-                const assignRes =  chargers.assignUserFromShutdown(chargerType, user2);
-                chargers.cancelCharging(user2.username);
+                const assignRes =  chargers.assignUserFromUnavailable(chargerType, user2);
+                // chargers.removeFromUnavailable(user2.username);
             }
         }
 
@@ -182,4 +189,8 @@ server.on('listening', () => {
 //     console.log(`服务器已启动，监听端口 ${PORT}，绑定 IP 地址 ${HOST}`);
 // });
 // 如果您想让服务器在其他计算机上可访问，请将 IP 地址设置为本地计算机的公共 IP 地址或网络接口的 IP 地址。
-// 例如 https://www.whatismyip.com/ 或 https://www.iplocation.net/. 这些网站将显示您的公共 IP 地址。
+// 要查看本机的 IP 地址，可以使用以下方法：
+// 在 Windows 上：
+// 打开命令提示符（按下 Win + R，输入 cmd，然后按下回车键）。
+// 在命令提示符窗口中，输入 ipconfig 命令并按下回车键。
+// 查找名为“IPv4 地址”的行，其中包含本机的 IP 地址。

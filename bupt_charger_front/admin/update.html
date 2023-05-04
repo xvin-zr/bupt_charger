@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <title>更新充电桩状态</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <!-- <script src="../js/clock.js"></script> -->
+    <script src="../config.js"></script>
+    <!-- <script src="js/time.js"></script> -->
+    <script src="../js/update.js"></script>
+    <style>
+        .select-container {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+    <script>
+        var timerId;
+        // 在页面加载完成后调用函数
+        window.onload = function () {
+            // getTimeFromServer();
+
+            // callGetTimeFromServer();
+
+            // 在用户离开页面时停止计时器
+            window.onbeforeunload = function () {
+                clearInterval(timerId);
+            };
+        };
+    </script>
+
+</head>
+
+<body>
+    <header class="header">
+        <h1>更新充电桩状态</h1>
+        <div id="time"></div>
+    </header>
+    <nav class="navbar">
+        <ul>
+            <li><a href="#">更新充电桩状态</a></li>
+            <li><a href="#">查看充电桩状态</a></li>
+            <li><a href="#">排队情况</a></li>
+            <li><a href="#">报表</a></li>
+
+        </ul>
+        <ul>
+            <li><a href="#"></a></li>
+            <li><a href="#">退出</a></li>
+        </ul>
+    </nav>
+    <main class="content">
+        <div class="select-container">
+
+            <label for="charging-pile">充电桩：</label>
+            <br>
+            <select id="charging-pile" name="chargingPile">
+                <option value="">选择充电桩</option>
+                <option value="1" charging-pile-id="1">充电桩 1</option>
+                <option value="2" charging-pile-id="2">充电桩 2</option>
+                <option value="3" charging-pile-id="3">充电桩 3</option>
+                <option value="4" charging-pile-id="4">充电桩 4</option>
+                <option value="5" charging-pile-id="5">充电桩 5</option>
+            </select>
+            <br>
+
+            <label for="status">更新状态为：</label>
+            <br>
+            <select id="status" name="status">
+                <option value="">选择状态</option>
+                <option value="RUNNING">开启</option>
+                <option value="SHUTDOWN">关闭</option>
+                <!-- <option value="PAUSED" data-charging-pile-id="7" data-status="PAUSED">Paused</option> -->
+            </select>
+            <button type="submit" class="login-btn" id="submitBtn">更新</button>
+        </div>
+
+        <!-- <input type="hidden" name="user" id="user" value="<%= JSON.stringify(user) %>"> -->
+
+
+        <script>
+            updateChargerStatus();
+        </script>
+
+    </main>
+</body>
+
+</html>
