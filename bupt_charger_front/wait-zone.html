@@ -226,8 +226,10 @@
                     console.log(res);
                     if (res.code === 0) {
                         alert(res.message);
+                        location.reload();
                     } else if (res.code === -1) {
                         alert(res.message);
+                        popup.style.display = "none";
                     }
                 })
                 .catch(error => console.error(error));

@@ -12,7 +12,7 @@ router.get('/info', (req, res) => {
     let token = '';
     if (authHeader) {
         token = authHeader.split(' ')[1];
-        console.log(`Received token: ${token}`);
+        // console.log(`Received token: ${token}`);
     }
 
     const username = getUsernameFromJwt(token, secretKey);
@@ -93,13 +93,28 @@ router.post('/change', (req, res) => {
     let token = '';
     if (authHeader) {
         token = authHeader.split(' ')[1];
-        console.log(`Received token: ${token}`);
+        // console.log(`Received token: ${token}`);
     }
 
     const username = getUsernameFromJwt(token, secretKey);
     console.log("/change", username);
 
     const waitZone = new WaitZone();
+
+    const { modifyRes, msg } = waitZone.modifyUserRequest(username, chargingMode, chargingAmount);
+    if (modifyRes) {
+        res.status(200).json({
+            code: 0,
+            message: msg,
+            data: {}
+        });
+    } else {
+        res.status(401).json({
+            code: -1,
+            message: msg,
+            data: {}
+        });
+    }
 
 })
 

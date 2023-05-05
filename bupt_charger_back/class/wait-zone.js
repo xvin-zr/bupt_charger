@@ -66,8 +66,6 @@ class WaitZone {
         }
 
 
-
-
         // 将更新后的 waitZone 保存到 JSON 文件中
         this.saveWaitZone();
         return true;
@@ -104,17 +102,36 @@ class WaitZone {
     modifyUserRequest(username, chargingMode, chargingAmount) {
         // 先判断 chargingAmount 是否大于 batteryAmount
         // 调用 addUserReq 和 clearQueueInfo
+        var index = this.waitZone.findIndex(item => item.userReq?.username === username);
+        if (index === -1)
+            return { modifyRes: false, msg: "请稍后再试" };
 
+        const item = this.waitZone[index];
 
-        this.saveWaitZone();
-        return { modifyRes: true, msg: "msg" };
+        // 先判断 chargingAmount 是否大于 batteryAmount
+        if (chargingAmount <= item.userReq.batteryAmount) {
+            //再判断是否修改充电模式
+            if (chargingMode !== item.queueNumber[0]) {
+                var batteryAmount = item.userReq.batteryAmount;
+                this.clearQueueInfo(username);
+                //console.log('///', batteryAmount);
+                this.addUserRequest(username, chargingMode, chargingAmount, batteryAmount);
+            } else {
+                this.waitZone[index].userReq.chargingAmount = chargingAmount;
+            }
+            this.saveWaitZone();
+            return { modifyRes: true, msg: "修改充电请求成功" };
+        } else {
+            return { modifyRes: false, msg: "修改充电请求失败，申请充电量大于电池容量" };
+        }
+
 
     }
 
     increaseWaitingTime() {
         for (const i of this.waitZone) {
             if (i.queueNumber && i.userReq.username) {
-                i.waitingTime += PER_WAIT_TIME;
+                i.userReq.waitingTime += PER_WAIT_TIME;
             }
         }
         this.saveWaitZone();

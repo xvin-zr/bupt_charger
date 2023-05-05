@@ -13,7 +13,7 @@ router.post('/request', (req, res) => {
     let token = '';
     if (authHeader) {
         token = authHeader.split(' ')[1];
-        console.log(`Received token: ${token}`);
+        // console.log(`Received token: ${token}`);
     }
 
     const username = getUsernameFromJwt(token, secretKey);
@@ -60,7 +60,7 @@ router.get("/remainAmount", (req, res) => {
     let token = '';
     if (authHeader) {
         token = authHeader.split(' ')[1];
-        console.log(`Received token: ${token}`);
+        // console.log(`Received token: ${token}`);
     }
     const username = getUsernameFromJwt(token, secretKey);
 
@@ -82,7 +82,7 @@ router.post("/submit", (req, res) => {
     let token = '';
     if (authHeader) {
         token = authHeader.split(' ')[1];
-        console.log(`Received token: ${token}`);
+        // console.log(`Received token: ${token}`);
     }
     const username = getUsernameFromJwt(token, secretKey);
 

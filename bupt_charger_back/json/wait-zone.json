@@ -1,11 +1,11 @@
 [
   {
-    "queueNumber": "",
+    "queueNumber": "T1",
     "userReq": {
-      "username": "",
-      "chargingAmount": 0,
-      "batteryAmount": 0,
-      "waitingTime": 0
+      "username": "usr1",
+      "chargingAmount": 14,
+      "batteryAmount": 60,
+      "waitingTime": 180
     }
   },
   {

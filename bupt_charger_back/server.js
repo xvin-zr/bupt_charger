@@ -180,7 +180,7 @@ server.on('listening', () => {
                 chargers.assignUser("T", tMinReq);
                 waitZone.clearQueueInfo(tMinReq.username);
             }
-        }, 10 * 1000);
+        }, 120 * 1000);
 
         waitZone.increaseWaitingTime();
 
