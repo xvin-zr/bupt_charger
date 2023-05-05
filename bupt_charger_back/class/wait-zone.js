@@ -1,14 +1,9 @@
 const fs = require("fs");
-const path = require('path');
-
-const PER_WAIT_TIME = 60;
 
 class WaitZone {
     constructor() {
         this.waitZone = [];
-        // this.filePath = 'json/wait-zone.json';
-        this.filePath = path.join(__dirname, '../json/wait-zone.json');
-        // console.log("filePath:", this.filePath);
+        this.filePath = 'json/wait-zone.json';
         this.loadWaitZone();
         // console.log(this.waitZone);
     }
@@ -59,14 +54,10 @@ class WaitZone {
                 userReq: {
                     username: username,
                     chargingAmount: chargingAmount,
-                    batteryAmount: batteryAmount,
-                    waitingTime: 0
+                    batteryAmount: batteryAmount
                 }
             }
         }
-
-
-
 
         // 将更新后的 waitZone 保存到 JSON 文件中
         this.saveWaitZone();
@@ -100,24 +91,33 @@ class WaitZone {
         return this.waitZone.find(item => item.userReq.username === username)?.queueNumber;
     }
 
-    // todo: 修改充电请求
+    // TODO: 修改充电请求
     modifyUserRequest(username, chargingMode, chargingAmount) {
         // 先判断 chargingAmount 是否大于 batteryAmount
         // 调用 addUserReq 和 clearQueueInfo
+        var index = this.waitZone.findIndex(item => item.userReq?.username === username);
+        if (index === -1) 
+            return { modifyRes: false, msg: "请稍后再试" };
 
+        const item = this.waitZone[index];
 
-        this.saveWaitZone();
-        return { modifyRes: true, msg: "msg" };
-
-    }
-
-    increaseWaitingTime() {
-        for (const i of this.waitZone) {
-            if (i.queueNumber && i.userReq.username) {
-                i.waitingTime += PER_WAIT_TIME;
+        // 先判断 chargingAmount 是否大于 batteryAmount
+        if (chargingAmount <= item.userReq.batteryAmount) {
+            //再判断是否修改充电模式
+            if (chargingMode !== item.queueNumber[0]) {
+                var batteryAmount = item.userReq.batteryAmount;
+                this.clearQueueInfo(username);
+                //console.log('///', batteryAmount);
+                this.addUserRequest(username, chargingMode, chargingAmount, batteryAmount);
+            } else {
+                this.waitZone[index].userReq.chargingAmount = chargingAmount;
             }
+            this.saveWaitZone();
+            return { modifyRes: true, msg: "修改充电请求成功" };
+        } else {
+            return { modifyRes: false, msg: "修改充电请求失败" };
         }
-        this.saveWaitZone();
+
     }
 
     // 找到快充和慢充排第一的用户
@@ -160,7 +160,6 @@ class WaitZone {
             item.userReq.username = '';
             item.userReq.chargingAmount = 0;
             item.userReq.batteryAmount = 0;
-            item.userReq.waitingTime = 0;
             this.saveWaitZone();
         }
     }
