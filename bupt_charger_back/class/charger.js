@@ -24,8 +24,8 @@ const SERVICE_FEE_PRICE = 0.8;
 class Charger {
     constructor() {
 
-        // this.filePath = 'json/charger.json';
-        this.filePath = path.join(__dirname, '../json/charger.json');
+        this.filePath = 'json/charger.json';
+        // this.filePath = path.join(__dirname, '../json/charger.json');
         this.loadCharger();
     }
 

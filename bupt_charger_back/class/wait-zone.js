@@ -5,7 +5,7 @@ class WaitZone {
         this.waitZone = [];
         this.filePath = 'json/wait-zone.json';
         this.loadWaitZone();
-        // console.log(this.waitZone);
+        console.log(this.waitZone);
     }
 
     loadWaitZone() {

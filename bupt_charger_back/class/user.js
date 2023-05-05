@@ -13,8 +13,8 @@ class User {
 class UserList {
     constructor() {
         this.users = [];
-        // this.filePath = 'json/users.json';
-        this.filePath = path.join(__dirname, '../json/users.json');
+        this.filePath = 'json/users.json';
+        // this.filePath = path.join(__dirname, '../json/users.json');
         this.loadUsers();
     }
 
