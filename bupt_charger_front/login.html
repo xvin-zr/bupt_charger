@@ -55,7 +55,7 @@
                     } else if (res.code === 0 && res.data.is_admin) {
                         // 管理员登陆
                         alert(res.message);
-                        window.location.href = '#';
+                        window.location.href = 'admin/query-charger.html';
                     } else if (res.code === -1) {
                         alert(res.message);
                         document.getElementById("password").value = "";

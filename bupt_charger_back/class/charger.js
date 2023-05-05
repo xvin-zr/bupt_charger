@@ -3,6 +3,7 @@ const express = require("express");
 const csv = require("csv");
 const crypto = require('crypto');
 const { v4: uuidv4 } = require('uuid');
+const path = require("path");
 
 const app = express();
 
@@ -24,6 +25,7 @@ class Charger {
     constructor() {
 
         this.filePath = 'json/charger.json';
+        // this.filePath = path.join(__dirname, '../json/charger.json');
         this.loadCharger();
     }
 
@@ -55,8 +57,8 @@ class Charger {
                 task.chargingFee += chargingFee; // 更新充电费用
                 task.serviceFee += serviceFee;
                 charger.cumulativeChargingAmount += actualPower; // 更新充电桩的累计充电量
-                // charger.cumulativeChargingTime += 60; // 更新充电桩的累计充电时间
-                // 累计充电时间结束后计算
+                charger.cumulativeChargingTime += 1; // 更新充电桩的累计充电时间
+
                 charger.cumulativeChargingFee += chargingFee; // 更新充电桩的累计充电费用
                 charger.cumulativeServiceFee += serviceFee; // 更新充电桩的累计服务费用
                 charger.cumulativeFee += chargingFee + serviceFee; // 更新充电桩的累计费用
@@ -65,7 +67,7 @@ class Charger {
                 task.remainAmount -= charger.power; // 消耗电量
                 if (task.remainAmount <= 0) {
                     task.remainAmount = 0;
-                    if (app.get("username") && task.username !== app.get("username")) {
+                    if (!app.get("username") || task.username !== app.get("username")) {
                         this.finishCharging(task.username); // 完成充电任务
                     }
                 }
@@ -73,6 +75,26 @@ class Charger {
             }
         }
         this.saveCharger(); // 保存充电桩数据
+    }
+
+    // todo: 管理员更新充电桩状态
+    updateChargerStatus(chargerId, status) {
+
+    }
+
+    // todo: 管理员查询充电桩状态
+    getAllChargerStatus() {
+
+    }
+
+    // todo: 管理员查看排队状态
+    getChargerQueueStatus() {
+
+    }
+
+    // todo: 管理员查看报表
+    getChargerReport() {
+
     }
 
     getUnavailableChargerUsers() {

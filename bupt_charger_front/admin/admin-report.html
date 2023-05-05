@@ -2,17 +2,14 @@
 <html lang="zh">
 
 <head>
-    <title>查看充电桩状态</title>
+    <title>查看报表</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <!-- <script src="../js/clock.js"></script> -->
     <script src="../config.js"></script>
     <!-- <script src="js/time.js"></script> -->
-    <script src="../js/query-charger.js"></script>
+    <script src="../js/admin-report.js"></script>
     <style>
-        .select-container {
-            display: flex;
-            flex-direction: column;
-        }
+        
 
         .btn-container {
             display: flex;
@@ -39,15 +36,15 @@
 
 <body>
     <header class="header">
-        <h1>查看充电桩状态</h1>
+        <h1>查看报表</h1>
         <div id="time"></div>
     </header>
     <nav class="navbar">
         <ul>
             <li><a href="update.html">更新充电桩状态</a></li>
-            <li><a href="#">查看充电桩状态</a></li>
-            <li><a href="#">排队情况</a></li>
-            <li><a href="admin-report.html">报表</a></li>
+            <li><a href="query-charger.html">查看充电桩状态</a></li>
+            <li><a href="queue.html">排队情况</a></li>
+            <li><a href="#">报表</a></li>
 
         </ul>
         <ul>
@@ -58,20 +55,7 @@
     <main class="content">
         <div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>充电桩编号</th>
-                        <th>状态</th>
-                        <th>使用次数</th>
-                        <th>累计充电时间</th>
-                        <th>累计充电金额</th>
-                    </tr>
-                </thead>
-                <tbody id="table-body">
-
-                </tbody>
-            </table>
+            
             <div class="btn-container">
                 <button type="submit" class="login-btn" id="submitBtn">查询</button>
             </div>
@@ -81,7 +65,7 @@
 
 
         <script>
-            getChargerStatus();
+            getReport();
         </script>
 
     </main>

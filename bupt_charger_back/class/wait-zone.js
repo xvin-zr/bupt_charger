@@ -1,11 +1,16 @@
 const fs = require("fs");
+const path = require('path');
+
+const PER_WAIT_TIME = 60;
 
 class WaitZone {
     constructor() {
         this.waitZone = [];
-        this.filePath = 'json/wait-zone.json';
+        // this.filePath = 'json/wait-zone.json';
+        this.filePath = path.join(__dirname, '../json/wait-zone.json');
+        // console.log("filePath:", this.filePath);
         this.loadWaitZone();
-        // console.log(this.waitZone);
+        console.log(this.waitZone);
     }
 
     loadWaitZone() {
@@ -54,7 +59,8 @@ class WaitZone {
                 userReq: {
                     username: username,
                     chargingAmount: chargingAmount,
-                    batteryAmount: batteryAmount
+                    batteryAmount: batteryAmount,
+                    waitingTime: 0
                 }
             }
         }
@@ -105,6 +111,15 @@ class WaitZone {
 
     }
 
+    increaseWaitingTime() {
+        for (const i of this.waitZone) {
+            if (i.queueNumber && i.userReq.username) {
+                i.waitingTime += PER_WAIT_TIME;
+            }
+        }
+        this.saveWaitZone();
+    }
+
     // 找到快充和慢充排第一的用户
     getFirstUserReqs() {
         let fMinQueueNum = "";
@@ -145,6 +160,7 @@ class WaitZone {
             item.userReq.username = '';
             item.userReq.chargingAmount = 0;
             item.userReq.batteryAmount = 0;
+            item.userReq.waitingTime = 0;
             this.saveWaitZone();
         }
     }

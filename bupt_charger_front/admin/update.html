@@ -13,6 +13,11 @@
             display: flex;
             flex-direction: column;
         }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
     </style>
     <script>
         var timerId;
@@ -39,7 +44,7 @@
     <nav class="navbar">
         <ul>
             <li><a href="#">更新充电桩状态</a></li>
-            <li><a href="#">查看充电桩状态</a></li>
+            <li><a href="query-charger.html">查看充电桩状态</a></li>
             <li><a href="#">排队情况</a></li>
             <li><a href="#">报表</a></li>
 
@@ -72,7 +77,10 @@
                 <option value="SHUTDOWN">关闭</option>
                 <!-- <option value="PAUSED" data-charging-pile-id="7" data-status="PAUSED">Paused</option> -->
             </select>
-            <button type="submit" class="login-btn" id="submitBtn">更新</button>
+            <div class="btn-container">
+
+                <button type="submit" class="login-btn" id="submitBtn">更新</button>
+            </div>
         </div>
 
         <!-- <input type="hidden" name="user" id="user" value="<%= JSON.stringify(user) %>"> -->

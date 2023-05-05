@@ -66,7 +66,7 @@ app.post('/login', (req, res) => {
 
         res.status(200).json({
             code: 0,
-            message: '登录成功',
+            message: '管理员登录成功',
             data: {
                 token: token,
                 is_admin: true
@@ -123,9 +123,11 @@ app.get('/time', (req, res) => {
 // 路由
 const chargingRouter = require('./routes/charging');
 const queueRouter = require('./routes/queue');
+const adminRouter = require('./routes/admin');
 
 app.use('/charging', chargingRouter);
 app.use('/queue', queueRouter);
+app.use('/admin', adminRouter);
 
 
 
@@ -163,23 +165,28 @@ server.on('listening', () => {
             }
         }
 
+        setInterval(() => {
 
-        const { fMinReq, tMinReq } = waitZone.getFirstUserReqs();
-        console.log('fMinReq', fMinReq, 'tMinReq', tMinReq);
+            const { fMinReq, tMinReq } = waitZone.getFirstUserReqs();
+            console.log('fMinReq', fMinReq, 'tMinReq', tMinReq);
 
-        if (chargers.hasSlotForFastCharger() && fMinReq) {
-            chargers.assignUser("F", fMinReq);
-            waitZone.clearQueueInfo(fMinReq.username);
+            if (chargers.hasSlotForFastCharger() && fMinReq) {
+                chargers.assignUser("F", fMinReq);
+                waitZone.clearQueueInfo(fMinReq.username);
 
-        }
-        if (chargers.hasSlotForSlowCharger() && tMinReq) {
-            // console.log('hasAvailableSlotForSlowCharger');
-            chargers.assignUser("T", tMinReq);
-            waitZone.clearQueueInfo(tMinReq.username);
-        }
+            }
+            if (chargers.hasSlotForSlowCharger() && tMinReq) {
+                // console.log('hasAvailableSlotForSlowCharger');
+                chargers.assignUser("T", tMinReq);
+                waitZone.clearQueueInfo(tMinReq.username);
+            }
+        }, 10 * 1000);
+
+        waitZone.increaseWaitingTime();
 
 
-    }, 60 * 1000);
+
+    }, 10 * 1000);
 })
 
 // const PORT = 3000;

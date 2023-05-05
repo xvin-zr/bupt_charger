@@ -1,3 +1,5 @@
+// 用户充电区
+
 function getChargingQueueInfo() {
     var requestOptions = {
         method: 'GET',

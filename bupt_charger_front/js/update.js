@@ -4,11 +4,11 @@ function updateChargerStatus() {
         const chargingPileSelect = document.getElementById('charging-pile');
         const statusSelect = document.getElementById('status');
 
-        const selectedChargingPileId = chargingPileSelect.options[chargingPileSelect.selectedIndex].getAttribute('charging-pile-id');
+        const selectedChargingPileId = parseInt(chargingPileSelect.options[chargingPileSelect.selectedIndex].getAttribute('charging-pile-id'));
         const selectedStatus = statusSelect.options[statusSelect.selectedIndex].value;
 
-        console.log(`Selected charging pile ID: ${selectedChargingPileId}`);
-        console.log(`Selected status: ${selectedStatus}`);
+        console.log(`Selected charging pile ID:`, selectedChargingPileId);
+        console.log(`Selected status:`, selectedStatus);
 
         const data = {
             "chargingPileId": selectedChargingPileId,
@@ -24,9 +24,12 @@ function updateChargerStatus() {
             body: JSON.stringify(data),
             redirect: 'follow'
         };
-        fetch("/admin/update-pile", requestOptions)
+        fetch(serverURL + "/admin/update-pile", requestOptions)
             .then(response => response.text())
-            .then(result => console.log(result))
+            .then(result => {
+                const res = JSON.parse(result);
+                console.log("res", res);
+            })
             .catch(error => console.log('error', error));
     });
 }

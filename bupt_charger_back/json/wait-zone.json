@@ -4,7 +4,8 @@
     "userReq": {
       "username": "",
       "chargingAmount": 0,
-      "batteryAmount": 0
+      "batteryAmount": 0,
+      "waitingTime": 0
     }
   },
   {
@@ -12,7 +13,8 @@
     "userReq": {
       "username": "",
       "chargingAmount": 0,
-      "batteryAmount": 0
+      "batteryAmount": 0,
+      "waitingTime": 0
     }
   },
   {
@@ -20,7 +22,8 @@
     "userReq": {
       "username": "",
       "chargingAmount": 0,
-      "batteryAmount": 0
+      "batteryAmount": 0,
+      "waitingTime": 0
     }
   },
   {
@@ -28,7 +31,8 @@
     "userReq": {
       "username": "",
       "chargingAmount": 0,
-      "batteryAmount": 0
+      "batteryAmount": 0,
+      "waitingTime": 0
     }
   },
   {
@@ -36,7 +40,8 @@
     "userReq": {
       "username": "",
       "chargingAmount": 111.11,
-      "batteryAmount": 222.22
+      "batteryAmount": 222.22,
+      "waitingTime": 0
     }
   },
   {
@@ -44,7 +49,8 @@
     "userReq": {
       "username": "",
       "chargingAmount": 111.11,
-      "batteryAmount": 222.22
+      "batteryAmount": 222.22,
+      "waitingTime": 0
     }
   }
 ]

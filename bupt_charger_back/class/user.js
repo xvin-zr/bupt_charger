@@ -1,4 +1,5 @@
 const fs = require("fs")
+const path = require("path");
 
 class User {
     constructor(username, password) {
@@ -13,6 +14,7 @@ class UserList {
     constructor() {
         this.users = [];
         this.filePath = 'json/users.json';
+        // this.filePath = path.join(__dirname, '../json/users.json');
         this.loadUsers();
     }
 

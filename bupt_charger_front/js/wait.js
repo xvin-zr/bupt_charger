@@ -1,4 +1,4 @@
-
+// 用户等待区
 function getQueueInfo() {
     var requestOptions = {
         method: 'GET',
