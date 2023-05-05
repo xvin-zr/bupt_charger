@@ -84,7 +84,7 @@ router.get('/info', (req, res) => {
 })
 
 
-// TODO: 修改充电请求
+// todo: 修改充电请求
 router.post('/change', (req, res) => {
     const authHeader = req.headers.authorization;
     const { chargingMode, chargingAmount } = req.body;
@@ -100,22 +100,7 @@ router.post('/change', (req, res) => {
     console.log("/change", username);
 
     const waitZone = new WaitZone();
-    //temp
-    waitZone.loadWaitZone();
-    const { modifyRes, msg } = waitZone.modifyUserRequest(username, chargingMode, chargingAmount);
-    if (modifyRes) {
-        res.status(200).json({
-            code: 0,
-            message: msg,
-            data: {}
-        });
-    } else {
-        res.status(200).json({
-            code: -1,
-            message: msg,
-            data: {}
-        });
-    }
+
 })
 
 module.exports = router;
