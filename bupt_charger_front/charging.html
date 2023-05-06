@@ -43,9 +43,9 @@
             // displayImg();
             getChargingQueueInfo();
 
-            // callGetTimeFromServer();
+            callGetTimeFromServer();
             setInterval(function () {
-                getTimeFromServer();
+                // getTimeFromServer();
                 getChargingQueueInfo();
                 
             }, 10 * 1000); // 每60秒调用一次函数

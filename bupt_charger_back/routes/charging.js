@@ -110,6 +110,13 @@ router.post("/cancel", (req, res) => {
 
     if (waitZone.existUser(username)) {
         // todo: 等待区中用户取消充电
+        waitZone.clearQueueInfo(username);
+
+        res.status(200).json({
+            code: 0,
+            message: '取消充电成功',
+            data: {}
+        });
 
     } else if (chargers.existWaitingUser(username)) {
 
