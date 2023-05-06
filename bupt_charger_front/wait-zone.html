@@ -46,7 +46,7 @@
             setInterval(function () {
                 getTimeFromServer();
                 getQueueInfo();
-            }, 60 * 1000); // 每60秒调用一次函数
+            }, 10 * 1000); // 每60秒调用一次函数
 
             window.onbeforeunload = function () {
                 clearInterval(timerId);
