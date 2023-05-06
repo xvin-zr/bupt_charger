@@ -180,13 +180,13 @@ server.on('listening', () => {
                 chargers.assignUser("T", tMinReq);
                 waitZone.clearQueueInfo(tMinReq.username);
             }
-        }, 120 * 1000);
+        }, 60 * 1000);
 
         waitZone.increaseWaitingTime();
 
 
 
-    }, 10 * 1000);
+    }, 60 * 1000);
 })
 
 // const PORT = 3000;
