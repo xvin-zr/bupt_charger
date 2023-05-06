@@ -17,7 +17,7 @@ function getQueueInfo() {
             const res = JSON.parse(result);
             if (res.data.curState === "WAITINGSTAGE2" || res.data.curState === "CHARGING") {
                 alert(`请前往 ${res.data.place} 号充电桩`);
-                window.location.href = "charging.html?chargerId="+res.data.place;
+                window.location.href = "charging.html?chargerId=" + res.data.place;
             } else if (res.data.curState === "FAULTREQUEUE") {
                 const queueInfoDiv = document.getElementById("queueInfo");
                 queueInfoDiv.textContent = "充电桩故障，正在重新分配";
@@ -26,4 +26,26 @@ function getQueueInfo() {
             document.getElementById("count").innerText = res.data.queueLen;
         })
         .catch(error => console.log('error', error));
+}
+
+function cancelQueue() {
+    document.getElementById("cancelBtn").addEventListener("click", function () {
+        var requestOptions = {
+            method: 'POST',
+            headers: {
+                'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
+                'Content-Type': 'application/json',
+                'Authorization': preToken + localStorage.getItem('token')
+            },
+            redirect: 'follow'
+        };
+
+        fetch(serverURL+"/charging/cancel", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                const res = JSON.parse(result);
+                console.log("res", res);
+            })
+            .catch(error => console.log('error', error));
+    });
 }
