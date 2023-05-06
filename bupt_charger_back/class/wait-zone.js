@@ -98,32 +98,29 @@ class WaitZone {
         return this.waitZone.find(item => item.userReq.username === username)?.queueNumber;
     }
 
-    // todo: 修改充电请求
+
     modifyUserRequest(username, chargingMode, chargingAmount) {
         // 先判断 chargingAmount 是否大于 batteryAmount
         // 调用 addUserReq 和 clearQueueInfo
-        var index = this.waitZone.findIndex(item => item.userReq?.username === username);
-        if (index === -1)
+        const item = this.waitZone.find(item => item.userReq?.username === username);
+        if (!item) {
             return { modifyRes: false, msg: "请稍后再试" };
-
-        const item = this.waitZone[index];
-
-        // 先判断 chargingAmount 是否大于 batteryAmount
-        if (chargingAmount <= item.userReq.batteryAmount) {
-            //再判断是否修改充电模式
-            if (chargingMode !== item.queueNumber[0]) {
-                var batteryAmount = item.userReq.batteryAmount;
-                this.clearQueueInfo(username);
-                //console.log('///', batteryAmount);
-                this.addUserRequest(username, chargingMode, chargingAmount, batteryAmount);
-            } else {
-                this.waitZone[index].userReq.chargingAmount = chargingAmount;
-            }
-            this.saveWaitZone();
-            return { modifyRes: true, msg: "修改充电请求成功" };
-        } else {
-            return { modifyRes: false, msg: "修改充电请求失败，申请充电量大于电池容量" };
         }
+
+        const { userReq: { batteryAmount }, queueNumber } = item;
+        if (chargingAmount > batteryAmount) {
+            return { modifyRes: false, msg: "修改失败，申请充电量大于电池容量" };
+        }
+
+        if (chargingMode !== queueNumber[0]) {
+            this.clearQueueInfo(username);
+            this.addUserRequest(username, chargingMode, chargingAmount, batteryAmount);
+        } else {
+            item.userReq.chargingAmount = chargingAmount;
+        }
+
+        this.saveWaitZone();
+        return { modifyRes: true, msg: "修改充电请求成功" };
 
 
     }

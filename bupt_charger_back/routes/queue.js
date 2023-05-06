@@ -20,7 +20,7 @@ router.get('/info', (req, res) => {
     const waitZone = new WaitZone();
     const chargers = new Charger();
 
-    // TODO: add else if 用户在充电区
+
 
     if (waitZone.existUser(username)) {
         const queueLen = waitZone.getWaitingCountAhead(username);
@@ -35,13 +35,13 @@ router.get('/info', (req, res) => {
                 "place": "WAITINGPLACE"
             }
         })
-    } else if (chargers.existWaitingUser(username))  { // TODO: add else if 用户在充电区
+    } else if (chargers.existWaitingUser(username))  {
         const chargerId = chargers.getUserChargerId(username);
         const chargerStatus = chargers.getChargerStatus(chargerId);
         let curState = "";
         if (chargerStatus === "RUNNING") {
             curState = "WAITINGSTAGE2";
-        } else if (chargerStatus === "SHUTDOWN") {
+        } else if (chargerStatus === "UNAVAILABLE") {
             curState = "FAULTREQUEUE";
         }
         res.status(200).json({
@@ -60,7 +60,7 @@ router.get('/info', (req, res) => {
         let curState = "";
         if (chargerStatus === "RUNNING") {
             curState = "CHARGING";
-        } else if (chargerStatus === "SHUTDOWN") {
+        } else if (chargerStatus === "UNAVAILABLE") {
             curState = "FAULTREQUEUE";
         }
         res.status(200).json({
@@ -84,7 +84,7 @@ router.get('/info', (req, res) => {
 })
 
 
-// todo: 修改充电请求
+
 router.post('/change', (req, res) => {
     const authHeader = req.headers.authorization;
     const { chargingMode, chargingAmount } = req.body;

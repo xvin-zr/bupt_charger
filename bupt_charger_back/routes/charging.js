@@ -50,9 +50,6 @@ router.post('/request', (req, res) => {
     }
 
 
-
-
-
 })
 
 router.get("/remainAmount", (req, res) => {
@@ -95,6 +92,29 @@ router.post("/submit", (req, res) => {
         message: 'success',
         data: data
     })
+})
+
+router.post("/cancel", (req, res) => {
+    const authHeader = req.headers.authorization;
+    let token = '';
+    if (authHeader) {
+        token = authHeader.split(' ')[1];
+        // console.log(`Received token: ${token}`);
+    }
+    const username = getUsernameFromJwt(token, secretKey);
+    console.log("/cancel", username);
+
+    const waitZone = new WaitZone();
+    const chargers = new Charger();
+
+    if (waitZone.existUser(username)) {
+        // todo: 等待区中用户取消充电
+
+    } else if (chargers.existWaitingUser(username)) {
+
+    } else if (chargers.existChargingUser(username)) {
+
+    }
 })
 
 
