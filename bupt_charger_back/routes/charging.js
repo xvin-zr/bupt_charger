@@ -26,7 +26,8 @@ router.post('/request', (req, res) => {
             code: -1,
             message: '你已在等候区，请勿重复提交申请',
             data: {}
-        })
+        });
+        return;
     }
 
     // 记录申请信息

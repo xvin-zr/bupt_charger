@@ -150,7 +150,7 @@ server.on('listening', () => {
         const waitZone = new WaitZone();
         const chargers = new Charger();
 
-        chargers.chargingOnce();
+        chargers.chargingOnce(app.get("username"));
 
         const unavailableRes = chargers.getUnavailableChargerUsers();
         if (unavailableRes) {
@@ -180,13 +180,13 @@ server.on('listening', () => {
                 chargers.assignUser("T", tMinReq);
                 waitZone.clearQueueInfo(tMinReq.username);
             }
-        }, 60 * 1000);
+        }, 30 * 1000);
 
         waitZone.increaseWaitingTime();
 
 
 
-    }, 60 * 1000);
+    }, 61 * 1000);
 })
 
 // const PORT = 3000;

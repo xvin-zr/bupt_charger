@@ -1,11 +1,11 @@
 const fs = require("fs");
-const express = require("express");
+// const express = require("express");
 const csv = require("csv");
 const crypto = require('crypto');
 const { v4: uuidv4 } = require('uuid');
 const path = require("path");
 
-const app = express();
+// const app = express();
 
 
 
@@ -29,7 +29,7 @@ class Charger {
         this.loadCharger();
     }
 
-    chargingOnce() {
+    chargingOnce(curUsername) {
         let price = 0; // 假设每度电的价格为 1.5 元
         const currentTime = new Date(); // 获取当前时间
         const currentMinute = currentTime.getMinutes() + currentTime.getSeconds() / 60; // 将当前分钟和秒钟转换为小数
@@ -67,7 +67,8 @@ class Charger {
                 task.remainAmount -= charger.power; // 消耗电量
                 if (task.remainAmount <= 0) {
                     task.remainAmount = 0;
-                    if (!app.get("username") || task.username !== app.get("username")) {
+                    console.log("curUser", curUsername);
+                    if (!curUsername || task.username !== curUsername) {
                         this.finishCharging(task.username); // 完成充电任务
                     }
                 }
