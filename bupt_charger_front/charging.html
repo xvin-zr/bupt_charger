@@ -66,11 +66,9 @@
     </header>
     <nav class="navbar">
         <ul>
-            <li><a href="#">申请充电</a></li>
-            <li><a href="#">等待区</a></li>
-            <li><a href="#">Database</a></li>
-            <li><a href="#">Tasks</a></li>
-            <li><a href="#">Calendar</a></li>
+            <li><a href="wait-zone.html">等待区</a></li>
+            <li><a href="#">充电区</a></li>
+            <li><a href="report.html">历史充电记录</a></li>
         </ul>
         <ul>
 
@@ -100,14 +98,18 @@
 
     </main>
     <div class="button-container">
-        <input type="button" value="查询排队状态" id="submitBtn">
+        <input type="button" value="查询排队状态" id="submitBtn" class="login-btn">
 
     </div>
     
     <div class="button-container">
-        <input type="button" value="取消充电" id="cancelBtn">
+        <input type="button" value="取消充电" id="cancelBtn" class="login-btn">
 
     </div>
+
+    <script>
+        cancelCharging();
+    </script>
     
     
 </body>

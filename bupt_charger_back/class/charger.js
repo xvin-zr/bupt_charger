@@ -112,7 +112,7 @@ class Charger {
     }
 
     append2CSV(data) {
-        const filePath = "json/report.csv";
+        const filePath = path.join(__dirname, '../json/report.csv');
         // const data = {};
 
         // 将新数据追加到CSV文件中
@@ -188,6 +188,7 @@ class Charger {
                     task.serviceFee = 0;
                     task.startTime = "";
                     // console.log(`Canceled charging for user ${username}`);
+                    this.saveCharger();
                     return;
                 }
             }

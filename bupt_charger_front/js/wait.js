@@ -21,6 +21,9 @@ function getQueueInfo() {
             } else if (res.data.curState === "FAULTREQUEUE") {
                 const queueInfoDiv = document.getElementById("queueInfo");
                 queueInfoDiv.textContent = "充电桩故障，正在重新分配";
+            } else if (res.code === -1) {
+                alert(res.message);
+                window.history.back();
             }
             document.getElementById("queueNumber").innerText = res.data.chargeId;
             document.getElementById("count").innerText = res.data.queueLen;
@@ -45,6 +48,10 @@ function cancelQueue() {
             .then(result => {
                 const res = JSON.parse(result);
                 console.log("res", res);
+                alert(res.message);
+                if (res.code === 0) {
+                    window.location.href = "apply.html";
+                }
             })
             .catch(error => console.log('error', error));
     });

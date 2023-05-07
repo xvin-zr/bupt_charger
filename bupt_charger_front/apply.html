@@ -31,11 +31,11 @@
     </header>
     <nav class="navbar">
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Pages</a></li>
-            <li><a href="#">Database</a></li>
-            <li><a href="#">Tasks</a></li>
-            <li><a href="#">Calendar</a></li>
+            <li><a href="#">申请充电</a></li>
+            <li><a href="wait-zone.html">等待区</a></li>
+            <li><a href="charging.html">充电区</a></li>
+            <li><a href="report.html">历史充电记录</a></li>
+            <!-- <li><a href="#">Calendar</a></li> -->
         </ul>
         <ul>
             <li><a href="#"></a></li>
@@ -63,7 +63,10 @@
             <input type="number" id="batteryAmount" name="batteryAmount" min="1" step="0.01" required>
             <br>
             <p>（输入精确到小数点后两位）</p>
-            <input type="submit" value="Submit">
+            <div class="btn-container">
+
+                <input type="submit" value="Submit">
+            </div>
         </form>
         <script>
             const applyForm = document.getElementById('apply-form');

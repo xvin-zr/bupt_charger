@@ -92,7 +92,7 @@ body {
     background-color: rgba(0, 0, 0, 0.4);
     /* 添加背景毛玻璃效果 */
     backdrop-filter: blur(5px);
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(109, 109, 109, 0.5);
     /* 添加阴影效果 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   }
@@ -149,6 +149,11 @@ input[type="password"] {
 input[type="text"]:focus,
 input[type="password"]:focus {
   border-bottom: 2px solid #444;
+}
+.btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }
 
 .login-btn {

@@ -26,6 +26,9 @@ function getChargingQueueInfo() {
             } else if (res.data.curState === "FAULTREQUEUE") {
                 const queueInfoDiv = document.getElementById("queueInfo");
                 queueInfoDiv.textContent = "充电桩故障，正在重新分配";
+            } else if (res.code === -1) {
+                // alert(res.message);
+                // window.history.back();
             }
 
         })
@@ -77,6 +80,8 @@ function finishCharging() {
             if (res.code === 0) {
                 if (confirm("充电完成，是否查看充电详单？")) {
                     window.location.href = "report.html";
+                } else {
+                    window.location.href = "apply.html";
                 }
             }
 
@@ -98,4 +103,30 @@ function displayImg(chargerId) {
     } else {
         chargerImg.src = "assets/slow-charger.png";
     }
+}
+
+function cancelCharging() {
+    document.getElementById("cancelBtn").addEventListener("click", function () {
+        var requestOptions = {
+            method: 'POST',
+            headers: {
+                'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
+                'Content-Type': 'application/json',
+                'Authorization': preToken + localStorage.getItem('token')
+            },
+            redirect: 'follow'
+        };
+
+        fetch(serverURL+"/charging/cancel", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                const res = JSON.parse(result);
+                console.log("res", res);
+                alert(res.message);
+                if (res.code === 0) {
+                    window.location.href = "apply.html";
+                }
+            })
+            .catch(error => console.log('error', error));
+    });
 }

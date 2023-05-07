@@ -119,11 +119,26 @@ router.post("/cancel", (req, res) => {
         });
 
     } else if (chargers.existWaitingUser(username)) {
+        chargers.cancelCharging(username);
+        res.status(200).json({
+            code: 0,
+            message: '取消充电成功',
+            data: {}
+        });
 
     } else if (chargers.existChargingUser(username)) {
-
+        chargers.finishCharging(username);
+        res.status(200).json({
+            code: 0,
+            message: '取消充电成功',
+            data: {}
+        });
     }
 })
+
+router.get('/report', (req, res) => {
+    
+});
 
 
 module.exports = router;
