@@ -2,10 +2,10 @@
 <html lang="zh">
 
 <head>
-    <title>等待区</title>
+    <title>充电详单</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="js/time.js"></script>
-    <script src="js/charge.js"></script>
+    <script src="js/report.js"></script>
     <script src="config.js"></script>
     <style>
         .button-container {
@@ -16,23 +16,10 @@
             margin-top: 20px;
         }
 
-        #submitBtn {
-            display: block;
-            /* 将 button 元素设置为块级元素 */
-            clear: both;
-            margin-top: 20px;
-            /* 在上方添加 20 像素的间距 */
-            align-items: center;
-        }
-
-        #count {
-            display: inline-block;
-            /* 将包含 X 人数的 div 元素设置为内联块级元素 */
-        }
-
-        #queueInfo {
-            display: inline-block;
-            /* 将包含整个句子的 div 元素设置为内联块级元素 */
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
         }
     </style>
 
@@ -40,11 +27,12 @@
         var timerId;
         window.onload = function () {
             getTimeFromServer();
+            getReport();
 
             callGetTimeFromServer();
             setInterval(function () {
-                
-                
+
+
             }, 60 * 1000); // 每60秒调用一次函数
 
             window.onbeforeunload = function () {
@@ -73,21 +61,40 @@
             <li><a href="#">退出</a></li>
         </ul>
     </nav>
-    <main class="content">
-        <!-- <% for (let i = 0; i < waitZones.length; i++) { %>
+    <!-- <main class="content"> -->
+    <!-- <% for (let i = 0; i < waitZones.length; i++) { %>
 			<div class="card">
 				<h3>等待号码：<%= waitZones[i].queueNumber %></h3>
 				<p>用户名：<%= waitZones[i].username %></p>
 				<p>车牌号：<%= waitZones[i].plateNumber %></p>
 			</div>
 		<% } %> -->
-        <div class="card">
-            
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th class="table-cell">订单号</th>
+                    <th class="table-cell">创建时间</th>
+                    <th class="table-cell">充电桩编号</th>
+                    <th class="table-cell">充电量</th>
+                    <th class="table-cell">充电时长</th>
+                    <th class="table-cell">开始时间</th>
+                    <th class="table-cell">结束时间</th>
+                    <th class="table-cell">充电费用</th>
+                    <th class="table-cell">服务费用</th>
+                    <th class="table-cell">总费用</th>
+                    <!-- <th class="table-cell">时间</th> -->
+                </tr>
+            </thead>
+            <tbody id="table-body">
+            </tbody>
+        </table>
 
 
-        </div>
 
-        <br>
+    </div>
+
+    <br>
 
 
 
@@ -101,8 +108,8 @@
         <input type="button" value="取消充电" id="cancelBtn">
 
     </div> -->
-    
-    
+
+
 </body>
 
 </html>

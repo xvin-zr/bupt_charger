@@ -99,7 +99,7 @@ function displayImg(chargerId) {
     const chargerImg = document.getElementById("chargerImg");
     document.getElementById("chargerId").innerText = "充电桩 " + chargerId;
     document.getElementById("chargerId").style.fontWeight = "bold";
-    if (chargerId === 1 || chargerId === 2) {
+    if (chargerId === "A" || chargerId === "B") {
         chargerImg.src = "assets/fast-charger.png";
     } else {
         chargerImg.src = "assets/slow-charger.png";

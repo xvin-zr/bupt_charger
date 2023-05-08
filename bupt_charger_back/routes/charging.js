@@ -6,6 +6,7 @@ const WaitZone = require('../class/wait-zone');
 const Charger = require('../class/charger'); // import Charger class
 const { secretKey }  = require('../config.js');
 const { getUsernameFromJwt } = require('../class/token');
+const {User, UserList} = require("../class/user");
 
 router.post('/request', (req, res) => {
     const { chargingMode, chargingAmount, batteryAmount } = req.body;
@@ -137,7 +138,32 @@ router.post("/cancel", (req, res) => {
 })
 
 router.get('/report', (req, res) => {
-    
+    const authHeader = req.headers.authorization;
+    let token = '';
+    if (authHeader) {
+        token = authHeader.split(' ')[1];
+        // console.log(`Received token: ${token}`);
+    }
+    const username = getUsernameFromJwt(token, secretKey);
+
+    const userList = new UserList();
+
+    userList.getCsvData(username)
+        .then((result) => {
+            res.status(200).json({
+                code: 0,
+                message: '查看充电数据成功',
+                data: result
+            });
+        })
+        .catch((error) => {
+            console.error(error)
+            res.status(401).json({
+                code: -1,
+                message: '查看充电数据成功',
+                data: []
+            });
+        });
 });
 
 

@@ -1,5 +1,6 @@
 const fs = require("fs")
 const path = require("path");
+const csv = require("csv");
 
 class User {
     constructor(username, password) {
@@ -52,6 +53,43 @@ class UserList {
 
     login(username, password) {
         return this.users.find(u => u.username === username && u.password === password);
+    }
+
+    getCsvData(username) {
+        const filePath = path.join(__dirname, "../json/report.csv");
+        const data = [];
+
+        return new Promise((resolve, reject) => {
+            fs.createReadStream(filePath)
+                .pipe(csv.parse({ columns: true }))
+                .on("data", (row) => {
+                    if (row.username === username) {
+                        data.push({
+                            userId: row.userId,
+                            username: row.username,
+                            orderId: row.orderId,
+                            createTime: row.createTime,
+                            chargingPileId: row.chargingPileId,
+                            volume: parseFloat(row.volume),
+                            chargingTime: parseFloat(row.chargingTime),
+                            startTime: row.startTime,
+                            endTime: row.endTime,
+                            chargingFee: parseFloat(row.chargingFee),
+                            serviceFee: parseFloat(row.serviceFee),
+                            totalFee: parseFloat(row.totalFee),
+                            time: row.time,
+                        });
+                    }
+                })
+                .on("end", () => {
+                    const result = data.reverse().slice(0, 5);
+                    resolve(result);
+                })
+                .on("error", (error) => {
+                    reject(error);
+                });
+        });
+
     }
 }
 
