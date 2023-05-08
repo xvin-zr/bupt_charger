@@ -4,7 +4,7 @@ function updateChargerStatus() {
         const chargingPileSelect = document.getElementById('charging-pile');
         const statusSelect = document.getElementById('status');
 
-        const selectedChargingPileId = parseInt(chargingPileSelect.options[chargingPileSelect.selectedIndex].getAttribute('charging-pile-id'));
+        const selectedChargingPileId = chargingPileSelect.options[chargingPileSelect.selectedIndex].getAttribute('charging-pile-id');
         const selectedStatus = statusSelect.options[statusSelect.selectedIndex].value;
 
         console.log(`Selected charging pile ID:`, selectedChargingPileId);

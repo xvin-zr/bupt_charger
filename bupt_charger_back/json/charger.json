@@ -1,6 +1,6 @@
 [
   {
-    "chargingPileId": 1,
+    "chargingPileId": "A",
     "chargerType": "F",
     "power": 30,
     "status": "UNAVAILABLE",
@@ -34,16 +34,16 @@
     ]
   },
   {
-    "chargingPileId": 2,
+    "chargingPileId": "B",
     "chargerType": "F",
     "power": 30,
     "status": "RUNNING",
     "cumulativeUsageTimes": 0,
-    "cumulativeChargingTime": 9,
-    "cumulativeChargingAmount": 270,
-    "cumulativeChargingFee": 255,
-    "cumulativeServiceFee": 216,
-    "cumulativeFee": 471,
+    "cumulativeChargingTime": 10,
+    "cumulativeChargingAmount": 290,
+    "cumulativeChargingFee": 275,
+    "cumulativeServiceFee": 232,
+    "cumulativeFee": 507,
     "chargerQueue": [
       {
         "username": "",
@@ -66,7 +66,7 @@
     ]
   },
   {
-    "chargingPileId": 3,
+    "chargingPileId": "C",
     "chargerType": "T",
     "power": 7,
     "status": "RUNNING",
@@ -100,7 +100,7 @@
     ]
   },
   {
-    "chargingPileId": 4,
+    "chargingPileId": "D",
     "chargerType": "T",
     "power": 7,
     "status": "RUNNING",
@@ -133,7 +133,7 @@
     ]
   },
   {
-    "chargingPileId": 5,
+    "chargingPileId": "E",
     "chargerType": "T",
     "power": 7,
     "status": "RUNNING",

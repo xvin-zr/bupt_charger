@@ -16,7 +16,7 @@ function getQueueInfo() {
             console.log(result);
             const res = JSON.parse(result);
             if (res.data.curState === "WAITINGSTAGE2" || res.data.curState === "CHARGING") {
-                alert(`请前往 ${res.data.place} 号充电桩`);
+                alert(`请前往充电桩 ${res.data.place}`);
                 window.location.href = "charging.html?chargerId=" + res.data.place;
             } else if (res.data.curState === "FAULTREQUEUE") {
                 const queueInfoDiv = document.getElementById("queueInfo");
