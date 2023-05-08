@@ -50,10 +50,15 @@ class Charger {
 
                 if (!task.username) continue;
 
+                if (!task.startTime) {
+                    const date = new Date();
+                    task.startTime = date.toISOString();
+                }
+
                 const actualPower = Math.min(charger.power, task.remainAmount); // 取实际用电量和剩余电量的最小值作为充电量
 
-                const chargingFee = price * actualPower; // 根据实际用电量计算充电费用
-                const serviceFee = SERVICE_FEE_PRICE * actualPower;
+                const chargingFee = parseFloat((price * actualPower).toFixed(2)); // 将计算结果转换为浮点数类型
+                const serviceFee = parseFloat((SERVICE_FEE_PRICE * actualPower).toFixed(2));
                 task.chargingFee += chargingFee; // 更新充电费用
                 task.serviceFee += serviceFee;
                 charger.cumulativeChargingAmount += actualPower; // 更新充电桩的累计充电量

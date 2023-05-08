@@ -12,8 +12,8 @@
     "queueNumber": "",
     "userReq": {
       "username": "",
-      "chargingAmount": 60,
-      "batteryAmount": 60,
+      "chargingAmount": 0,
+      "batteryAmount": 0,
       "waitingTime": 0
     }
   },

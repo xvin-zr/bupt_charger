@@ -17,6 +17,7 @@ function getChargingQueueInfo() {
             console.log(result);
             const res = JSON.parse(result);
             if (res.data.curState === "WAITINGSTAGE2" ) {
+                displayImg(res.data.place);
                 document.getElementById("chargerId").innerText = "充电桩 " + res.data.place;
                 document.getElementById("chargerId").style.fontWeight = "bold";
                 document.getElementById("queueInfo").innerText = "前方一人正在充电";
