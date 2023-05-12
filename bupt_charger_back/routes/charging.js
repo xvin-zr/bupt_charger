@@ -160,7 +160,7 @@ router.get('/report', (req, res) => {
             console.error(error)
             res.status(401).json({
                 code: -1,
-                message: '查看充电数据成功',
+                message: '查看充电数据失败',
                 data: []
             });
         });

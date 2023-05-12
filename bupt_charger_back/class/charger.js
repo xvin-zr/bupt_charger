@@ -235,7 +235,7 @@ class Charger {
                 const endTime = dateObj.toISOString();
                 const start = new Date(startTime);
                 const end = new Date(endTime);
-                const chargingTime = (end.getTime() - start.getTime()) / 1000;
+                const chargingTime = (queue[0].chargingAmount - queue[0].remainAmount) / c.power;
 
                 const hash = crypto.createHash('sha256').update(username).digest('hex'); // 将用户名哈希为固定长度的字符串
                 const userId = uuidv4({ namespace: hash }); // 使用哈希值作为命名空间生成 UUID
