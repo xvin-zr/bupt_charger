@@ -5,11 +5,11 @@
     "power": 30,
     "status": "RUNNING",
     "cumulativeUsageTimes": 0,
-    "cumulativeChargingTime": 19,
-    "cumulativeChargingAmount": 2600,
-    "cumulativeChargingFee": 1544,
-    "cumulativeServiceFee": 2080,
-    "cumulativeFee": 3624,
+    "cumulativeChargingTime": 20,
+    "cumulativeChargingAmount": 2605,
+    "cumulativeChargingFee": 1549,
+    "cumulativeServiceFee": 2084,
+    "cumulativeFee": 3633,
     "chargerQueue": [
       {
         "username": "",
@@ -69,11 +69,11 @@
     "power": 7,
     "status": "RUNNING",
     "cumulativeUsageTimes": 0,
-    "cumulativeChargingTime": 8,
-    "cumulativeChargingAmount": 53,
-    "cumulativeChargingFee": 22.400000000000002,
-    "cumulativeServiceFee": 42.400000000000006,
-    "cumulativeFee": 64.8,
+    "cumulativeChargingTime": 12,
+    "cumulativeChargingAmount": 73,
+    "cumulativeChargingFee": 39.400000000000006,
+    "cumulativeServiceFee": 58.400000000000006,
+    "cumulativeFee": 97.8,
     "chargerQueue": [
       {
         "username": "",
