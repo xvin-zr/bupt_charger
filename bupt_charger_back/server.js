@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 // const session = require('express-session');
 
 const app = express();
@@ -147,16 +148,26 @@ const server =  app.listen(PORT, HOST,() => {
 // 如果当前用户被叫到，/charging/remainAmount 后 restartCharging
 server.on('listening', () => {
     let brokenCharger = "";
+    fs.readFile(__dirname+'/json/brokenCharger.json', 'utf8', (err, data) => {
+        if (err) throw err;
+        brokenCharger = JSON.parse(data).brokenCharger;
+        console.log(brokenCharger);
+    });
     setInterval(() => {
         const waitZone = new WaitZone();
         const chargers = new Charger();
 
+
+
         chargers.chargingOnce(app.get("username"));
+
+        chargers.setChargerStatus("B", "RUNNING");
 
         const unavailableRes = chargers.getUnavailableChargerUsers();
         if (unavailableRes) {
             const { chargerType, user1, user2 } = unavailableRes;
             brokenCharger = unavailableRes.brokenChargerId;
+            fs.writeFileSync(__dirname + '/json/brokenCharger.json', JSON.stringify({brokenCharger: brokenCharger}));
             if (user1.username) {
                 const assignRes =  chargers.assignUserFromUnavailable(chargerType, user1);
                 // chargers.removeFromUnavailable(user1.username);
@@ -167,46 +178,52 @@ server.on('listening', () => {
             }
         }
 
-        // 如果故障充电桩恢复
-        if (brokenCharger && chargers.getChargerStatus(brokenCharger) === "RUNNING") {
-            const chargerType = chargers.find(c => c.chargingPileId === brokenCharger)?.chargerType;
-            const sameTypeCharger = chargers.find(c => c.chargerType === chargerType && c.status === "RUNNING");
 
-            let minEnterTime = null;
-            let usr1 = null;
-            let usr2 = null;
-            for (const c of sameTypeCharger) {
-                const user = c.chargerQueue[1];
-                if (user?.username && (minEnterTime === null || user.enterTime < minEnterTime)) {
-                    usr2 = usr1;
-                    usr1 = user;
-                    minEnterTime = user.enterTime;
-                } else if (usr2 === null || (user?.username && user.enterTime < usr2.enterTime)) {
-                    usr2 = user;
-                }
-            }
-            brokenCharger = "";
-
-            if (usr1) {
-                const userReq = {
-                    username: usr1.username,
-                    chargingAmount: usr1.chargingAmount,
-                    batteryAmount: usr1.batteryAmount,
-
-                }
-                chargers.assignUser(chargerType, userReq);
-            }
-            if (usr2) {
-                const userReq = {
-                    username: usr2.username,
-                    chargingAmount: usr2.chargingAmount,
-                    batteryAmount: usr2.batteryAmount,
-                }
-                chargers.assignUser(chargerType, userReq);
-            }
-        }
 
         setInterval(() => {
+            // 如果故障充电桩恢复
+            console.log("brokenCharger", brokenCharger);
+            if (brokenCharger && chargers.getChargerStatus(brokenCharger) === "RUNNING") {
+                const chargerType = chargers.chargers.find(c => c.chargingPileId === brokenCharger)?.chargerType;
+                const sameTypeCharger = chargers.chargers.filter(c => c.chargerType === chargerType && c.status === "RUNNING");
+                console.log(sameTypeCharger);
+
+                let minEnterTime = null;
+                let usr1 = null;
+                let usr2 = null;
+                for (const c of sameTypeCharger) {
+                    const user = c.chargerQueue[1];
+                    if (user?.username && (minEnterTime === null || user.enterTime < minEnterTime)) {
+                        usr2 = usr1;
+                        usr1 = user;
+                        minEnterTime = user.enterTime;
+                    } else if (usr2 === null || (user?.username && user.enterTime < usr2.enterTime)) {
+                        usr2 = user;
+                    }
+                }
+                brokenCharger = "";
+                fs.writeFileSync(__dirname + '/json/brokenCharger.json', JSON.stringify({brokenCharger: brokenCharger}));
+
+                if (usr1) {
+                    const userReq = {
+                        username: usr1.username,
+                        chargingAmount: usr1.chargingAmount,
+                        batteryAmount: usr1.batteryAmount,
+
+                    }
+                    chargers.removeWaitingUser(usr1.username);
+                    chargers.assignUser(chargerType, userReq);
+                }
+                if (usr2) {
+                    const userReq = {
+                        username: usr2.username,
+                        chargingAmount: usr2.chargingAmount,
+                        batteryAmount: usr2.batteryAmount,
+                    }
+                    chargers.removeWaitingUser(usr1.username);
+                    chargers.assignUser(chargerType, userReq);
+                }
+            }
 
             const { fMinReq, tMinReq } = waitZone.getFirstUserReqs();
             console.log('fMinReq', fMinReq, 'tMinReq', tMinReq);

@@ -103,6 +103,34 @@ class Charger {
 
     }
 
+    setChargerStatus(chargerId, status) {
+        const statusList = ["UNAVAILABLE", "RUNNING"];
+        if (! status in statusList) {
+            return;
+        }
+        for (const c of this.chargers) {
+            if (c.chargingPileId === chargerId) {
+                c.status = status;
+                break;
+            }
+        }
+        this.saveCharger();
+    }
+
+    removeWaitingUser(username) {
+        for (const c of this.chargers) {
+            const q = c.chargerQueue;
+            if (q[1].username === username) {
+                q[1].username = "";
+                q[1].chargingAmount = 0;
+                q[1].batteryAmount = 0;
+                q[1].remainAmount = 0;
+                break;
+            }
+        }
+        this.saveCharger();
+    }
+
     getUnavailableChargerUsers() {
         for (const charger of this.chargers) {
             if (charger.status === "UNAVAILABLE") {
