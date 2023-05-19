@@ -105,7 +105,7 @@ class Charger {
 
     setChargerStatus(chargerId, status) {
         const statusList = ["UNAVAILABLE", "RUNNING"];
-        if (! status in statusList) {
+        if (!statusList.includes(status)) {
             return;
         }
         for (const c of this.chargers) {
