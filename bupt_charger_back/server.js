@@ -169,7 +169,6 @@ server.on('listening', () => {
 
         // 如果故障充电桩恢复
         if (brokenCharger && chargers.getChargerStatus(brokenCharger) === "RUNNING") {
-            brokenCharger = "";
             const chargerType = chargers.find(c => c.chargingPileId === brokenCharger)?.chargerType;
             const sameTypeCharger = chargers.find(c => c.chargerType === chargerType && c.status === "RUNNING");
 
@@ -186,6 +185,7 @@ server.on('listening', () => {
                     usr2 = user;
                 }
             }
+            brokenCharger = "";
 
             if (usr1) {
                 const userReq = {
