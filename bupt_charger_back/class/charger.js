@@ -110,7 +110,8 @@ class Charger {
                 // if (chargerQueue[0].username) {
                 //     this.finishCharging(chargerQueue[0].username);
                 // }
-                return {chargerType: chargerType, user1: chargerQueue[0], user2: chargerQueue[1]};
+                return {chargerType: chargerType, user1: chargerQueue[0], user2: chargerQueue[1],
+                    brokenChargerId: charger.chargingPileId};
             }
         }
         return null;
@@ -306,6 +307,7 @@ class Charger {
                 remainAmount: userReq.chargingAmount,
                 chargingFee: 0,
                 serviceFee: 0,
+                enterTime: Date.now(),
                 startTime: new Date().toISOString(),
             };
             Object.assign(firstEmptySlot, userReq, other);
@@ -333,6 +335,7 @@ class Charger {
                     remainAmount: userReq.chargingAmount,
                     chargingFee: 0,
                     serviceFee: 0,
+                    enterTime: Date.now(),
                     startTime: "",
                 };
                 Object.assign(minCharger.charger.chargerQueue[1], userReq, other);
