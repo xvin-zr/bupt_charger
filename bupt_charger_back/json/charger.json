@@ -4,21 +4,22 @@
     "chargerType": "F",
     "power": 30,
     "status": "RUNNING",
-    "cumulativeUsageTimes": 0,
-    "cumulativeChargingTime": 43,
-    "cumulativeChargingAmount": 3295,
-    "cumulativeChargingFee": 2032,
-    "cumulativeServiceFee": 2636,
-    "cumulativeFee": 4668,
+    "cumulativeUsageTimes": 1,
+    "cumulativeChargingTime": 45,
+    "cumulativeChargingAmount": 3345,
+    "cumulativeChargingFee": 2082,
+    "cumulativeServiceFee": 2676,
+    "cumulativeFee": 4758,
     "chargerQueue": [
       {
-        "username": "usrf13",
-        "chargingAmount": 200,
-        "remainAmount": 50,
-        "batteryAmount": 200,
-        "chargingFee": 132,
-        "serviceFee": 120,
-        "startTime": "2023-05-19T15:17:43.439Z"
+        "username": "",
+        "chargingAmount": 0,
+        "remainAmount": 0,
+        "batteryAmount": 0,
+        "chargingFee": 0,
+        "serviceFee": 0,
+        "enterTime": 0,
+        "startTime": ""
       },
       {
         "username": "",
@@ -38,19 +39,19 @@
     "power": 30,
     "status": "RUNNING",
     "cumulativeUsageTimes": 0,
-    "cumulativeChargingTime": 17,
-    "cumulativeChargingAmount": 480,
-    "cumulativeChargingFee": 369,
-    "cumulativeServiceFee": 384,
-    "cumulativeFee": 753,
+    "cumulativeChargingTime": 21,
+    "cumulativeChargingAmount": 600,
+    "cumulativeChargingFee": 480,
+    "cumulativeServiceFee": 480,
+    "cumulativeFee": 960,
     "chargerQueue": [
       {
         "username": "usrf14",
         "chargingAmount": 200,
-        "remainAmount": 200,
+        "remainAmount": 80,
         "batteryAmount": 200,
-        "chargingFee": 0,
-        "serviceFee": 0,
+        "chargingFee": 111,
+        "serviceFee": 96,
         "enterTime": 1684510978596,
         "startTime": "2023-05-19T15:42:58.596Z"
       },
@@ -72,20 +73,20 @@
     "power": 7,
     "status": "RUNNING",
     "cumulativeUsageTimes": 0,
-    "cumulativeChargingTime": 35,
-    "cumulativeChargingAmount": 230,
-    "cumulativeChargingFee": 148.10000000000002,
-    "cumulativeServiceFee": 183.9999999999999,
-    "cumulativeFee": 332.09999999999997,
+    "cumulativeChargingTime": 39,
+    "cumulativeChargingAmount": 258,
+    "cumulativeChargingFee": 174.00000000000003,
+    "cumulativeServiceFee": 206.39999999999986,
+    "cumulativeFee": 380.40000000000003,
     "chargerQueue": [
       {
         "username": "usrf32",
         "chargingAmount": 120,
-        "remainAmount": 113,
+        "remainAmount": 85,
         "batteryAmount": 120,
-        "chargingFee": 4.9,
-        "serviceFee": 5.6,
-        "enterTime": 0,
+        "chargingFee": 30.799999999999997,
+        "serviceFee": 28,
+        "enterTime": 100,
         "startTime": "2023-05-19T15:35:10.171Z"
       },
       {
@@ -95,6 +96,7 @@
         "batteryAmount": 0,
         "chargingFee": 0,
         "serviceFee": 0,
+        "enterTime": 100,
         "startTime": ""
       }
     ]
@@ -112,14 +114,14 @@
     "cumulativeFee": 338.29999999999984,
     "chargerQueue": [
       {
-        "username": "",
-        "chargingAmount": 0,
-        "remainAmount": 0,
-        "batteryAmount": 0,
+        "username": "usrt32",
+        "chargingAmount": 80,
+        "remainAmount": 80,
+        "batteryAmount": 80,
         "chargingFee": 0,
         "serviceFee": 0,
-        "enterTime": 0,
-        "startTime": ""
+        "enterTime": 1684550409014,
+        "startTime": "2023-05-20T02:40:09.014Z"
       },
       {
         "username": "",
@@ -128,7 +130,7 @@
         "batteryAmount": 0,
         "chargingFee": 0,
         "serviceFee": 0,
-        "enterTime": 0,
+        "enterTime": 1684550409016,
         "startTime": ""
       }
     ]
@@ -139,30 +141,30 @@
     "power": 7,
     "status": "RUNNING",
     "cumulativeUsageTimes": 0,
-    "cumulativeChargingTime": 14,
-    "cumulativeChargingAmount": 237.11,
-    "cumulativeChargingFee": 124.244,
-    "cumulativeServiceFee": 189.6879999999999,
-    "cumulativeFee": 313.9320000000001,
+    "cumulativeChargingTime": 18,
+    "cumulativeChargingAmount": 265.11,
+    "cumulativeChargingFee": 150.144,
+    "cumulativeServiceFee": 212.08799999999988,
+    "cumulativeFee": 362.23200000000014,
     "chargerQueue": [
       {
-        "username": "",
-        "chargingAmount": 0,
-        "remainAmount": 0,
-        "batteryAmount": 0,
-        "chargingFee": 0,
-        "serviceFee": 0,
-        "enterTime": 0,
-        "startTime": ""
+        "username": "usrt51",
+        "chargingAmount": 70,
+        "remainAmount": 56,
+        "batteryAmount": 70,
+        "chargingFee": 25.9,
+        "serviceFee": 22.4,
+        "enterTime": 200,
+        "startTime": "2023-05-20T02:31:55.526Z"
       },
       {
-        "username": "",
-        "chargingAmount": 0,
-        "remainAmount": 0,
-        "batteryAmount": 0,
+        "username": "usrt52",
+        "chargingAmount": 70,
+        "remainAmount": 70,
+        "batteryAmount": 70,
         "chargingFee": 0,
         "serviceFee": 0,
-        "enterTime": 0,
+        "enterTime": 1684550439011,
         "startTime": ""
       }
     ]

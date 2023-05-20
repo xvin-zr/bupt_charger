@@ -103,6 +103,8 @@ class Charger {
 
     }
 
+
+    // 后端更新充电桩状态
     setChargerStatus(chargerId, status) {
         const statusList = ["UNAVAILABLE", "RUNNING"];
         if (!statusList.includes(status)) {
@@ -111,6 +113,10 @@ class Charger {
         for (const c of this.chargers) {
             if (c.chargingPileId === chargerId) {
                 c.status = status;
+                // if (status === "UNAVAILABLE") {
+                //     fs.writeFileSync(__dirname + '../json/brokenCharger.json',
+                //         JSON.stringify({brokenCharger: c.chargingPileId}));
+                // }
                 break;
             }
         }
@@ -143,6 +149,53 @@ class Charger {
             }
         }
         return null;
+    }
+
+    checkChargerRecovered(brokenCharger) {
+        // 如果故障充电桩恢复
+        console.log("brokenCharger", brokenCharger);
+        if (brokenCharger && this.getChargerStatus(brokenCharger) === "RUNNING") {
+            const chargerType = this.chargers.find(c => c.chargingPileId === brokenCharger)?.chargerType;
+            const sameTypeCharger = this.chargers.filter(c => c.chargerType === chargerType && c.status === "RUNNING");
+            // console.log(sameTypeCharger);
+
+            let minEnterTime = null;
+            let usr1 = null;
+            let usr2 = null;
+            for (const c of sameTypeCharger) {
+                const user = c.chargerQueue[1];
+                if (user?.username && (minEnterTime === null || user.enterTime < minEnterTime)) {
+                    usr2 = usr1;
+                    usr1 = user;
+                    minEnterTime = user.enterTime;
+                } else if (usr2 === null || (user?.username && user.enterTime < usr2.enterTime)) {
+                    usr2 = user;
+                }
+            }
+            brokenCharger = "";
+            fs.writeFileSync(__dirname + '/../json/brokenCharger.json', JSON.stringify({brokenCharger: brokenCharger}));
+
+            if (usr1) {
+                const userReq = {
+                    username: usr1.username,
+                    chargingAmount: usr1.chargingAmount,
+                    batteryAmount: usr1.batteryAmount,
+
+                }
+                this.removeWaitingUser(usr1.username);
+                this.assignUser(chargerType, userReq);
+            }
+            if (usr2) {
+                const userReq = {
+                    username: usr2.username,
+                    chargingAmount: usr2.chargingAmount,
+                    batteryAmount: usr2.batteryAmount,
+                }
+                this.removeWaitingUser(usr1.username);
+                this.assignUser(chargerType, userReq);
+            }
+        }
+
     }
 
     append2CSV(data) {
@@ -258,6 +311,7 @@ class Charger {
         for (const c of this.chargers) {
             const queue = c.chargerQueue;
             if (queue[0].username === username) {
+                c.cumulativeUsageTimes += 1;
                 // 找到了需要完成充电的用户
                 const dateObj = new Date();
                 const startTime = queue[0].startTime;
@@ -287,7 +341,7 @@ class Charger {
                 this.append2CSV(data); // 调用append2CSV
                 if (queue[1].username) {
                     // 如果queue[1]有用户，将其移到queue[0]
-                    queue[0] = queue[1];
+                    queue[0] = Object.assign({}, queue[1]) ;
                     queue[0].startTime = new Date().toISOString();
                     queue[1] = {
                         username: "",
@@ -296,6 +350,7 @@ class Charger {
                         batteryAmount: 0,
                         chargingFee: 0,
                         serviceFee: 0,
+                        enterTime: 0,
                         startTime: "",
                     };
                 } else {
@@ -307,6 +362,7 @@ class Charger {
                         batteryAmount: 0,
                         chargingFee: 0,
                         serviceFee: 0,
+                        enterTime: 0,
                         startTime: "",
                     };
                 }

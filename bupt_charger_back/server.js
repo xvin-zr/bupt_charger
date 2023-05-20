@@ -161,7 +161,7 @@ server.on('listening', () => {
 
         chargers.chargingOnce(app.get("username"));
 
-        chargers.setChargerStatus("B", "RUNNING");
+        // chargers.setChargerStatus("B", "RUNNING");
 
         const unavailableRes = chargers.getUnavailableChargerUsers();
         if (unavailableRes) {
@@ -181,49 +181,7 @@ server.on('listening', () => {
 
 
         setInterval(() => {
-            // 如果故障充电桩恢复
-            console.log("brokenCharger", brokenCharger);
-            if (brokenCharger && chargers.getChargerStatus(brokenCharger) === "RUNNING") {
-                const chargerType = chargers.chargers.find(c => c.chargingPileId === brokenCharger)?.chargerType;
-                const sameTypeCharger = chargers.chargers.filter(c => c.chargerType === chargerType && c.status === "RUNNING");
-                console.log(sameTypeCharger);
-
-                let minEnterTime = null;
-                let usr1 = null;
-                let usr2 = null;
-                for (const c of sameTypeCharger) {
-                    const user = c.chargerQueue[1];
-                    if (user?.username && (minEnterTime === null || user.enterTime < minEnterTime)) {
-                        usr2 = usr1;
-                        usr1 = user;
-                        minEnterTime = user.enterTime;
-                    } else if (usr2 === null || (user?.username && user.enterTime < usr2.enterTime)) {
-                        usr2 = user;
-                    }
-                }
-                brokenCharger = "";
-                fs.writeFileSync(__dirname + '/json/brokenCharger.json', JSON.stringify({brokenCharger: brokenCharger}));
-
-                if (usr1) {
-                    const userReq = {
-                        username: usr1.username,
-                        chargingAmount: usr1.chargingAmount,
-                        batteryAmount: usr1.batteryAmount,
-
-                    }
-                    chargers.removeWaitingUser(usr1.username);
-                    chargers.assignUser(chargerType, userReq);
-                }
-                if (usr2) {
-                    const userReq = {
-                        username: usr2.username,
-                        chargingAmount: usr2.chargingAmount,
-                        batteryAmount: usr2.batteryAmount,
-                    }
-                    chargers.removeWaitingUser(usr1.username);
-                    chargers.assignUser(chargerType, userReq);
-                }
-            }
+            chargers.checkChargerRecovered(brokenCharger);
 
             const { fMinReq, tMinReq } = waitZone.getFirstUserReqs();
             console.log('fMinReq', fMinReq, 'tMinReq', tMinReq);
