@@ -21,6 +21,8 @@
         var timerId;
         // 在页面加载完成后调用函数
         window.onload = function () {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.dispatchEvent(new Event('click'));
             // getTimeFromServer();
 
             // callGetTimeFromServer();
@@ -54,7 +56,25 @@
     </nav>
     <main class="content">
         <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>日</th>
+                        <th>周</th>
+                        <th>月</th>
+                        <th>充电桩编号</th>
+                        <th>累计使用次数</th>
+                        <th>累计充电时长</th>
+                        <th>累计充电量</th>
+                        <th>累计充电费用</th>
+                        <th>累计服务费用</th>
+                        <th>累积总费用</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
 
+                </tbody>
+            </table>
             
             <div class="btn-container">
                 <button type="submit" class="login-btn" id="submitBtn">查询</button>

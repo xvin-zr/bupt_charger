@@ -21,6 +21,8 @@
         var timerId;
         // 在页面加载完成后调用函数
         window.onload = function () {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.dispatchEvent(new Event('click'));
             // getTimeFromServer();
 
             // callGetTimeFromServer();
@@ -36,15 +38,15 @@
 
 <body>
     <header class="header">
-        <h1>查看充电桩状态</h1>
+        <h1>查看排队情况</h1>
         <div id="time"></div>
     </header>
     <nav class="navbar">
         <ul>
             <li><a href="update.html">更新充电桩状态</a></li>
-            <li><a href="#">查看充电桩状态</a></li>
+            <li><a href="query-charger.html">查看充电桩状态</a></li>
             <li><a href="#">排队情况</a></li>
-            <li><a href="#">报表</a></li>
+            <li><a href="admin-report.html">报表</a></li>
 
         </ul>
         <ul>
@@ -54,7 +56,20 @@
     </nav>
     <main class="content">
         <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>充电桩编号</th>
+                        <th>用户名</th>
+                        <th>申请充电量</th>
+                        <th>电池容量</th>
+                        <th>等待时间</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
 
+                </tbody>
+            </table>
             
             <div class="btn-container">
                 <button type="submit" class="login-btn" id="submitBtn">查询</button>

@@ -21,6 +21,8 @@ function getChargerStatus() {
                 // 获取表格的 tbody 元素
                 const tbody = document.getElementById('table-body');
     
+                // 清空表格
+                tbody.innerHTML = "";
                 // 遍历 'data' 数组中的每个 JSON 数据对象
                 res.data.forEach(dataObj => {
                     // 创建一个新的表格行

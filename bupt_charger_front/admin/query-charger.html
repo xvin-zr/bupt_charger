@@ -24,6 +24,9 @@
         var timerId;
         // 在页面加载完成后调用函数
         window.onload = function () {
+            const submitBtn = document.getElementById('submitBtn');
+
+            submitBtn.dispatchEvent(new Event('click'));
             // getTimeFromServer();
 
             // callGetTimeFromServer();
@@ -46,7 +49,7 @@
         <ul>
             <li><a href="update.html">更新充电桩状态</a></li>
             <li><a href="#">查看充电桩状态</a></li>
-            <li><a href="#">排队情况</a></li>
+            <li><a href="queue.html">排队情况</a></li>
             <li><a href="admin-report.html">报表</a></li>
 
         </ul>
