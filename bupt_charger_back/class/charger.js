@@ -90,7 +90,22 @@ class Charger {
 
     // todo: 管理员查询充电桩状态
     getAllChargerStatus() {
-
+        try {
+            const data = [];
+            for (const charger of this.chargers) {
+                const a = {
+                    chargingPileId: charger.chargingPileId,
+                    status: charger.status,
+                    cumulativeUsageTimes: charger.cumulativeUsageTimes,
+                    cumulativeChargingTime: charger.cumulativeChargingTime,
+                    cumulativeChargingAmount: charger.cumulativeChargingAmount,
+                };
+                data.push(a);
+            }
+            return Promise.resolve(data);
+        } catch (error) {
+            return Promise.reject(error);
+        }
     }
 
     // todo: 管理员查看排队状态
