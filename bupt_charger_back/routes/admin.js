@@ -5,6 +5,7 @@ const WaitZone = require('../class/wait-zone');
 const Charger = require('../class/charger');
 const {data} = require("express-session/session/cookie"); // import Charger class
 
+// 管理员更新充电桩状态
 router.put('/update-pile', (req, res) => {
     const { chargingPileId, status } = req.body;
     console.log("/update-pile", chargingPileId, status);
@@ -33,6 +34,7 @@ router.get('/query-all-piles_stat', (req, res) => {
         })
 });
 
+// 管理员查看排队状态
 router.get('/query-queue', (req, res) => {
     const data = [
         {
