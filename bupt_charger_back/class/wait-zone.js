@@ -98,6 +98,11 @@ class WaitZone {
         return this.waitZone.find(item => item.userReq.username === username)?.queueNumber;
     }
 
+    // todo: 管理员查看排队状态
+    getWaitingStatus() {
+
+    }
+
 
     modifyUserRequest(username, chargingMode, chargingAmount) {
         // 先判断 chargingAmount 是否大于 batteryAmount

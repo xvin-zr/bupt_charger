@@ -108,7 +108,7 @@ class Charger {
         }
     }
 
-    // todo: 管理员查看排队状态
+
     getChargerQueueStatus() {
 
     }
