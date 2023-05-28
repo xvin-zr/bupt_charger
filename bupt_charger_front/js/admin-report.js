@@ -49,13 +49,13 @@ function getReport() {
                     cumulativeChargingAmountCell.innerHTML = dataObj.cumulativeChargingAmount;
                   
                     const cumulativeChargingFeeCell = row.insertCell();
-                    cumulativeChargingFeeCell.innerHTML = dataObj.cumulativeChargingFee;
+                    cumulativeChargingFeeCell.innerHTML = dataObj.cumulativeChargingFee.toFixed(2);
                   
                     const cumulativeServiceFeeCell = row.insertCell();
-                    cumulativeServiceFeeCell.innerHTML = dataObj.cumulativeServiceFee;
+                    cumulativeServiceFeeCell.innerHTML = dataObj.cumulativeServiceFee.toFixed(2);
                   
                     const cumulativeFeeCell = row.insertCell();
-                    cumulativeFeeCell.innerHTML = dataObj.cumulativeFee;
+                    cumulativeFeeCell.innerHTML = dataObj.cumulativeFee.toFixed(2);
                   });
 
             })
