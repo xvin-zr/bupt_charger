@@ -11,14 +11,14 @@ router.put('/update-pile', (req, res) => {
     console.log("/update-pile", chargingPileId, status);
 
     const chargers = new Charger();
-    if (chargingPileId != null && status != ""){
+    if (chargingPileId != null && status !== ""){
         // 若充电桩正在被使用则提示用户稍后再试
         for (const charger of chargers.chargers) {
-            if (charger.chargingPileId == chargingPileId && status == "SHUTDOWN" && (charger.chargerQueue[0].username != "" || charger.chargerQueue[1].username != "")) {
+            if (charger.chargingPileId === chargingPileId && status === "SHUTDOWN" && (charger.chargerQueue[0].username !== "" || charger.chargerQueue[1].username !== "")) {
                 res.status(200).json({
                     code: 0,
                     message: '该充电桩正在使用，请稍后再试',
-                    data: []
+                    data: {}
                 })
                 return;
             }
@@ -37,7 +37,7 @@ router.put('/update-pile', (req, res) => {
             res.status(401).json({
                 code: -1,
                 message: 'error',
-                data: []
+                data: {}
             })
         })
     }
@@ -45,7 +45,7 @@ router.put('/update-pile', (req, res) => {
         res.status(200).json({
             code: 0,
             message: '更新失败',
-            data: []
+            data: {}
         })
 
 });
