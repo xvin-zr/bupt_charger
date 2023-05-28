@@ -18,13 +18,15 @@ function getQueueStatus() {
                 const res = JSON.parse(result);
                 console.log("res", res);
 
+                
+
                 // 获取表格的 tbody 元素
                 const tbody = document.getElementById('table-body');
 
                 // 清空表格
                 tbody.innerHTML = "";
                 
-                if (res.data.length != 0) {
+                if (res.data.length !== 0) {
                      // 遍历 'data' 数组中的每个 JSON 数据对象
                     res.data.forEach(dataObj => {
                         // 创建一个新的表格行
@@ -45,6 +47,8 @@ function getQueueStatus() {
 
                         const waitingTimeCell = row.insertCell();
                         waitingTimeCell.innerHTML = dataObj.waitingTime;
+
+                        
                     })
                 }
                 else {
@@ -59,6 +63,7 @@ function getQueueStatus() {
                     info.colSpan = 5;
                     
                 }
+                alert(res.message);
             }).catch(error => console.log('error', error));
     })
 }

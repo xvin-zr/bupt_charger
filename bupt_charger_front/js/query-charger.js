@@ -17,6 +17,8 @@ function getChargerStatus() {
             .then(result => {
                 const res = JSON.parse(result);
                 console.log("res", res);
+
+                
     
                 // 获取表格的 tbody 元素
                 const tbody = document.getElementById('table-body');
@@ -43,7 +45,9 @@ function getChargerStatus() {
     
                     const cumulativeChargingAmountCell = row.insertCell();
                     cumulativeChargingAmountCell.innerHTML = dataObj.cumulativeChargingAmount;
+                    
                 });
+                alert(res.message);
             })
             .catch(error => console.log('error', error));
     });

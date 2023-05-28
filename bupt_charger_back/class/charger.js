@@ -88,7 +88,7 @@ class Charger {
         try {
             const data = [];
             for (const c of this.chargers) {
-                if (c.chargingPileId === chargerId && status != "") {
+                if (c.chargingPileId === chargerId && status !== "") {
                     c.status = status;
                     const a = {
                         chargingPileId: chargerId,
@@ -132,7 +132,30 @@ class Charger {
 
     // todo: 管理员查看报表
     getChargerReport() {
+        return new Promise((resolve, reject) => {
+            try {
+                const now = new Date();
+                const month = now.getMonth() + 1;
+                const day = now.getDate();
+                const week = Math.floor(day/7) + 1;
 
+                const report = this.chargers.map(charger => ({
+                    day: day,
+                    week: week,
+                    month: month,
+                    chargingPileId: charger.chargingPileId,
+                    cumulativeUsageTimes: charger.cumulativeUsageTimes,
+                    cumulativeChargingTime: charger.cumulativeChargingTime,
+                    cumulativeChargingAmount: charger.cumulativeChargingAmount,
+                    cumulativeChargingFee: charger.cumulativeChargingFee,
+                    cumulativeServiceFee: charger.cumulativeServiceFee,
+                    cumulativeFee: charger.cumulativeFee
+                }));
+                resolve(report);
+            } catch (error) {
+                reject(error);
+            }
+        });
     }
 
 

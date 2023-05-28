@@ -113,26 +113,24 @@ router.get('/query-queue', (req, res) => {
 });
 
 router.get('/query-report', (req, res) => {
-    const data = [
-        {
-            day: 28,
-            week: 3,
-            month: 2,
-            chargingPileId: "A",
-            cumulativeUsageTimes: 53,
-            cumulativeChargingTime: 123,
-            cumulativeChargingAmount: 2191.32,
-            cumulativeChargingFee: 123.12,
-            cumulativeServiceFee: 321.12,
-            cumulativeFee: 666.66
-        }
-    ]
+    const chargers = new Charger();
 
-    res.status(200).json({
-        code: 0,
-        message: 'success',
-        data: data
-    })
+    chargers.getChargerReport()
+        .then(data => {
+            res.status(200).json({
+                code: 0,
+                message: "查看成功",
+                data: data
+            })
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(401).json({
+                code: -1,
+                message: 'error',
+                data: []
+            })
+        })
 })
 
 module.exports = router;

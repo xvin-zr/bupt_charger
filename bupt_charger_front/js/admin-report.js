@@ -15,8 +15,11 @@ function getReport() {
         fetch(serverURL + "/admin/query-report", requestOptions)
             .then(response => response.text())
             .then(result => {
+                console.log(result)
                 const res = JSON.parse(result);
                 console.log("res", res);
+
+                
 
                 const tbody = document.getElementById('table-body');
     
@@ -57,6 +60,8 @@ function getReport() {
                     const cumulativeFeeCell = row.insertCell();
                     cumulativeFeeCell.innerHTML = dataObj.cumulativeFee.toFixed(2);
                   });
+
+                alert(res.message)
 
             })
             .catch(error => console.log('error', error));
