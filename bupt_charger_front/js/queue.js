@@ -23,28 +23,42 @@ function getQueueStatus() {
 
                 // 清空表格
                 tbody.innerHTML = "";
-                // 遍历 'data' 数组中的每个 JSON 数据对象
-                res.data.forEach(dataObj => {
+                
+                if (res.data.length != 0) {
+                     // 遍历 'data' 数组中的每个 JSON 数据对象
+                    res.data.forEach(dataObj => {
+                        // 创建一个新的表格行
+                        const row = tbody.insertRow();
+
+                        // 创建表格单元格并将数据添加到单元格中
+                        const chargingPileIdCell = row.insertCell();
+                        chargingPileIdCell.innerHTML = dataObj.chargingPileId;
+
+                        const usernameCell = row.insertCell();
+                        usernameCell.innerHTML = dataObj.username;
+
+                        const requireAmountCell = row.insertCell();
+                        requireAmountCell.innerHTML = dataObj.requireAmount;
+
+                        const batteryAmountCell = row.insertCell();
+                        batteryAmountCell.innerHTML = dataObj.batteryAmount;
+
+                        const waitingTimeCell = row.insertCell();
+                        waitingTimeCell.innerHTML = dataObj.waitingTime;
+                    })
+                }
+                else {
+
                     // 创建一个新的表格行
                     const row = tbody.insertRow();
+                    
+                    const info = row.insertCell();
+                    info.innerHTML = "暂无用户";
 
-                    // 创建表格单元格并将数据添加到单元格中
-                    const chargingPileIdCell = row.insertCell();
-                    chargingPileIdCell.innerHTML = dataObj.chargingPileId;
-
-                    const usernameCell = row.insertCell();
-                    usernameCell.innerHTML = dataObj.username;
-
-                    const requireAmountCell = row.insertCell();
-                    requireAmountCell.innerHTML = dataObj.requireAmount;
-
-                    const batteryAmountCell = row.insertCell();
-                    batteryAmountCell.innerHTML = dataObj.batteryAmount;
-
-                    const waitingTimeCell = row.insertCell();
-                    waitingTimeCell.innerHTML = dataObj.waitingTime;
-                })
-                    .catch(error => console.log('error', error));
-            });
+                    // 将第一行的五个单元格合并
+                    info.colSpan = 5;
+                    
+                }
+            }).catch(error => console.log('error', error));
     })
 }

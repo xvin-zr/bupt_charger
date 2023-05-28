@@ -29,6 +29,12 @@ function updateChargerStatus() {
             .then(result => {
                 const res = JSON.parse(result);
                 console.log("res", res);
+                if (selectedChargingPileId == null)
+                    alert('请选择充电桩');
+                else if(selectedStatus == "")
+                    alert('请选择更新状态');
+                else
+                    alert(res.message);
             })
             .catch(error => console.log('error', error));
     });

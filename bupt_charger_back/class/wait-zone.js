@@ -98,9 +98,26 @@ class WaitZone {
         return this.waitZone.find(item => item.userReq.username === username)?.queueNumber;
     }
 
-    // todo: 管理员查看排队状态
+    // TODO: 管理员查看排队状态
     getWaitingStatus() {
-
+        try {
+            const data = [];
+            for (const obj of this.waitZone) {
+                if (obj.userReq.username != "") {
+                    const dataObj = {
+                        chargingPileId: "",
+                        username: obj.userReq.username,
+                        requireAmount: obj.userReq.chargingAmount,
+                        batteryAmount: obj.userReq.batteryAmount,
+                        waitingTime: obj.userReq.waitingTime,
+                    };
+                    data.push(dataObj);
+                }
+            }
+            return Promise.resolve(data);
+        } catch (error) {
+            return Promise.reject(error);
+        }
     }
 
 

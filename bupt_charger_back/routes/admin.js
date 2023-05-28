@@ -9,6 +9,45 @@ const {data} = require("express-session/session/cookie"); // import Charger clas
 router.put('/update-pile', (req, res) => {
     const { chargingPileId, status } = req.body;
     console.log("/update-pile", chargingPileId, status);
+
+    const chargers = new Charger();
+    if (chargingPileId != null && status != ""){
+        // 若充电桩正在被使用则提示用户稍后再试
+        for (const charger of chargers.chargers) {
+            if (charger.chargingPileId == chargingPileId && status == "SHUTDOWN" && (charger.chargerQueue[0].username != "" || charger.chargerQueue[1].username != "")) {
+                res.status(200).json({
+                    code: 0,
+                    message: '该充电桩正在使用，请稍后再试',
+                    data: []
+                })
+                return;
+            }
+        }
+
+        chargers.updateChargerStatus(chargingPileId, status)
+        .then(data => {
+            res.status(200).json({
+                code: 0,
+                message: '更新成功',
+                data: data
+            })
+        })
+        .catch(error => {
+            console.log(error)
+            res.status(401).json({
+                code: -1,
+                message: 'error',
+                data: []
+            })
+        })
+    }
+    else
+        res.status(200).json({
+            code: 0,
+            message: '更新失败',
+            data: []
+        })
+
 });
 
 
@@ -19,7 +58,7 @@ router.get('/query-all-piles_stat', (req, res) => {
         .then(data => {
             res.status(200).json({
                 code: 0,
-                message: 'success',
+                message: '查询成功',
                 data: data
             })
         })
@@ -36,6 +75,7 @@ router.get('/query-all-piles_stat', (req, res) => {
 
 // 管理员查看排队状态
 router.get('/query-queue', (req, res) => {
+    /*
     const data = [
         {
             chargingPileId: "A",
@@ -45,12 +85,31 @@ router.get('/query-queue', (req, res) => {
             waitingTime: 600
         }
     ]
-
     res.status(200).json({
         code: 0,
         message: 'success',
         data: data
     })
+    */
+
+    const waitZone = new WaitZone();
+
+    waitZone.getWaitingStatus()
+        .then(data => {
+            res.status(200).json({
+                code: 0,
+                message: '查询成功',
+                data: data
+            })
+        })
+        .catch(error => {
+            console.log(error)
+            res.status(401).json({
+                code: -1,
+                message: 'error',
+                data: []
+            })
+        })
 });
 
 router.get('/query-report', (req, res) => {

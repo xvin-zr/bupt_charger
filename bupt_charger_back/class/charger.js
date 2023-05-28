@@ -83,9 +83,26 @@ class Charger {
         this.saveCharger(); // 保存充电桩数据
     }
 
-    // todo: 管理员更新充电桩状态
+    // TODO: 管理员更新充电桩状态
     updateChargerStatus(chargerId, status) {
-
+        try {
+            const data = [];
+            for (const c of this.chargers) {
+                if (c.chargingPileId === chargerId && status != "") {
+                    c.status = status;
+                    const a = {
+                        chargingPileId: chargerId,
+                        status: status,
+                    };
+                    data.push(a);
+                    break;
+                }
+            }
+            this.saveCharger();
+            return Promise.resolve(data);
+        } catch (error) {
+            return Promise.reject(error);
+        }
     }
 
     // todo: 管理员查询充电桩状态
