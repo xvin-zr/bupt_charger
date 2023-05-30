@@ -53,7 +53,7 @@ function getRemainAmount() {
             const res = JSON.parse(result);
             console.log("remainAmount", res);
             if (res.data.amount > 0) {
-                document.getElementById("queueInfo").innerText = `正在充电，还剩 ${res.data.amount}KWh`;
+                document.getElementById("queueInfo").innerText = `正在充电,还剩 ${(res.data.amount).toFixed(2)}KWh`;
             } else {
                 finishCharging();
             }
@@ -118,7 +118,7 @@ function cancelCharging() {
             redirect: 'follow'
         };
 
-        fetch(serverURL+"/charging/cancel", requestOptions)
+        fetch(serverURL+"/charging/submit", requestOptions)
             .then(response => response.text())
             .then(result => {
                 const res = JSON.parse(result);

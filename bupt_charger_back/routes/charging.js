@@ -91,7 +91,7 @@ router.post("/submit", (req, res) => {
 
     res.status(200).json({
         code: 0,
-        message: 'success',
+        message: '成功',
         data: data
     })
 })
@@ -136,6 +136,7 @@ router.post("/cancel", (req, res) => {
         });
     }
 })
+
 
 router.get('/report', (req, res) => {
     const authHeader = req.headers.authorization;

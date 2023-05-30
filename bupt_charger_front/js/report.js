@@ -11,7 +11,7 @@ function getReport(id) {
         redirect: 'follow'
     };
 
-    fetch(serverURL + "/charging/report", requestOptions)
+    fetch(serverURL + "/report/charging", requestOptions)
         .then(response => response.text())
         .then(result => {
             const res = JSON.parse(result);
@@ -25,13 +25,13 @@ function getReport(id) {
                   <td class="table-cell">${order.orderId}</td>
                   <td class="table-cell">${new Date(order.createTime).toLocaleString("zh-CN", { hour12: false })}</td>
                   <td class="table-cell">${order.chargingPileId}</td>
-                  <td class="table-cell">${order.volume}</td>
-                  <td class="table-cell">${order.chargingTime}</td>
+                  <td class="table-cell">${(order.volume).toFixed(2)}</td>
+                  <td class="table-cell">${(order.chargingTime).toFixed(2)}</td>
                   <td class="table-cell">${new Date(order.startTime).toLocaleString("zh-CN", { hour12: false })}</td>
                   <td class="table-cell">${new Date(order.endTime).toLocaleString("zh-CN", { hour12: false })}</td>
-                  <td class="table-cell">${order.chargingFee}</td>
-                  <td class="table-cell">${order.serviceFee}</td>
-                  <td class="table-cell">${order.totalFee}</td>
+                  <td class="table-cell">${(order.chargingFee).toFixed(2)}</td>
+                  <td class="table-cell">${(order.serviceFee).toFixed(2)}</td>
+                  <td class="table-cell">${(order.totalFee).toFixed(2)}</td>
                 `;
                 tableBody.appendChild(row);
               }
