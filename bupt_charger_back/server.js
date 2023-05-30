@@ -121,15 +121,18 @@ app.get('/time', (req, res) => {
     });
 })
 
+
 // 路由
 const chargingRouter = require('./routes/charging');
 const queueRouter = require('./routes/queue');
 const adminRouter = require('./routes/admin');
+const { reportHandler } = require('./routes/charging');
 
 app.use('/charging', chargingRouter);
 app.use('/queue', queueRouter);
 app.use('/admin', adminRouter);
 
+app.get('/report/charging', reportHandler);
 
 
 const server =  app.listen(PORT, HOST,() => {

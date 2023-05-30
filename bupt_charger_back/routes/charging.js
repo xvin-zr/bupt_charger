@@ -138,7 +138,10 @@ router.post("/cancel", (req, res) => {
 })
 
 
-router.get('/report', (req, res) => {
+router.get('/report', reportHandler);
+
+
+function reportHandler(req, res) {
     const authHeader = req.headers.authorization;
     let token = '';
     if (authHeader) {
@@ -165,7 +168,8 @@ router.get('/report', (req, res) => {
                 data: []
             });
         });
-});
+}
 
 
 module.exports = router;
+module.exports.reportHandler = reportHandler;
