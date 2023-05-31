@@ -25,6 +25,7 @@ function getChargingQueueInfo() {
                 displayImg(res.data.place);
                 getRemainAmount();
             } else if (res.data.curState === "FAULTREQUEUE") {
+                displayImg(res.data.place);
                 const queueInfoDiv = document.getElementById("queueInfo");
                 queueInfoDiv.textContent = "充电桩故障，正在重新分配";
             } else if (res.code === -1) {
@@ -53,7 +54,7 @@ function getRemainAmount() {
             const res = JSON.parse(result);
             console.log("remainAmount", res);
             if (res.data.amount > 0) {
-                document.getElementById("queueInfo").innerText = `正在充电,还剩 ${(res.data.amount).toFixed(2)}KWh`;
+                document.getElementById("queueInfo").innerText = `正在充电，还剩 ${(res.data.amount).toFixed(2)}KWh`;
             } else {
                 finishCharging();
             }

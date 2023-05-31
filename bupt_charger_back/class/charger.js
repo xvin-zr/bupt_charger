@@ -342,6 +342,34 @@ class Charger {
         for (const charger of this.chargers) {
             if (charger.status === "UNAVAILABLE") {
                 for (let task of charger.chargerQueue) {
+                    if (username === charger.chargerQueue[0].username) {
+                        charger.cumulativeUsageTimes += 1;
+                        // 找到了需要完成充电的用户
+                        const dateObj = new Date();
+                        const startTime = task.startTime;
+                        const endTime = dateObj.toISOString();
+                        const chargingTime = (task.chargingAmount - task.remainAmount) / parseFloat(charger.power);
+
+                        const hash = crypto.createHash('sha256').update(username).digest('hex'); // 将用户名哈希为固定长度的字符串
+                        const userId = uuidv4({ namespace: hash }); // 使用哈希值作为命名空间生成 UUID
+                        console.log("userId: " + userId);
+                        const data = {
+                            userId: userId,
+                            username: task.username,
+                            orderId: task.username + Math.floor(Date.now() / 10000).toString(),
+                            createTime: task.startTime,
+                            chargingPileId: charger.chargingPileId,
+                            volume: task.chargingAmount - task.remainAmount,
+                            chargingTime: parseFloat(chargingTime.toFixed(2)),
+                            startTime: startTime,
+                            endTime: endTime,
+                            chargingFee: task.chargingFee,
+                            serviceFee: task.serviceFee,
+                            totalFee: task.chargingFee + task.serviceFee,
+                            time: Date.now().toString(),
+                        };
+                        this.append2CSV(data)
+                    }
                     if (task.username === username) {
                         task.username = "";
                         task.chargingAmount = 0;
@@ -497,6 +525,7 @@ class Charger {
 
         if (firstEmptySlot) {
             Object.assign(firstEmptySlot, userReq);
+            firstEmptySlot.startTime = new Date().toISOString();
             this.removeFromUnavailable(userReq.username);
             this.saveCharger();
             return true;
@@ -520,6 +549,7 @@ class Charger {
 
 
                 Object.assign(minCharger.charger.chargerQueue[1], userReq);
+                minCharger.charger.startTime = new Date().toISOString();
                 this.removeFromUnavailable(userReq.username);
                 this.saveCharger();
                 return true;
