@@ -91,7 +91,7 @@ router.post("/submit", (req, res) => {
 
     res.status(200).json({
         code: 0,
-        message: '成功',
+        message: '结束充电',
         data: data
     })
 })

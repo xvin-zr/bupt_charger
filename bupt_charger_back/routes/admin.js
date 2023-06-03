@@ -21,6 +21,13 @@ router.put('/update-pile', (req, res) => {
                     data: {}
                 })
                 return;
+            } else if (charger.chargingPileId === chargingPileId && charger.status === "UNAVAILABLE") {
+                res.status(200).json({
+                    code: 0,
+                    message: '该充电桩故障，请稍后再试',
+                    data: {}
+                })
+                return;
             }
         }
 
