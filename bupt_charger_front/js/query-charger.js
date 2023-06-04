@@ -41,10 +41,10 @@ function getChargerStatus() {
                     cumulativeUsageTimesCell.innerHTML = dataObj.cumulativeUsageTimes;
     
                     const cumulativeChargingTimeCell = row.insertCell();
-                    cumulativeChargingTimeCell.innerHTML = dataObj.cumulativeChargingTime;
+                    cumulativeChargingTimeCell.innerHTML = (dataObj.cumulativeChargingTime).toFixed(2);
     
                     const cumulativeChargingAmountCell = row.insertCell();
-                    cumulativeChargingAmountCell.innerHTML = dataObj.cumulativeChargingAmount;
+                    cumulativeChargingAmountCell.innerHTML = (dataObj.cumulativeChargingAmount).toFixed(2);
                     
                 });
                 alert(res.message);

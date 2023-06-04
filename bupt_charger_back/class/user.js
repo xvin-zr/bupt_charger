@@ -71,7 +71,7 @@ class UserList {
                             createTime: row.createTime,
                             chargingPileId: row.chargingPileId,
                             volume: parseFloat(row.volume),
-                            chargingTime: parseFloat(row.chargingTime),
+                            chargingTime: parseFloat(row.chargingTime) * 3600,
                             startTime: row.startTime,
                             endTime: row.endTime,
                             chargingFee: parseFloat(row.chargingFee),
