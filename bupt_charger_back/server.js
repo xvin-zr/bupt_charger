@@ -199,9 +199,10 @@ server.on('listening', () => {
                 chargers.assignUser("T", tMinReq);
                 waitZone.clearQueueInfo(tMinReq.username);
             }
+
+            waitZone.increaseWaitingTime();
         }, 30 * 1000);
 
-        waitZone.increaseWaitingTime();
 
 
 

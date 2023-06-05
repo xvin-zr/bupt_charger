@@ -17,6 +17,8 @@ router.get('/info', (req, res) => {
 
     const username = getUsernameFromJwt(token, secretKey);
 
+    req.app.set("username", username);
+
     const waitZone = new WaitZone();
     const chargers = new Charger();
 

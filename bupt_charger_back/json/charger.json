@@ -4,12 +4,12 @@
     "chargerType": "F",
     "power": 30,
     "status": "RUNNING",
-    "cumulativeUsageTimes": 2,
-    "cumulativeChargingTime": 46,
-    "cumulativeChargingAmount": 3365,
-    "cumulativeChargingFee": 2102,
-    "cumulativeServiceFee": 2692,
-    "cumulativeFee": 4794,
+    "cumulativeUsageTimes": 3,
+    "cumulativeChargingTime": 47,
+    "cumulativeChargingAmount": 3375,
+    "cumulativeChargingFee": 2109,
+    "cumulativeServiceFee": 2700,
+    "cumulativeFee": 4809,
     "chargerQueue": [
       {
         "username": "",

@@ -53,7 +53,8 @@
             event.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            const data = { username, password, key:"auth-key" };
+            const key = "auth-key";
+            const data = { username, password };
             const requestOptions = {
                 method: 'POST',
                 headers: {

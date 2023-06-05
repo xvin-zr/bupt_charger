@@ -45,19 +45,19 @@ function getReport() {
                     cumulativeUsageTimesCell.innerHTML = dataObj.cumulativeUsageTimes;
                   
                     const cumulativeChargingTimeCell = row.insertCell();
-                    cumulativeChargingTimeCell.innerHTML = dataObj.cumulativeChargingTime;
+                    cumulativeChargingTimeCell.innerHTML = Math.floor(dataObj.cumulativeChargingTime);
                   
                     const cumulativeChargingAmountCell = row.insertCell();
-                    cumulativeChargingAmountCell.innerHTML = dataObj.cumulativeChargingAmount;
+                    cumulativeChargingAmountCell.innerHTML = (dataObj.cumulativeChargingAmount).toFixed(2);
                   
                     const cumulativeChargingFeeCell = row.insertCell();
-                    cumulativeChargingFeeCell.innerHTML = dataObj.cumulativeChargingFee.toFixed(2);
+                    cumulativeChargingFeeCell.innerHTML = (dataObj.cumulativeChargingFee).toFixed(2);
                   
                     const cumulativeServiceFeeCell = row.insertCell();
-                    cumulativeServiceFeeCell.innerHTML = dataObj.cumulativeServiceFee.toFixed(2);
+                    cumulativeServiceFeeCell.innerHTML = (dataObj.cumulativeServiceFee).toFixed(2);
                   
                     const cumulativeFeeCell = row.insertCell();
-                    cumulativeFeeCell.innerHTML = dataObj.cumulativeFee.toFixed(2);
+                    cumulativeFeeCell.innerHTML = (dataObj.cumulativeFee).toFixed(2);
                   });
 
                 alert(res.message)

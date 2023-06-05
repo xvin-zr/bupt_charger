@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require('path');
 
-const PER_WAIT_TIME = 60;
+const PER_WAIT_TIME = 30;
 
 class WaitZone {
     constructor() {
@@ -103,7 +103,7 @@ class WaitZone {
         try {
             const data = [];
             for (const obj of this.waitZone) {
-                if (obj.userReq.username != "") {
+                if (obj.userReq.username !== "") {
                     const dataObj = {
                         chargingPileId: "",
                         username: obj.userReq.username,
