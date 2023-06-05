@@ -153,7 +153,7 @@
                 .then(result => {
                     console.log(result);
                     const res = JSON.parse(result);
-                    if (res.code === 0) {
+                    if (res.code === 0 && res.data.curState !== "NOTCHARGING") {
                         document.getElementById("queueNumber").innerText = res.data.chargeId;
                         document.getElementById("count").innerText = res.data.queueLen;
                         alert(`你的排队号码是 ${res.data.chargeId}，前方还有 ${res.data.queueLen} 人`);
@@ -164,7 +164,7 @@
                             alert("充电桩故障，正在重新分配");
                         }
 
-                    } else if (res.code === -1) {
+                    } else if (res.code === -1 || res.data.curState === "NOTCHARGING") {
                         alert(res.message);
                     }
                 })

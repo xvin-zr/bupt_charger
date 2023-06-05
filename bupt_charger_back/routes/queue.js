@@ -17,7 +17,7 @@ router.get('/info', (req, res) => {
 
     const username = getUsernameFromJwt(token, secretKey);
 
-    req.app.set("username", username);
+    // req.app.set("username", username);
 
     const waitZone = new WaitZone();
     const chargers = new Charger();
@@ -77,10 +77,15 @@ router.get('/info', (req, res) => {
         });
     }
     else {
-        res.status(401).json({
-            code: -1,
-            message: '未找到用户充电信息',
-            data: {}
+        res.status(200).json({
+            "code": 0,
+            "message": "用户未申请充电或已结束",
+            "data": {
+                "chargeId": "",
+                "queueLen": 0,
+                "curState": "NOTCHARGING",
+                "place": ""
+            }
         })
     }
 })
@@ -102,6 +107,16 @@ router.post('/change', (req, res) => {
     console.log("/change", username);
 
     const waitZone = new WaitZone();
+    const chargers = new Charger();
+
+    if (chargers.existWaitingUser(username) || chargers.existChargingUser(username)) {
+        res.status(200).json({
+            code: 0,
+            message: "用户位于充电桩处，无法修改请求",
+            data: {}
+        });
+        return;
+    }
 
     const { modifyRes, msg } = waitZone.modifyUserRequest(username, chargingMode, chargingAmount);
     if (modifyRes) {

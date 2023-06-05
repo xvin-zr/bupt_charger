@@ -21,7 +21,7 @@ function getQueueInfo() {
             } else if (res.data.curState === "FAULTREQUEUE") {
                 const queueInfoDiv = document.getElementById("queueInfo");
                 queueInfoDiv.textContent = "充电桩故障，正在重新分配";
-            } else if (res.code === -1) {
+            } else if (res.code === -1 || res.data.curState === "NOTCHARGING") {
                 alert(res.message);
                 window.history.back();
             }

@@ -1,10 +1,10 @@
 [
   {
-    "queueNumber": "T3",
+    "queueNumber": "",
     "userReq": {
-      "username": "qwerty",
-      "chargingAmount": 10,
-      "batteryAmount": 10,
+      "username": "",
+      "chargingAmount": 0,
+      "batteryAmount": 0,
       "waitingTime": 0
     }
   },

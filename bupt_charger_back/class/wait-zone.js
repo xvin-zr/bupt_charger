@@ -105,7 +105,7 @@ class WaitZone {
             for (const obj of this.waitZone) {
                 if (obj.userReq.username !== "") {
                     const dataObj = {
-                        chargingPileId: "",
+                        chargingPileId: "等待区",
                         username: obj.userReq.username,
                         requireAmount: obj.userReq.chargingAmount,
                         batteryAmount: obj.userReq.batteryAmount,

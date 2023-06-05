@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use(cors({
-    origin: ['http://127.0.0.1:8080', 'http://localhost:8080', 'http://10.128.155.80:*'],
+    origin: ['http://127.0.0.1:8080', 'http://localhost:8080'],
 }));
 
 // 使用他人客户端用这个
@@ -184,6 +184,8 @@ server.on('listening', () => {
 
 
         setInterval(() => {
+            waitZone.loadWaitZone();
+            chargers.loadCharger();
             chargers.checkChargerRecovered(brokenCharger);
 
             const { fMinReq, tMinReq } = waitZone.getFirstUserReqs();

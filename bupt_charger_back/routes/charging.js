@@ -63,13 +63,22 @@ router.get("/remainAmount", (req, res) => {
     }
     const username = getUsernameFromJwt(token, secretKey);
 
+    req.app.set("username", username);
+
     const chargers = new Charger();
     const remainAmount = chargers.getUserRemainAmount(username);
     console.log("remainAmount", remainAmount);
 
+    let msg = "";
+    if (remainAmount === 0) {
+        msg = "充电已结束或未申请充电";
+    } else {
+        msg = "充电中";
+    }
+
     res.status(200).json({
         code: 0,
-        message: 'success',
+        message: msg,
         data: {
             amount: remainAmount
         }

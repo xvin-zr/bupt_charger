@@ -33,7 +33,8 @@ class Charger {
         let price = 0; // 假设每度电的价格为 1.5 元
         const currentTime = new Date(); // 获取当前时间
         const currentMinute = currentTime.getMinutes() + currentTime.getSeconds() / 60; // 将当前分钟和秒钟转换为小数
-        const hour = currentMinute / 2.5; // 计算时间因子
+        const hour = currentTime.getHours(); // 计算时间因子
+        console.log("hour:", hour);
 
         // 获得当前电价
         if (hour >= 10 && hour < 15 || hour >= 18 && hour < 21) {
@@ -230,23 +231,23 @@ class Charger {
             brokenCharger = "";
             fs.writeFileSync(__dirname + '/../json/brokenCharger.json', JSON.stringify({brokenCharger: brokenCharger}));
 
-            if (usr1) {
+            if (usr1 !== null) {
                 const userReq = {
                     username: usr1.username,
                     chargingAmount: usr1.chargingAmount,
                     batteryAmount: usr1.batteryAmount,
 
                 }
-                this.removeWaitingUser(usr1.username);
+                this.removeWaitingUser(usr1?.username);
                 this.assignUser(chargerType, userReq);
             }
-            if (usr2) {
+            if (usr2 !== null) {
                 const userReq = {
                     username: usr2.username,
                     chargingAmount: usr2.chargingAmount,
                     batteryAmount: usr2.batteryAmount,
                 }
-                this.removeWaitingUser(usr1.username);
+                this.removeWaitingUser(usr2?.username);
                 this.assignUser(chargerType, userReq);
             }
         }

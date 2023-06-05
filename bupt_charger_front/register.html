@@ -9,7 +9,7 @@
     <script>
         function validateForm() {
             var username = document.getElementById("username").value;
-            var pattern = /^[a-zA-Z0-9]+$/;
+            var pattern = /^[a-zA-Z0-9_]+$/;
             if (!pattern.test(username)) {
                 alert("用户名必须由英文和数字组成！");
                 return false;
@@ -30,7 +30,7 @@
 <body>
 <h1>用户注册</h1>
 <div class="card">
-<form id="regis-form" method="post" onsubmit="return validateForm()">
+<form id="regis-form" method="post" >
     <label for="username">用户名:</label>
     <input type="text" id="username" name="username" minlength="4" maxlength="20" required>
     <br>
@@ -51,10 +51,12 @@
         const regisForm = document.getElementById('regis-form');
         regisForm.addEventListener('submit', (event) => {
             event.preventDefault();
+            const res = validateForm();
+            if (!res) return;
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const key = "auth-key";
-            const data = { username, password };
+            const data = { username, password, key: null };
             const requestOptions = {
                 method: 'POST',
                 headers: {
