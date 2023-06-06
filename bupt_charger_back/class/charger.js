@@ -7,7 +7,7 @@ const path = require("path");
 
 // const app = express();
 
-
+const POWER_FRAC = 3;
 
 // 峰时电费单价
 const HIGH_PRICE = 1.0;
@@ -70,13 +70,13 @@ class Charger {
                 charger.cumulativeFee += chargingFee + serviceFee; // 更新充电桩的累计费用
 
 
-                task.remainAmount -= charger.power; // 消耗电量
+                task.remainAmount -= Math.ceil(charger.power/POWER_FRAC); // 消耗电量
                 if (task.remainAmount <= 0) {
                     task.remainAmount = 0;
                     console.log("curUser", curUsername);
-                    if (!curUsername || task.username !== curUsername) {
-                        this.finishCharging(task.username); // 完成充电任务
-                    }
+                    // if (!curUsername || task.username !== curUsername) {
+                    //     this.finishCharging(task.username); // 完成充电任务
+                    // }
                 }
 
             }
@@ -232,6 +232,7 @@ class Charger {
             fs.writeFileSync(__dirname + '/../json/brokenCharger.json', JSON.stringify({brokenCharger: brokenCharger}));
 
             if (usr1 !== null) {
+                console.log("recovered", usr1.username);
                 const userReq = {
                     username: usr1.username,
                     chargingAmount: usr1.chargingAmount,
@@ -242,6 +243,7 @@ class Charger {
                 this.assignUser(chargerType, userReq);
             }
             if (usr2 !== null) {
+                console.log("recovered", usr2.username);
                 const userReq = {
                     username: usr2.username,
                     chargingAmount: usr2.chargingAmount,

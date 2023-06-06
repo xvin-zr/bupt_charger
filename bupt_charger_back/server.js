@@ -27,14 +27,14 @@ app.use(express.urlencoded({ extended: true }));
 // }));
 
 
-app.use(cors({
-    origin: ['http://127.0.0.1:8080', 'http://localhost:8080'],
-}));
+// app.use(cors({
+//     origin: ['http://127.0.0.1:8080', 'http://localhost:8080'],
+// }));
 
 // 使用他人客户端用这个
-// app.use(cors({
-//     origin: '*'
-// }));
+app.use(cors({
+    origin: '*'
+}));
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
@@ -156,12 +156,14 @@ server.on('listening', () => {
         brokenCharger = JSON.parse(data).brokenCharger;
         console.log(brokenCharger);
     });
-    setInterval(() => {
         const waitZone = new WaitZone();
         const chargers = new Charger();
+    setInterval(() => {
+        waitZone.loadWaitZone();
+        chargers.loadCharger();
 
 
-
+        printCurTime("充电");
         chargers.chargingOnce(app.get("username"));
 
         // chargers.setChargerStatus("B", "RUNNING");
@@ -183,7 +185,8 @@ server.on('listening', () => {
 
 
 
-        setInterval(() => {
+        // setInterval(() => {
+            printCurTime("叫号");
             waitZone.loadWaitZone();
             chargers.loadCharger();
             chargers.checkChargerRecovered(brokenCharger);
@@ -203,13 +206,18 @@ server.on('listening', () => {
             }
 
             waitZone.increaseWaitingTime();
-        }, 30 * 1000);
+        // }, 30 * 1000);
 
 
 
 
-    }, 59 * 1000);
+    }, 19 * 1000);
 })
+
+function printCurTime(msg) {
+    const now = new Date();
+    console.log(`${msg} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`);
+}
 
 // const PORT = 3000;
 // const HOST = '127.0.0.1';

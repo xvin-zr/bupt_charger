@@ -29,7 +29,8 @@ function getChargingQueueInfo() {
                 const queueInfoDiv = document.getElementById("queueInfo");
                 queueInfoDiv.textContent = "充电桩故障，正在重新分配";
             } else if (res.code === -1 || res.data.curState === "NOTCHARGING") {
-                alert(res.message);
+                // alert(res.message);
+                alert("用户未申请或已结束充电");
                 window.history.back();
             }
 

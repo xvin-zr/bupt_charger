@@ -51,7 +51,7 @@ router.get('/info', (req, res) => {
             "message": "success",
             "data": {
                 "chargeId": "",
-                "queueLen": 0,
+                "queueLen": 1,
                 "curState": curState,
                 "place": chargerId
             }

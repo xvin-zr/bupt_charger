@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require('path');
 
-const PER_WAIT_TIME = 30;
+const PER_WAIT_TIME = 20;
 
 class WaitZone {
     constructor() {
