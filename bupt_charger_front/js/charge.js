@@ -16,7 +16,7 @@ function getChargingQueueInfo() {
         .then(result => {
             console.log(result);
             const res = JSON.parse(result);
-            if (res.data.curState === "WAITINGSTAGE2" ) {
+            if (res.data.curState === "WAITINGSTAGE2") {
                 displayImg(res.data.place);
                 document.getElementById("chargerId").innerText = "充电桩 " + res.data.place;
                 document.getElementById("chargerId").style.fontWeight = "bold";
@@ -55,7 +55,19 @@ function getRemainAmount() {
             const res = JSON.parse(result);
             console.log("remainAmount", res);
             if (res.data.amount > 0) {
-                document.getElementById("queueInfo").innerText = `正在充电，还剩 ${(res.data.amount).toFixed(2)}KWh`;
+                let chargedInfo = `正在充电，还剩 ${(res.data.amount).toFixed(2)}KWh`;
+                if (res.data.chargedAmount) {
+                    chargedInfo = `
+      正在充电，还剩 ${(res.data.amount).toFixed(2)}KWh  
+      
+      已充电量：${(res.data?.chargedAmount).toFixed(2)}KWh
+      
+      总费用：${(res.data?.totalFee).toFixed(2)}`;
+                }
+
+                
+
+                document.getElementById("queueInfo").innerText = chargedInfo;
             } else {
                 finishCharging();
             }
@@ -120,7 +132,7 @@ function cancelCharging() {
             redirect: 'follow'
         };
 
-        fetch(serverURL+"/charging/submit", requestOptions)
+        fetch(serverURL + "/charging/submit", requestOptions)
             .then(response => response.text())
             .then(result => {
                 const res = JSON.parse(result);

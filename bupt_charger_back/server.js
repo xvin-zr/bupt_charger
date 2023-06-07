@@ -211,7 +211,7 @@ server.on('listening', () => {
 
 
 
-    }, 19 * 1000);
+    }, 29 * 1000);
 })
 
 function printCurTime(msg) {

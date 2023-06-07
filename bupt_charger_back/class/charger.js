@@ -7,7 +7,7 @@ const path = require("path");
 
 // const app = express();
 
-const POWER_FRAC = 3;
+const POWER_FRAC = 2;
 
 // 峰时电费单价
 const HIGH_PRICE = 1.0;
@@ -200,6 +200,8 @@ class Charger {
                 // if (chargerQueue[0].username) {
                 //     this.finishCharging(chargerQueue[0].username);
                 // }
+                // chargerQueue[0].chargingAmount = chargerQueue[0].remainAmount;
+
                 return {chargerType: chargerType, user1: chargerQueue[0], user2: chargerQueue[1],
                     brokenChargerId: charger.chargingPileId};
             }
@@ -341,7 +343,7 @@ class Charger {
         // console.log(`No charging task found for user ${username}`);
     }
 
-    removeFromUnavailable(username) {
+    removeFromUnavailable(username, chargedAmount, chargingFee, serviceFee) {
         for (const charger of this.chargers) {
             if (charger.status === "UNAVAILABLE") {
                 for (let task of charger.chargerQueue) {
@@ -351,7 +353,7 @@ class Charger {
                         const dateObj = new Date();
                         const startTime = task.startTime;
                         const endTime = dateObj.toISOString();
-                        const chargingTime = (task.chargingAmount - task.remainAmount) / parseFloat(charger.power);
+                        const chargingTime = (chargedAmount) / parseFloat(charger.power);
 
                         const hash = crypto.createHash('sha256').update(username).digest('hex'); // 将用户名哈希为固定长度的字符串
                         const userId = uuidv4({ namespace: hash }); // 使用哈希值作为命名空间生成 UUID
@@ -362,13 +364,13 @@ class Charger {
                             orderId: task.username + Math.floor(Date.now() / 10000).toString(),
                             createTime: task.startTime,
                             chargingPileId: charger.chargingPileId,
-                            volume: task.chargingAmount - task.remainAmount,
+                            volume: chargedAmount,
                             chargingTime: parseFloat(chargingTime.toFixed(2)),
                             startTime: startTime,
                             endTime: endTime,
-                            chargingFee: task.chargingFee,
-                            serviceFee: task.serviceFee,
-                            totalFee: task.chargingFee + task.serviceFee,
+                            chargingFee: chargingFee,
+                            serviceFee: serviceFee,
+                            totalFee: chargingFee + serviceFee,
                             time: Date.now().toString(),
                         };
                         this.append2CSV(data)
@@ -518,6 +520,13 @@ class Charger {
     }
 
     assignUserFromUnavailable(chargingType, userReq) {
+        const chargedAmount = userReq.chargingAmount - userReq.remainAmount;
+        const chargingFee = userReq.chargingFee;
+        const serviceFee = userReq.serviceFee;
+        userReq.chargingAmount = userReq.remainAmount;
+        userReq.chargingFee = 0;
+        userReq.serviceFee = 0;
+        console.log("userReq",userReq)
         const chargers = this.chargers.filter(c => c.chargerType === chargingType &&
             c.status === "RUNNING");
 
@@ -529,7 +538,7 @@ class Charger {
         if (firstEmptySlot) {
             Object.assign(firstEmptySlot, userReq);
             firstEmptySlot.startTime = new Date().toISOString();
-            this.removeFromUnavailable(userReq.username);
+            this.removeFromUnavailable(userReq.username, chargedAmount, chargingFee, serviceFee);
             this.saveCharger();
             return true;
         } else {
@@ -553,7 +562,7 @@ class Charger {
 
                 Object.assign(minCharger.charger.chargerQueue[1], userReq);
                 minCharger.charger.startTime = new Date().toISOString();
-                this.removeFromUnavailable(userReq.username);
+                this.removeFromUnavailable(userReq.username, chargedAmount, chargingFee, serviceFee);
                 this.saveCharger();
                 return true;
             } else {

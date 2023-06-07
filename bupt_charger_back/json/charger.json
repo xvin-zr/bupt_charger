@@ -4,22 +4,22 @@
     "chargerType": "F",
     "power": 30,
     "status": "RUNNING",
-    "cumulativeUsageTimes": 33,
-    "cumulativeChargingTime": 95,
-    "cumulativeChargingAmount": 3987,
-    "cumulativeChargingFee": 2591.3999999999996,
-    "cumulativeServiceFee": 3189.6000000000013,
-    "cumulativeFee": 5781,
+    "cumulativeUsageTimes": 43,
+    "cumulativeChargingTime": 108,
+    "cumulativeChargingAmount": 4353.5,
+    "cumulativeChargingFee": 2919.95,
+    "cumulativeServiceFee": 3482.800000000001,
+    "cumulativeFee": 6402.75,
     "chargerQueue": [
       {
-        "username": "",
-        "chargingAmount": 0,
-        "remainAmount": 0,
-        "batteryAmount": 0,
-        "chargingFee": 0,
-        "serviceFee": 0,
-        "enterTime": 1686053219376,
-        "startTime": "",
+        "username": "tmp",
+        "chargingAmount": 200,
+        "remainAmount": 140,
+        "batteryAmount": 200,
+        "chargingFee": 120,
+        "serviceFee": 96,
+        "enterTime": 1686123501506,
+        "startTime": "2023-06-07T07:38:50.505Z",
         "waitingTime": 0
       },
       {
@@ -29,8 +29,9 @@
         "batteryAmount": 0,
         "chargingFee": 0,
         "serviceFee": 0,
-        "enterTime": 0,
-        "startTime": ""
+        "enterTime": 1686133217327,
+        "startTime": "",
+        "waitingTime": 0
       }
     ]
   },
@@ -39,12 +40,12 @@
     "chargerType": "F",
     "power": 30,
     "status": "RUNNING",
-    "cumulativeUsageTimes": 10,
-    "cumulativeChargingTime": 44,
-    "cumulativeChargingAmount": 991.5,
-    "cumulativeChargingFee": 785.6999999999999,
-    "cumulativeServiceFee": 793.2,
-    "cumulativeFee": 1578.9,
+    "cumulativeUsageTimes": 28,
+    "cumulativeChargingTime": 77,
+    "cumulativeChargingAmount": 1826.5,
+    "cumulativeChargingFee": 1419.6999999999998,
+    "cumulativeServiceFee": 1461.2,
+    "cumulativeFee": 2880.9,
     "chargerQueue": [
       {
         "username": "",
@@ -63,8 +64,9 @@
         "batteryAmount": 0,
         "chargingFee": 0,
         "serviceFee": 0,
-        "enterTime": 1684509965938,
-        "startTime": ""
+        "enterTime": 1686133297828,
+        "startTime": "",
+        "waitingTime": 0
       }
     ]
   },
@@ -73,7 +75,7 @@
     "chargerType": "T",
     "power": 7,
     "status": "RUNNING",
-    "cumulativeUsageTimes": 10,
+    "cumulativeUsageTimes": 11,
     "cumulativeChargingTime": 77,
     "cumulativeChargingAmount": 471,
     "cumulativeChargingFee": 354.30000000000007,

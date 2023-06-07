@@ -1,7 +1,8 @@
 
 
 // const serverURL = require('../config.js').serverURL;
-const PER_HOUR = 60 / 24;
+// const PER_HOUR = 60 / 24;
+const PER_HOUR = 1;
 
 function getTimeFromServer() {
     var myHeaders = new Headers();
@@ -25,11 +26,18 @@ function getTimeFromServer() {
             console.log(res);
 
             if (res.code === 0) {
-                const datetime = timeToDecimal(res.data.datetime);
-                const hour = Math.floor(datetime / PER_HOUR);
-                
+                // const datetime = timeToDecimal(res.data.datetime);
+                // const hour = Math.floor(datetime / PER_HOUR);
+                const date = new Date(res.data.datetime);
+                const hour = date.getHours() - 8;
+                const minutes = date.getMinutes();
+                let mid = ":";
+                if (minutes < 10) {
+                    mid = ":0";
+                }
                 // 将内容修改为"Hour: hour"
-                timeDiv.innerHTML = hour + ":00";
+                // timeDiv.innerHTML = hour + ":00";
+                timeDiv.innerHTML = hour + mid + minutes;
 
             }
         })
@@ -40,7 +48,7 @@ function getTimeFromServer() {
 function callGetTimeFromServer() {
     setInterval(function () {
         getTimeFromServer();
-    }, 60 * 1000); // 每60秒调用一次函数
+    }, 1 * 1000); // 每60秒调用一次函数
 }
 
 function timeToDecimal(timeString) {
